@@ -1,0 +1,11 @@
+.layout {
+  border: 1px solid aqua;
+  height: 100%;
+  display: flex;
+}
+
+.title {
+  margin: auto;
+  color: aqua;
+  font-style: italic;
+}
