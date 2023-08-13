@@ -1,0 +1,33 @@
+.container {
+  box-sizing: border-box;
+  border: 1px solid red;
+  max-width: 600px;
+}
+
+.ingredients {
+  overflow: scroll;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.div {
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+
+.ul {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 1px solid aqua;
+  display: flex;
+  flex-direction: row;
+}
+
+.li {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid green;
+}

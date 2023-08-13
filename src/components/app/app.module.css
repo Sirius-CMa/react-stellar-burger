@@ -6,4 +6,16 @@
   color: #f2f2f3;
   border: 1px solid red;
   box-sizing: border-box;
+  align-items: center;
+  max-width: 2000px;
+  margin: auto;
+}
+.containerConstructor {
+  box-sizing: border-box;
+  border: 2px solid lawngreen;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  max-height: 912px;
+  /* overflow: hidden; */
 }

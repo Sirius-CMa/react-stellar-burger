@@ -1,12 +1,18 @@
-import styles from "./app.module.css";
+import styles from "./App.module.css";
 import { data } from "../../utils/data";
 //import Layout from "../layout/layout";
-import Header from "../header/header";
+import AppHeader from "../AppHeader/AppHeader";
+import { BurgerIngredients } from "../BurgerIngredients";
+import { BurgerConstructor } from "../BurgerConstructor";
 
 function App() {
   return (
     <div className={styles.app}>
-      <Header/>
+      <AppHeader />
+      <div className={styles.containerConstructor}>
+        <BurgerIngredients ingredients={data} />
+        <BurgerConstructor ingredients={data} />
+      </div>
     </div>
   );
 }
