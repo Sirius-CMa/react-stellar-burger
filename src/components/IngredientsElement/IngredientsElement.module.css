@@ -1,19 +1,21 @@
 .container {
-  border: 1px solid aqua;
+  /* border: 1px solid aqua; */
   position: relative;
   /* width: 300px; */
   /* height: 200px; */
   display: flex;
   flex-direction: column;
+  margin: 24px 0 40px 0;
 }
 
 .image {
   width: 240px;
   height: 120px;
+  margin: auto;
 }
 
 .description {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -29,7 +31,7 @@
 .name {
   margin: 0;
   padding: 0;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   text-align: center;
 }
 
@@ -37,5 +39,4 @@
   position: absolute;
   top: 0;
   right: 0;
-  border: 1px solid red;
 }

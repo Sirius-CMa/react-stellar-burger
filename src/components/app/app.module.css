@@ -9,6 +9,7 @@
   align-items: center;
   max-width: 2000px;
   margin: auto;
+  /* position: absolute; */
 }
 .containerConstructor {
   box-sizing: border-box;
@@ -17,5 +18,5 @@
   flex-direction: row;
   gap: 40px;
   max-height: 912px;
-  /* overflow: hidden; */
+  overflow: hidden;
 }

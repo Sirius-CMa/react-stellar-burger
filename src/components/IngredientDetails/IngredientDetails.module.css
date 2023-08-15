@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  align-self: flex-start;
+}
+
+.table {
+  border-spacing: 20px;
+}

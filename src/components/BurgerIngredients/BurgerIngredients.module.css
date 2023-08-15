@@ -1,27 +1,55 @@
 .container {
   box-sizing: border-box;
-  border: 1px solid red;
+  /* border: 3px solid red; */
   max-width: 600px;
+  max-height: 912px;
+  /* overflow: hidden; */
+  padding: 0 16px;
+}
+
+.tabContainer {
+  box-sizing: border-box;
+  /* border: 1px solid aqua; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.tab {
+  max-width: 33%;
 }
 
 .ingredients {
   overflow: scroll;
   overflow-x: hidden;
-  box-sizing: border-box;
+  max-height: 78%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+  padding-right: 10px;
 }
 
 .div {
   box-sizing: border-box;
-  border: 1px solid red;
+  /* border: 1px solid red; */
+}
+
+.h2 {
+  margin: 0;
+  padding: 0;
 }
 
 .ul {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  border: 1px solid aqua;
-  display: flex;
-  flex-direction: row;
+  /* border: 1px solid aqua; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  column-gap: 24px;
+  justify-content: space-around;
 }
 
 .li {
@@ -29,5 +57,28 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  border: 1px solid green;
+  /* border: 1px solid green; */
+}
+
+.ingredients::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ingredients::-webkit-scrollbar-track {
+  background-color: #2f2f37;
+  border-radius: 10px;
+  margin-bottom: 70px;
+}
+
+.ingredients::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border-radius: 4px;
+}
+
+.ingredients::-webkit-scrollbar-thumb:hover {
+  background: #c1c1c1;
+}
+
+.ingredients::-webkit-scrollbar-button {
+  display: none;
 }

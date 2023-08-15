@@ -9,7 +9,7 @@ export function BurgerIngredients({ ingredients }) {
   return (
     <div className={styles.container}>
       <h1>Соберите бургер</h1>
-      <section style={{ display: "flex" }}>
+      <section className={styles.tabContainer}>
         <Tab value="one" active={current === "one"} onClick={setCurrent}>
           Булки
         </Tab>
@@ -21,9 +21,9 @@ export function BurgerIngredients({ ingredients }) {
         </Tab>
       </section>
       {/*  */}
-      <section className={styles.ingredients}>
+      <section className={`${styles.ingredients} ${styles.aa}`}>
         <div className={styles.div}>
-          <h2>Булки</h2>
+          <h2 className={`${styles.h2} text text_type_main-medium`}>Булки</h2>
           <ul className={styles.ul}>
             {ingredients
               .filter((item) => item.type === "bun")
@@ -35,7 +35,7 @@ export function BurgerIngredients({ ingredients }) {
           </ul>
         </div>
         <div className={styles.div}>
-          <h2>Соусы</h2>
+          <h2 className={`${styles.h2} text text_type_main-medium`}>Соусы</h2>
           <ul className={styles.ul}>
             {ingredients
               .filter((item) => item.type === "sauce")
@@ -47,7 +47,7 @@ export function BurgerIngredients({ ingredients }) {
           </ul>
         </div>
         <div>
-          <h2>Начинки</h2>
+          <h2 className={`${styles.h2} text text_type_main-medium`}>Начинки</h2>
           <ul className={styles.ul}>
             {ingredients
               .filter((item) => item.type === "main")
@@ -63,7 +63,6 @@ export function BurgerIngredients({ ingredients }) {
   );
 }
 
-// export default BurgerIngredients;
 BurgerIngredients.propTypes = {
   ingredients: ingredientsPropTypes,
 };
