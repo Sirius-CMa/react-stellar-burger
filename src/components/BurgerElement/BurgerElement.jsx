@@ -39,5 +39,8 @@ BurgerElement.propTypes = {
     PropTypes.bool.isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]),
-  isLocked: PropTypes.oneOf([PropTypes.bool | null]),
+  isLocked: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
 };

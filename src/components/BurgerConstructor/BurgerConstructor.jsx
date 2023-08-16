@@ -1,18 +1,17 @@
-import {
-  Button,
-  CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-// import { filling } from "../../utils/data";
+import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerElement } from "../BurgerElement";
 import styles from "./BurgerConstructor.module.css";
 import { ingredientsPropTypes } from "../../utils/prop-types";
 import PropTypes from "prop-types";
 
 export function BurgerConstructor({ ingredients, filling, openPopup }) {
+  // временная история с булочкой
+  const bun = ingredients.find((element) => element.type === "bun");
+
   return (
     <div className={styles.container}>
       <section className={styles.blockIngredients}>
-        <BurgerElement item={ingredients[0]} isTop isLocked />
+        <BurgerElement item={bun} isTop isLocked />
 
         <ul className={styles.ul}>
           {filling.map((item, i) => (
@@ -22,7 +21,7 @@ export function BurgerConstructor({ ingredients, filling, openPopup }) {
           ))}
         </ul>
 
-        <BurgerElement item={ingredients[0]} isBottom isLocked />
+        <BurgerElement item={bun} isBottom isLocked />
       </section>
       <section className={styles.order}>
         <div className={`${styles.blockPrice} mr-10`}>

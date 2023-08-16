@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 const $popupRoot = document.getElementById("popup");
 
-export function Popup({ closePopup, children }) {
+export function Popup({ closePopup, load, children }) {
   const closePopupByEsc = (evt) => {
     if (evt.key === "Escape") {
       closePopup();
@@ -25,8 +25,8 @@ export function Popup({ closePopup, children }) {
   return ReactDOM.createPortal(
     <>
       <PopupOverlay closePopup={closePopup} />
-      <div className={`${styles.container}`}>
-        <button className={`${styles.closeButton}`} onClick={closePopup}>
+      <div className={`${styles.container}  ${load && styles.load}`}>
+        <button className={`${styles.closeButton} ${load && styles.closeButton_loadScreen}`} onClick={closePopup}>
           <CloseIcon type="primary" />
         </button>
         {children}
