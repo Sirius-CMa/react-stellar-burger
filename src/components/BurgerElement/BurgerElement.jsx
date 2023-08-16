@@ -4,6 +4,8 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ingredientPropTypes } from "../../utils/prop-types";
+import PropTypes from "prop-types";
 
 export function BurgerElement({ item, isTop, isBottom, isLocked }) {
   return (
@@ -26,3 +28,16 @@ export function BurgerElement({ item, isTop, isBottom, isLocked }) {
     </div>
   );
 }
+
+BurgerElement.propTypes = {
+  item: ingredientPropTypes,
+  isTop: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
+  isBottom: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.oneOf([null]).isRequired,
+  ]),
+  isLocked: PropTypes.oneOf([PropTypes.bool | null]),
+};

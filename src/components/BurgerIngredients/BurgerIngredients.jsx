@@ -3,8 +3,9 @@ import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IngredientsElement } from "../IngredientsElement";
 import { ingredientsPropTypes } from "../../utils/prop-types";
+import PropTypes from "prop-types";
 
-export function BurgerIngredients({ ingredients }) {
+export function BurgerIngredients({ ingredients, openPopup }) {
   const [current, setCurrent] = React.useState("one");
   return (
     <div className={styles.container}>
@@ -29,7 +30,7 @@ export function BurgerIngredients({ ingredients }) {
               .filter((item) => item.type === "bun")
               .map((item) => (
                 <li key={item._id} className={styles.li}>
-                  <IngredientsElement element={item} />
+                  <IngredientsElement ingredient={item} openPopup={openPopup} />
                 </li>
               ))}
           </ul>
@@ -41,7 +42,7 @@ export function BurgerIngredients({ ingredients }) {
               .filter((item) => item.type === "sauce")
               .map((item) => (
                 <li key={item._id} className={styles.li}>
-                  <IngredientsElement element={item} />
+                  <IngredientsElement ingredient={item} openPopup={openPopup} />
                 </li>
               ))}
           </ul>
@@ -53,7 +54,7 @@ export function BurgerIngredients({ ingredients }) {
               .filter((item) => item.type === "main")
               .map((item) => (
                 <li key={item._id} className={styles.li}>
-                  <IngredientsElement element={item} />
+                  <IngredientsElement ingredient={item} openPopup={openPopup} />
                 </li>
               ))}
           </ul>
@@ -65,4 +66,5 @@ export function BurgerIngredients({ ingredients }) {
 
 BurgerIngredients.propTypes = {
   ingredients: ingredientsPropTypes,
+  openPopup: PropTypes.func.isRequired,
 };

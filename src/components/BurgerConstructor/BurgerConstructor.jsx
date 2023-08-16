@@ -1,24 +1,14 @@
-import { useState } from "react";
 import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { filling } from "../../utils/data";
+// import { filling } from "../../utils/data";
 import { BurgerElement } from "../BurgerElement";
 import styles from "./BurgerConstructor.module.css";
-import { OrderDetails } from "../OrderDetails";
-import { Modal } from "../Modal";
+import { ingredientsPropTypes } from "../../utils/prop-types";
+import PropTypes from "prop-types";
 
-export function BurgerConstructor({ ingredients }) {
-  const [showModal, setShowModal] = useState(false);
-
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
+export function BurgerConstructor({ ingredients, filling, openPopup }) {
   return (
     <div className={styles.container}>
       <section className={styles.blockIngredients}>
@@ -43,16 +33,19 @@ export function BurgerConstructor({ ingredients }) {
           htmlType="button"
           type="primary"
           size="medium"
-          onClick={openModal}
+          onClick={() => {
+            openPopup("", "order");
+          }}
         >
           Оформить заказ
         </Button>
       </section>
-      {showModal && (
-        <Modal close={closeModal}>
-          <OrderDetails />
-        </Modal>
-      )}
     </div>
   );
 }
+
+BurgerConstructor.propTypes = {
+  ingredients: ingredientsPropTypes,
+  filling: ingredientsPropTypes,
+  openPopup: PropTypes.func.isRequired,
+};

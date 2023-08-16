@@ -9,8 +9,8 @@
   align-items: center;
   max-width: 2000px;
   margin: auto;
-  /* position: absolute; */
 }
+
 .containerConstructor {
   box-sizing: border-box;
   border: 2px solid lawngreen;
