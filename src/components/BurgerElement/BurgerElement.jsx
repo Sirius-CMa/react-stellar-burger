@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 export function BurgerElement({ item, isTop, isBottom, isLocked }) {
   return (
-    <div key={new Date().getTime()} className={`${styles.container} ${isLocked && styles.container_notIcon}`}>
+    <div className={`${styles.container} ${isLocked && styles.container_notIcon}`}>
       <div className={styles.blockElement}>
         {isLocked ? "" : <DragIcon type="secondary" />}
 

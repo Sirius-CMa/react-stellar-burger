@@ -7,12 +7,5 @@ export const PopupOverlay = (props) => {
     }
   };
 
-  return (
-    <div
-      key={new Date().getTime()}
-      className={`${styles.overlay}`}
-      onClick={closePopupByClickOverley}
-      id="overlay"
-    ></div>
-  );
+  return <div className={`${styles.overlay}`} onClick={closePopupByClickOverley} id="overlay"></div>;
 };

@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./App.module.css";
-// начинка для бургера
-import { filling } from "../../utils/data";
+
 import { AppHeader } from "../AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor";
@@ -9,9 +8,12 @@ import { IngredientDetails } from "../IngredientDetails";
 import { Popup } from "../Popup";
 import { useEffect, useState } from "react";
 import { OrderDetails } from "../OrderDetails";
+import { LoadingScreen } from "../LoadingScreen";
+
 import Api from "../../utils/Api";
 import { dataServer } from "../../utils/constants";
-import { LoadingScreen } from "../LoadingScreen";
+// начинка для бургера
+import { filling } from "../../utils/data";
 
 export function App() {
   const api = new Api(dataServer);
