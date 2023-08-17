@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  /* border: 1px solid red; */
 }
 
 .container_notIcon {
@@ -8,7 +7,6 @@
 }
 
 .blockElement {
-  /* width: 100%; */
   display: flex;
   flex-direction: row;
   align-items: center;

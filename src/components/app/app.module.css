@@ -1,10 +1,9 @@
-.app {
+.container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   background-color: #131316;
   color: #f2f2f3;
-  border: 1px solid red;
   box-sizing: border-box;
   align-items: center;
   max-width: 2000px;
@@ -13,10 +12,10 @@
 
 .containerConstructor {
   box-sizing: border-box;
-  border: 2px solid lawngreen;
+  /* border: 2px solid lawngreen; */
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 20px;
   max-height: 912px;
   overflow: hidden;
 }

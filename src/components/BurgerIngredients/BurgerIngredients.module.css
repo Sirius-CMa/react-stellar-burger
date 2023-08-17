@@ -1,22 +1,15 @@
 .container {
   box-sizing: border-box;
-  /* border: 3px solid red; */
-  max-width: 600px;
-  max-height: 912px;
-  /* overflow: hidden; */
-  padding: 0 16px;
+  max-width: 620px;
+  max-height: 812px;
+  padding: 10px 0 16px 20px;
 }
 
 .tabContainer {
   box-sizing: border-box;
-  /* border: 1px solid aqua; */
   width: 100%;
   display: flex;
   flex-direction: row;
-}
-
-.tab {
-  max-width: 33%;
 }
 
 .ingredients {
@@ -25,39 +18,26 @@
   max-height: 78%;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 30px;
   margin-top: 40px;
   padding-right: 10px;
 }
 
-.div {
-  box-sizing: border-box;
-  /* border: 1px solid red; */
-}
-
-.h2 {
-  margin: 0;
-  padding: 0;
-}
-
-.ul {
+.wrapperList {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* border: 1px solid aqua; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  column-gap: 24px;
+  column-gap: 20px;
   justify-content: space-around;
 }
 
-.li {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.listItem {
   list-style: none;
-  /* border: 1px solid green; */
+  margin: 0 0 0 10px;
+  padding: 0;
 }
 
 .ingredients::-webkit-scrollbar {
@@ -82,3 +62,14 @@
 .ingredients::-webkit-scrollbar-button {
   display: none;
 }
+
+/* .title{
+
+} */
+
+/* .blockIngredient {
+} */
+/* .subtitle {
+  margin: 0;
+  padding: 0;
+} */

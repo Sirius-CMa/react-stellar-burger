@@ -13,9 +13,9 @@ export function BurgerConstructor({ ingredients, filling, openPopup }) {
       <section className={styles.blockIngredients}>
         <BurgerElement item={bun} isTop isLocked />
 
-        <ul className={styles.ul}>
+        <ul className={styles.wrapperList}>
           {filling.map((item, i) => (
-            <li key={i} className={styles.li}>
+            <li key={i} className={styles.listElement}>
               <BurgerElement item={item} />
             </li>
           ))}

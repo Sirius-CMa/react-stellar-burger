@@ -50,7 +50,7 @@ function App() {
   }, []);
 
   return (
-    <div className={styles.app}>
+    <div className={styles.container}>
       {!serverData.loading && (
         <>
           <AppHeader />
