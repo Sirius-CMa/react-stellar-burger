@@ -2,7 +2,7 @@
 import styles from "./App.module.css";
 // начинка для бургера
 import { filling } from "../../utils/data";
-import AppHeader from "../AppHeader/AppHeader";
+import { AppHeader } from "../AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor";
 import { IngredientDetails } from "../IngredientDetails";
@@ -13,7 +13,7 @@ import Api from "../../utils/Api";
 import { dataServer } from "../../utils/constants";
 import { LoadingScreen } from "../LoadingScreen";
 
-function App() {
+export function App() {
   const api = new Api(dataServer);
 
   const [showPopup, setShowPopup] = useState(false);
@@ -75,5 +75,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

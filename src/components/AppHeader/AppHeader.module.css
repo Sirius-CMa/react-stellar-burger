@@ -2,19 +2,21 @@
   max-width: 1920px;
   width: 96%;
   max-height: 88px;
-  display: flex;
-  align-items: center;
   background-color: #1c1c21;
   flex-shrink: 0;
   margin-top: 8px;
 }
 
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
 .nav {
   box-sizing: border-box;
   width: 100%;
   max-width: 1320px;
   margin: 10px auto;
-  /* padding: 0 30px; */
   display: flex;
   flex-direction: row;
   align-items: center;
