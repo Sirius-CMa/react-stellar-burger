@@ -56,10 +56,10 @@ export function App() {
       {!serverData.loading && (
         <>
           <AppHeader />
-          <div className={styles.containerConstructor}>
+          <main className={styles.containerConstructor}>
             <BurgerIngredients ingredients={serverData.data} openPopup={openPopup} />
             <BurgerConstructor ingredients={serverData.data} filling={filling} openPopup={openPopup} />
-          </div>
+          </main>
         </>
       )}
 
