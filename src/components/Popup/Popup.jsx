@@ -9,13 +9,13 @@ import PropTypes from "prop-types";
 const $popupRoot = document.getElementById("popup");
 
 export function Popup({ closePopup, load, children }) {
-  const closePopupByEsc = (evt) => {
-    if (evt.key === "Escape") {
-      closePopup();
-    }
-  };
-
   useEffect(() => {
+    const closePopupByEsc = (evt) => {
+      if (evt.key === "Escape") {
+        closePopup();
+      }
+    };
+
     document.addEventListener("keydown", closePopupByEsc);
     return () => {
       document.removeEventListener("keydown", closePopupByEsc);

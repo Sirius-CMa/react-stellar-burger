@@ -14,30 +14,17 @@ import Api from "../../utils/Api";
 import { dataServer } from "../../utils/constants";
 // начинка для бургера
 import { filling } from "../../utils/data";
+import { usePopup } from "../../hooks/usePopup";
 
 export function App() {
   const api = new Api(dataServer);
 
-  const [showPopup, setShowPopup] = useState(false);
-  const [ingredient, setIngredient] = useState({});
-  const [targetPopup, setTargetPopup] = useState();
+  const { isPopupOpen, openPopup, closePopup, ingredient } = usePopup();
   const [serverData, setServerData] = useState({
     data: [],
     loading: true,
     error: false,
   });
-
-  const openPopup = (ingredient, popup) => {
-    popup === "ingredient" && setIngredient(ingredient);
-    setTargetPopup(popup);
-    setShowPopup(true);
-  };
-
-  const closePopup = () => {
-    setShowPopup(false);
-    ingredient && setIngredient({});
-    setTargetPopup("");
-  };
 
   useEffect(() => {
     api
@@ -63,9 +50,9 @@ export function App() {
         </>
       )}
 
-      {showPopup && (
+      {isPopupOpen && (
         <Popup closePopup={closePopup}>
-          {targetPopup === "ingredient" ? <IngredientDetails props={ingredient} /> : <OrderDetails />}
+          {ingredient ? <IngredientDetails props={ingredient} /> : <OrderDetails />}
         </Popup>
       )}
 

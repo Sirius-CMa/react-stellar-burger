@@ -1,15 +1,16 @@
 import { useState, useCallback } from "react";
 
-// кастомные хуки всегда должны начинаться с глагола `use`, чтобы реакт понял, что это хук. Он следит за их вызовами
 export const usePopup = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [ingredient, setIngredient] = useState(null);
 
-  // `useCallback` нужен для того, чтобы зафиксировать ссылку на функцию. Таким образом уменьшится кол-во перерисовок компонента, куда будет передана эта функция
-  const openPopup = useCallback(() => {
+  const openPopup = useCallback((component) => {
+    component && setIngredient(component);
     setIsPopupOpen(true);
   }, []);
 
   const closePopup = useCallback(() => {
+    setIngredient(null);
     setIsPopupOpen(false);
   }, []);
 
@@ -17,5 +18,6 @@ export const usePopup = () => {
     isPopupOpen,
     openPopup,
     closePopup,
+    ingredient
   };
 };

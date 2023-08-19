@@ -4,7 +4,7 @@ import { ingredientPropTypes } from "../../utils/prop-types";
 import PropTypes from "prop-types";
 export function IngredientsElement({ ingredient, openPopup }) {
   return (
-    <div className={styles.container} onClick={() => openPopup(ingredient, "ingredient")}>
+    <div className={styles.container} onClick={() => openPopup(ingredient)}>
       <Counter count={1} size="default" />
       <img src={ingredient.image} alt={ingredient.name} className={styles.image} />
       <div className={styles.description}>
