@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { IngredientsElement } from "../IngredientsElement";
-import { ingredientsPropTypes } from "../../utils/prop-types";
+// import { IngredientsElement } from "../IngredientsElement";
+import { IngredientsElement } from "Components/IngredientsElement";
+// import { ingredientsPropTypes } from "../../utils/prop-types";
+import { ingredientsPropTypes } from "Utils/prop-types";
 import PropTypes from "prop-types";
 
 export function BurgerIngredients({ ingredients, openPopup }) {

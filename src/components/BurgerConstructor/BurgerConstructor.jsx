@@ -1,7 +1,7 @@
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerElement } from "../BurgerElement";
 import styles from "./BurgerConstructor.module.css";
-import { ingredientsPropTypes } from "../../utils/prop-types";
+import { ingredientsPropTypes } from "Utils/prop-types";
 import PropTypes from "prop-types";
 
 export function BurgerConstructor({ ingredients, filling, openPopup }) {
