@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect } from "react"; //, useState
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./App.module.css";
@@ -27,8 +27,9 @@ export function App() {
   }, [dispatch]);
 
   const { data, error, loading } = useSelector((store) => store.serverData);
+  const { isPopupOpen, ingredient } = useSelector((store) => store.managePopup);
 
-  const { isPopupOpen, openPopup, closePopup, ingredient } = usePopup();
+  const { openPopup, closePopup } = usePopup();
   return (
     <div className={styles.container}>
       {!loading && (
@@ -41,15 +42,11 @@ export function App() {
         </>
       )}
 
-      {isPopupOpen && (
-        <Popup closePopup={closePopup}>
-          {ingredient ? <IngredientDetails props={ingredient} /> : <OrderDetails />}
-        </Popup>
-      )}
+      {isPopupOpen && <Popup>{ingredient ? <IngredientDetails props={ingredient} /> : <OrderDetails />}</Popup>}
 
       {loading && (
-        <Popup closePopup={closePopup} load={loading}>
-          <LoadingScreen load={loading} error={error} />
+        <Popup>
+          <LoadingScreen />
         </Popup>
       )}
     </div>

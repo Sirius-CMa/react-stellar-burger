@@ -32,7 +32,7 @@ export const serverDataReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: true,
-      };
+      }
     }
     // case SHOW_CURRENT_PRODUCT: {
     //     console.log(state.currentProduct);

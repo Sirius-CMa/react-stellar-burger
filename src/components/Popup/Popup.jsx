@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./Popup.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ReactDOM from "react-dom";
@@ -6,9 +8,14 @@ import { useEffect } from "react";
 import { PopupOverlay } from "../PopupOverlay/PopupOverlay";
 import PropTypes from "prop-types";
 
+import { managePopup } from "Action/popup";
+
 const $popupRoot = document.getElementById("popup");
 
-export function Popup({ closePopup, load, children }) {
+export function Popup({ children }) {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((store) => store.managePopup);
+
   useEffect(() => {
     const closePopupByEsc = (evt) => {
       if (evt.key === "Escape") {
@@ -22,11 +29,15 @@ export function Popup({ closePopup, load, children }) {
     };
   }, []);
 
+  const closePopup = () => {
+    dispatch(managePopup({ type: "close" }));
+  };
+
   return ReactDOM.createPortal(
     <>
       <PopupOverlay closePopup={closePopup} />
-      <div className={`${styles.container}  ${load && styles.load}`}>
-        <button className={`${styles.closeButton} ${load && styles.closeButton_loadScreen}`} onClick={closePopup}>
+      <div className={`${styles.container}  ${loading && styles.load}`}>
+        <button className={`${styles.closeButton} ${loading && styles.closeButton_loadScreen}`} onClick={closePopup}>
           <CloseIcon type="primary" />
         </button>
         {children}
