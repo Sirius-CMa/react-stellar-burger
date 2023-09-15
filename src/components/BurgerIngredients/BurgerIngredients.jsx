@@ -1,14 +1,21 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-// import { IngredientsElement } from "../IngredientsElement";
 import { IngredientsElement } from "Components/IngredientsElement";
-// import { ingredientsPropTypes } from "../../utils/prop-types";
 import { ingredientsPropTypes } from "Utils/prop-types";
 import PropTypes from "prop-types";
+import { getAllIngredients } from "Action/api";
 
 export function BurgerIngredients({ ingredients, openPopup }) {
-  const [current, setCurrent] = React.useState("one");
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getAllIngredients());
+  // }, [dispatch]);
+
+  const [current, setCurrent] = useState("one");
   return (
     <div className={styles.container}>
       <h2 className={`${styles.title}  text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>

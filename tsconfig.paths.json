@@ -13,6 +13,12 @@
       ],
       "Reducer/*": [
         "src/services/redusers/*"
+      ],
+      "Api/*": [
+        "src/utils/api/*"
+      ],
+      "Hooks/*": [
+        "src/hooks/*"
       ]
     }
   }

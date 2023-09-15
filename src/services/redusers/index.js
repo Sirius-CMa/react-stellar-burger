@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux';
-import { burgerConstructorReducer } from './burgerConstructorReducer';
+// import { burgerConstructorReducer } from './burgerConstructorReducer';
+import { serverDataReducer } from 'Reducer/api'
 
 
 
 export const rootReducer = combineReducers({
-  constructor: burgerConstructorReducer
-  //  step: stepReducer,
-  //  cart: cartReducer,
+  serverData: serverDataReducer
 });

@@ -1,4 +1,4 @@
-export default class Api {
+export class Api {
   constructor(dataServer) {
     this._baseUrl = dataServer.baseUrl;
     this._headers = dataServer.headers;
