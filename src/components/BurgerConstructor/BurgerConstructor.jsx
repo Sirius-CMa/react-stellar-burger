@@ -1,13 +1,14 @@
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerElement } from "../BurgerElement";
 import styles from "./BurgerConstructor.module.css";
-import { ingredientsPropTypes } from "Utils/prop-types";
-import PropTypes from "prop-types";
+// import { ingredientsPropTypes } from "Utils/prop-types";
+// import PropTypes from "prop-types";
+import { filling } from "Utils/data";
 
-export function BurgerConstructor({ ingredients, filling, openPopup }) {
+export function BurgerConstructor() {
   // временная история с булочкой
-  const bun = ingredients.find((element) => element.type === "bun");
-
+  const bun = filling.find((element) => element.type === "bun");
+  const aa = () => console.log(123);
   return (
     <div className={styles.container}>
       <section className={styles.blockIngredients}>
@@ -32,9 +33,8 @@ export function BurgerConstructor({ ingredients, filling, openPopup }) {
           htmlType="button"
           type="primary"
           size="medium"
-          onClick={() => {
-            openPopup("", "order");
-          }}
+          onClick={aa}
+          // openPopup("", "order");
         >
           Оформить заказ
         </Button>
@@ -43,8 +43,8 @@ export function BurgerConstructor({ ingredients, filling, openPopup }) {
   );
 }
 
-BurgerConstructor.propTypes = {
-  ingredients: ingredientsPropTypes,
-  filling: ingredientsPropTypes,
-  openPopup: PropTypes.func.isRequired,
-};
+// BurgerConstructor.propTypes = {
+//   ingredients: ingredientsPropTypes,
+//   filling: ingredientsPropTypes,
+//   openPopup: PropTypes.func.isRequired,
+// };

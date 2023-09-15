@@ -1,5 +1,6 @@
 import { Api } from "Api";
 import { dataServer } from "Utils/constants";
+import { sortIngredients } from "Utils/sortIngredients";
 
 const api = new Api(dataServer);
 
@@ -15,9 +16,10 @@ export function getAllIngredients() {
     api
       .loadIngredients()
       .then((res) => {
+        const ff = sortIngredients(res.data)
         dispatch({
           type: GET_ALL_INGREDIENTS_SUCCESS,
-          payload: res.data,
+          payload: ff
         })
       })
       .catch(error => {

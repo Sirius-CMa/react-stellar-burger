@@ -12,10 +12,6 @@ import { Popup } from "Components/Popup";
 import { OrderDetails } from "Components/OrderDetails";
 import { LoadingScreen } from "Components/LoadingScreen";
 
-// начинка для бургера
-import { filling } from "../../utils/data";
-// import { usePopup } from "Hooks/usePopup";
-
 import { getAllIngredients } from "Action/api";
 
 export function App() {
@@ -26,18 +22,17 @@ export function App() {
     dispatch(getAllIngredients());
   }, [dispatch]);
 
-  const { data, loading } = useSelector((store) => store.serverData);
+  const { loading } = useSelector((store) => store.serverData);
   const { isPopupOpen, ingredient } = useSelector((store) => store.managePopup);
 
-  // const { openPopup } = usePopup();
   return (
     <div className={styles.container}>
       {!loading && (
         <>
           <AppHeader />
           <main className={styles.containerConstructor}>
-            <BurgerIngredients ingredients={data} />
-            <BurgerConstructor ingredients={data} filling={filling} />
+            <BurgerIngredients />
+            <BurgerConstructor />
           </main>
         </>
       )}

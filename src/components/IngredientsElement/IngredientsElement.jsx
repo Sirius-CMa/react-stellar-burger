@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect, useMemo, useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 
 import styles from "./IngredientsElement.module.css";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -28,5 +28,5 @@ export function IngredientsElement({ ingredient }) {
 }
 
 IngredientsElement.propTypes = {
-  ingredients: ingredientPropTypes,
+  ingredient: ingredientPropTypes,
 };
