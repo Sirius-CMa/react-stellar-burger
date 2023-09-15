@@ -5,10 +5,10 @@ import styles from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IngredientsElement } from "Components/IngredientsElement";
 import { ingredientsPropTypes } from "Utils/prop-types";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 // import { getAllIngredients } from "Action/api";
 
-export function BurgerIngredients({ ingredients, openPopup }) {
+export function BurgerIngredients({ ingredients }) {
   // const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -78,5 +78,4 @@ export function BurgerIngredients({ ingredients, openPopup }) {
 
 BurgerIngredients.propTypes = {
   ingredients: ingredientsPropTypes,
-  openPopup: PropTypes.func.isRequired,
 };

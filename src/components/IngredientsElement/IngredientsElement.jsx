@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./IngredientsElement.module.css";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ingredientPropTypes } from "Utils/prop-types";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import { managePopup } from "Action/popup";
 export function IngredientsElement({ ingredient }) {

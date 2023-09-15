@@ -1,12 +1,14 @@
+import { useSelector } from "react-redux";
 import styles from "./IngredientDetails.module.css";
 import { ingredientPropTypes } from "../../utils/prop-types";
 
-export const IngredientDetails = ({ props }) => {
+export const IngredientDetails = () => {
+  const { ingredient } = useSelector((store) => store.managePopup);
   return (
     <div className={`${styles.container}  mt-10 mb-15`}>
       <h2 className={`${styles.title} ml-10 text text_type_main-large`}>Детали ингредиента</h2>
-      <img src={props.image_large} alt={props.name} className={`ml-4 mr-4`} />
-      <h3 className={`text text_type_main-medium`}>{props.name}</h3>
+      <img src={ingredient.image_large} alt={ingredient.name} className={`ml-4 mr-4`} />
+      <h3 className={`text text_type_main-medium`}>{ingredient.name}</h3>
       <table className={`${styles.table}`}>
         <tbody>
           <tr>
@@ -16,10 +18,10 @@ export const IngredientDetails = ({ props }) => {
             <th className="text text_type_main-default text_color_inactive">Углеводы, г</th>
           </tr>
           <tr>
-            <th className="text text_type_main-default text_color_inactive">{props.calories}</th>
-            <th className="text text_type_main-default text_color_inactive">{props.proteins}</th>
-            <th className="text text_type_main-default text_color_inactive">{props.fat}</th>
-            <th className="text text_type_main-default text_color_inactive">{props.carbohydrates}</th>
+            <th className="text text_type_main-default text_color_inactive">{ingredient.calories}</th>
+            <th className="text text_type_main-default text_color_inactive">{ingredient.proteins}</th>
+            <th className="text text_type_main-default text_color_inactive">{ingredient.fat}</th>
+            <th className="text text_type_main-default text_color_inactive">{ingredient.carbohydrates}</th>
           </tr>
         </tbody>
       </table>
@@ -28,5 +30,5 @@ export const IngredientDetails = ({ props }) => {
 };
 
 IngredientDetails.propTypes = {
-  props: ingredientPropTypes,
+  ingredient: ingredientPropTypes,
 };
