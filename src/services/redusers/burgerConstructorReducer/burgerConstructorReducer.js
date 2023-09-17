@@ -1,26 +1,17 @@
-const NEXT_STEP = 'NEXT_STEP'
-const PREVIOUS_STEP = 'PREVIOUS_STEP'
+import { ADD_ELEMENT } from 'Action/burgerConstructor'
 
-export const burgerConstructorReducer = (state = '', action) => {
+
+
+const initialState = {
+  listIngredients: []
+}
+
+export const burgerConstructorReducer = (state = initialState, action) => {
   switch (action.type) {
-    case NEXT_STEP: {
-      return state === 'cart'
-        ? 'delivery'
-        : state === 'delivery'
-          ? 'checkout'
-          : state === 'checkout'
-            ? 'checkout'
-            : 'checkout';
+    case ADD_ELEMENT: {
+      return state
     }
-    case PREVIOUS_STEP: {
-      return state === 'cart'
-        ? 'cart'
-        : state === 'delivery'
-          ? 'cart'
-          : state === 'checkout'
-            ? 'delivery'
-            : 'cart';
-    }
+
     default: {
       return state;
     }

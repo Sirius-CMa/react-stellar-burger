@@ -4,11 +4,14 @@ import {
   GET_ALL_INGREDIENTS_FAILED
 } from 'Action/api'
 
+
+
+
 const initialState = {
   data: [],
   loading: true,
   error: false,
-  currentProduct: null,
+  currentProduct: null
 }
 
 export const serverDataReducer = (state = initialState, action) => {
@@ -34,19 +37,7 @@ export const serverDataReducer = (state = initialState, action) => {
         error: true,
       }
     }
-    // case SHOW_CURRENT_PRODUCT: {
-    //     console.log(state.currentProduct);
-    //     return {
-    //         ...state,
-    //         currentProduct: action.currentProduct,
-    //     }
-    // }
-    // case CLOSE_CURRENT_PRODUCT: {
-    //     return {
-    //         ...state,
-    //         currentProduct: null,
-    //     }
-    // }
+
     default: {
       return state
     }

@@ -9,6 +9,7 @@ import { PopupOverlay } from "../PopupOverlay/PopupOverlay";
 import PropTypes from "prop-types";
 
 import { managePopup } from "Action/popup";
+import { REMOVE_ORDER_DATA } from "Action/order";
 
 const $popupRoot = document.getElementById("popup");
 
@@ -30,6 +31,7 @@ export function Popup({ children }) {
   }, []);
 
   const closePopup = () => {
+    dispatch({ type: REMOVE_ORDER_DATA });
     dispatch(managePopup({ type: "close" }));
   };
 

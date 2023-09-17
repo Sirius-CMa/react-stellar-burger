@@ -22,12 +22,12 @@ export function App() {
     dispatch(getAllIngredients());
   }, [dispatch]);
 
-  const { loading } = useSelector((store) => store.serverData);
+  const { loading, error } = useSelector((store) => store.serverData);
   const { isPopupOpen, ingredient } = useSelector((store) => store.managePopup);
 
   return (
     <div className={styles.container}>
-      {!loading && (
+      {!loading ? (
         <>
           <AppHeader />
           <main className={styles.containerConstructor}>
@@ -35,15 +35,13 @@ export function App() {
             <BurgerConstructor />
           </main>
         </>
+      ) : (
+        <Popup>
+          <LoadingScreen loading={loading} error={error} />
+        </Popup>
       )}
 
       {isPopupOpen && <Popup>{ingredient ? <IngredientDetails /> : <OrderDetails />}</Popup>}
-
-      {loading && (
-        <Popup>
-          <LoadingScreen />
-        </Popup>
-      )}
     </div>
   );
 }

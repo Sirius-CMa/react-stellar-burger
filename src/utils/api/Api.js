@@ -11,9 +11,21 @@ export class Api {
   }
 
   loadIngredients() {
-    return fetch(`${this._baseUrl}`, {
+    return fetch(`${this._baseUrl}/ingredients`, {
       headers: this._headers
     })
       .then(this._onResponse)
   }
+
+  getOrderDetailsServer(ingredients) {
+    console.log('Api - ', ingredients)
+    return fetch(`${this._baseUrl}/orders`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(ingredients)
+    })
+      .then(this._onResponse)
+  }
+
+
 }
