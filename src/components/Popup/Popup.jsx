@@ -8,14 +8,16 @@ import { useEffect } from "react";
 import { PopupOverlay } from "../PopupOverlay/PopupOverlay";
 import PropTypes from "prop-types";
 
-import { managePopup } from "Action/popup";
+import { SET_IS_POPUP_CLOSE } from "Action/popup";
 import { REMOVE_ORDER_DATA } from "Action/order";
+import { REMOVE_CURRENT_INGREDIENT } from "Action/burgerIngredients";
 
 const $popupRoot = document.getElementById("popup");
 
 export function Popup({ children }) {
   const dispatch = useDispatch();
-  const { loading } = useSelector((store) => store.managePopup);
+  const { isLoading } = useSelector((store) => store.burgerIngredients);
+  const { number } = useSelector((store) => store.order);
 
   useEffect(() => {
     const closePopupByEsc = (evt) => {
@@ -31,15 +33,15 @@ export function Popup({ children }) {
   }, []);
 
   const closePopup = () => {
-    dispatch({ type: REMOVE_ORDER_DATA });
-    dispatch(managePopup({ type: "close" }));
+    number ? dispatch({ type: REMOVE_ORDER_DATA }) : dispatch({ type: REMOVE_CURRENT_INGREDIENT });
+    dispatch({ type: SET_IS_POPUP_CLOSE });
   };
 
   return ReactDOM.createPortal(
     <>
       <PopupOverlay closePopup={closePopup} />
-      <div className={`${styles.container}  ${loading && styles.load}`}>
-        <button className={`${styles.closeButton} ${loading && styles.closeButton_loadScreen}`} onClick={closePopup}>
+      <div className={`${styles.container}  ${isLoading && styles.load}`}>
+        <button className={`${styles.closeButton} ${isLoading && styles.closeButton_loadScreen}`} onClick={closePopup}>
           <CloseIcon type="primary" />
         </button>
         {children}

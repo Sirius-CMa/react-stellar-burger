@@ -1,33 +1,56 @@
-// import { useEffect, useState } from "react";
-import { useSelector } from "react-redux"; //useDispatch,
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux"; //useDispatch,
 
 import styles from "./BurgerIngredients.module.css";
 import { titleReplace } from "Utils/titleConstants";
+import { getAllIngredients } from "Action/burgerIngredients";
 
 import { TabContainer } from "Components/TabContainer";
 import { BlockIngredient } from "Components/BlockIngredient";
+import { LoadingScreen } from "Components/LoadingScreen";
+import { Popup } from "Components/Popup";
+import { IngredientDetails } from "Components/IngredientDetails";
 // import { ingredientsPropTypes } from "Utils/prop-types";
 // import PropTypes from "prop-types";
 
 export function BurgerIngredients() {
-  // const dispatch = useDispatch();
-  const { data } = useSelector((store) => store.serverData);
+  console.log("BurgerIngredients");
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    console.log("dispatch(getAllIngredients())");
+    dispatch(getAllIngredients());
+  }, [dispatch]);
+
+  const { data, isLoading, isError, currentProduct } = useSelector((store) => store.burgerIngredients);
+  // const { isPopupOpen } = useSelector((store) => store.popup);
   return (
-    <div className={styles.container}>
-      <h2 className={`${styles.title}  text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
-      <TabContainer />
+    <div>
+      <div className={styles.container}>
+        <h2 className={`${styles.title}  text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
+        <TabContainer />
 
-      <ul className={`${styles.ingredients}`}>
-        {Object.keys(data).map((oneKey, i) => {
-          return (
-            <li key={i} className={styles.wrapperList}>
-              {" "}
-              <BlockIngredient title={titleReplace[oneKey]} ingredients={data[oneKey]} />
-            </li>
-          );
-        })}
-      </ul>
+        <ul className={`${styles.ingredients}`}>
+          {Object.keys(data).map((oneKey, i) => {
+            return (
+              <li key={i} className={styles.wrapperList}>
+                {" "}
+                <BlockIngredient title={titleReplace[oneKey]} ingredients={data[oneKey]} />
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      {isLoading && (
+        <Popup>
+          <LoadingScreen isLoading={isLoading} isError={isError} />
+        </Popup>
+      )}
+      {currentProduct && (
+        <Popup>
+          <IngredientDetails />
+        </Popup>
+      )}
     </div>
   );
 }

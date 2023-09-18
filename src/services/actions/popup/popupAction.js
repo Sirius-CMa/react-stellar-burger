@@ -1,0 +1,2 @@
+export const SET_IS_POPUP_CLOSE = 'SET_IS_POPUP_CLOSE';
+export const SET_IS_POPUP_OPEN = 'SET_IS_POPUP_OPEN';

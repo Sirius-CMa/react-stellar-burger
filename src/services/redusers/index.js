@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 import { burgerConstructorReducer } from 'Reducer/burgerConstructorReducer';
-import { serverDataReducer } from 'Reducer/api'
-import { managePopupReducer } from 'Reducer/popup';
+import { popupReducer } from 'Reducer/popup';
 import { orderReduser } from 'Reducer/orderReducer';
+import { burgerIngredientsReducer } from 'Reducer/burgerIngredientsReducer';
 
 
 
 export const rootReducer = combineReducers({
-  serverData: serverDataReducer,
-  managePopup: managePopupReducer,
+  burgerIngredients: burgerIngredientsReducer,
+  popup: popupReducer,
   burgerConstructor: burgerConstructorReducer,
   order: orderReduser
 });

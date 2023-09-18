@@ -11,8 +11,8 @@ import { SET_IS_POPUP_OPEN } from "Action/popup";
 
 export function Order() {
   const dispatch = useDispatch();
-  const { isPopupOpen } = useSelector((store) => store.managePopup);
-  const { id } = useSelector((store) => store.order);
+  const { isPopupOpen } = useSelector((store) => store.popup);
+  const { number } = useSelector((store) => store.order);
   // const dd = undefined;
   const handleClick = () => {
     dispatch(getOrderDetailsAction({ ingredients: ["643d69a5c3f7b9001cfa093c", "643d69a5c3f7b9001cfa093c"] }));
@@ -30,9 +30,9 @@ export function Order() {
           Оформить заказ
         </Button>
       </div>
-      {id && isPopupOpen && (
+      {number && isPopupOpen && (
         <Popup>
-          <OrderDetails id={id} />
+          <OrderDetails number={number} />
         </Popup>
       )}
     </div>
