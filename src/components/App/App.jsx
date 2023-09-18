@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react"; //, useState
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react"; //, useState
+// import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./App.module.css";
 

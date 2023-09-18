@@ -18,12 +18,13 @@ export function BurgerIngredients() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("dispatch(getAllIngredients())");
     dispatch(getAllIngredients());
   }, [dispatch]);
 
   const { data, isLoading, isError, currentProduct } = useSelector((store) => store.burgerIngredients);
   // const { isPopupOpen } = useSelector((store) => store.popup);
+  // const data = useMemo(() => ({ data }), [data]);
+
   return (
     <div>
       <div className={styles.container}>

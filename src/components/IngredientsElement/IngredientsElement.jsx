@@ -9,7 +9,9 @@ import { SET_IS_POPUP_OPEN } from "Action/popup";
 // import { Popup } from "Components/Popup";
 // import { IngredientDetails } from "Components/IngredientDetails";
 import { SET_CURRENT_INGREDIENT } from "Action/burgerIngredients";
+
 export function IngredientsElement({ ingredient }) {
+  console.log("IngredientsElement");
   const dispatch = useDispatch();
 
   const handleClick = () => {

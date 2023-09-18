@@ -1,8 +1,10 @@
 import { IngredientsElement } from "Components/IngredientsElement";
 import styles from "./BlockIngredient.module.css";
+import { memo } from "react";
 // import { useSelector } from "react-redux";
 
-export function BlockIngredient({ title, ingredients }) {
+export const BlockIngredient = memo(function BlockIngredient({ title, ingredients }) {
+  console.log("BlockIngredient");
   return (
     <div>
       <h3 className={`${styles.subtitle} text text_type_main-medium`}>{title}</h3>
@@ -15,4 +17,4 @@ export function BlockIngredient({ title, ingredients }) {
       </ul>
     </div>
   );
-}
+});
