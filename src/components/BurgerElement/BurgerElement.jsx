@@ -10,7 +10,7 @@ export function BurgerElement({ item, isTop, isBottom, isLocked }) {
         {isLocked ? "" : <DragIcon type="secondary" />}
 
         <ConstructorElement
-          text={`${item.name} ${isTop ? " (верх)" : isBottom && " (низ)"}`}
+          text={`${item.name} ${isTop ? " (верх)" : isBottom ? " (низ)" : ""}`}
           thumbnail={item.image}
           type={isTop ? "top" : isBottom && "bottom"}
           isLocked={isLocked ? true : false}

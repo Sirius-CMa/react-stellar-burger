@@ -1,4 +1,5 @@
 .container {
+  border: 1px solid red;
   max-width: 600px;
   max-height: 912px;
   overflow: hidden;
@@ -12,6 +13,15 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  transition: 0.2s;
+  /* overflow: scroll;
+  overflow-x: hidden; */
+}
+
+.blockIngredientsHover {
+  composes: blockIngredients;
+  transform: scale(1.05);
+
   /* overflow: scroll;
   overflow-x: hidden; */
 }

@@ -10,6 +10,7 @@ import { BlockIngredient } from "Components/BlockIngredient";
 import { LoadingScreen } from "Components/LoadingScreen";
 import { Popup } from "Components/Popup";
 import { IngredientDetails } from "Components/IngredientDetails";
+// import { ADD_DRUGGED_INGREDIENT } from "Action/burgerConstructor";
 // import { ingredientsPropTypes } from "Utils/prop-types";
 // import PropTypes from "prop-types";
 
@@ -22,9 +23,16 @@ export function BurgerIngredients() {
   }, [dispatch]);
 
   const { data, isLoading, isError, currentProduct } = useSelector((store) => store.burgerIngredients);
-  // const { isPopupOpen } = useSelector((store) => store.popup);
-  // const data = useMemo(() => ({ data }), [data]);
-
+  const bun = data.filter((el) => el.type === "bun");
+  const main = data.filter((el) => el.type === "main");
+  const sauce = data.filter((el) => el.type === "sauce");
+  // const onDragStartHandler = (evt, ingredient) => {
+  //   evt.preventDefault();
+  //   dispatch({
+  //     type: ADD_DRUGGED_INGREDIENT,
+  //     payload: ingredient,
+  //   });
+  // };
   return (
     <div>
       <div className={styles.container}>
@@ -32,14 +40,23 @@ export function BurgerIngredients() {
         <TabContainer />
 
         <ul className={`${styles.ingredients}`}>
-          {Object.keys(data).map((oneKey, i) => {
+          <li key={1} className={styles.wrapperList}>
+            <BlockIngredient title={titleReplace["bun"]} ingredients={bun} />
+          </li>
+          <li key={2} className={styles.wrapperList}>
+            <BlockIngredient title={titleReplace["sauce"]} ingredients={sauce} />
+          </li>
+          <li key={3} className={styles.wrapperList}>
+            <BlockIngredient title={titleReplace["main"]} ingredients={main} />
+          </li>
+          {/* {Object.keys(data).map((oneKey, i) => {
             return (
               <li key={i} className={styles.wrapperList}>
                 {" "}
                 <BlockIngredient title={titleReplace[oneKey]} ingredients={data[oneKey]} />
               </li>
             );
-          })}
+          })} */}
         </ul>
       </div>
       {isLoading && (

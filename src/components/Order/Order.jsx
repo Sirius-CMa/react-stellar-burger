@@ -7,16 +7,16 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 import { getOrderDetailsAction } from "Action/order";
 import { Popup } from "Components/Popup";
 import { OrderDetails } from "Components/OrderDetails";
-import { SET_IS_POPUP_OPEN } from "Action/popup";
 
 export function Order() {
   const dispatch = useDispatch();
-  const { isPopupOpen } = useSelector((store) => store.popup);
   const { number } = useSelector((store) => store.order);
-  // const dd = undefined;
+  const { selectedBun, listIngredients } = useSelector((store) => store.burgerConstructor);
+
   const handleClick = () => {
-    dispatch(getOrderDetailsAction({ ingredients: ["643d69a5c3f7b9001cfa093c", "643d69a5c3f7b9001cfa093c"] }));
-    dispatch({ type: SET_IS_POPUP_OPEN });
+    const ingredientsId = [...Array(2).fill(selectedBun._id), ...listIngredients.map((el) => el._id)];
+    console.log(ingredientsId);
+    dispatch(getOrderDetailsAction({ ingredients: ingredientsId }));
   };
 
   return (
@@ -30,7 +30,7 @@ export function Order() {
           Оформить заказ
         </Button>
       </div>
-      {number && isPopupOpen && (
+      {number && (
         <Popup>
           <OrderDetails number={number} />
         </Popup>

@@ -10,9 +10,16 @@ export const GET_ALL_INGREDIENTS_FAILED = 'GET_ALL_INGREDIENTS_FAILED';
 export const SET_CURRENT_INGREDIENT = 'SET_CURRENT_INGREDIENT';
 export const REMOVE_CURRENT_INGREDIENT = 'REMOVE_CURRENT_INGREDIENT';
 
+export const SET_COUNT_INGREDIENT = 'SET_COUNT_INGREDIENT';
+
+
+
+// export function setCount(){
+//   return function(dispatch){}
+// }
+
 
 export function getAllIngredients() {
-  console.log(33)
   return function (dispatch) {
     dispatch({
       type: GET_ALL_INGREDIENTS_REQUEST,
@@ -20,11 +27,11 @@ export function getAllIngredients() {
     api
       .loadIngredients()
       .then((res) => {
-        const ingredients = sortIngredients(res.data)
-        console.log(ingredients);
+        // const ingredients = sortIngredients(res.data)
+        console.log(res.data);
         dispatch({
           type: GET_ALL_INGREDIENTS_SUCCESS,
-          payload: ingredients
+          payload: res.data
         })
       })
       .catch(error => {
