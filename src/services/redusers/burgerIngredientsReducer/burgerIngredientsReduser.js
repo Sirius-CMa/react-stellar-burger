@@ -55,10 +55,8 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
       }
     }
     case SET_COUNT_INGREDIENT: {
-      console.log(action.payload);
-      const aa = state.data.map(el => el._id === action.payload._id ? el.count === undefined ? { ...el, count: 1 } : { ...el, count: el.count + 1 } : el)
-      console.log(22, aa);
-      return { ...state, data: aa };
+
+      return state;
     }
 
     default: {

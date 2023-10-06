@@ -1,6 +1,6 @@
 import { Api } from "Api";
 import { dataServer } from "Utils/constants";
-import { sortIngredients } from "Utils/sortIngredients";
+// import { sortIngredients } from "Utils/sortIngredients";
 
 const api = new Api(dataServer);
 

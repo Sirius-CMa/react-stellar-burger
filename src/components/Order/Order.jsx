@@ -13,6 +13,8 @@ export function Order() {
   const { number } = useSelector((store) => store.order);
   const { selectedBun, listIngredients } = useSelector((store) => store.burgerConstructor);
 
+  const sum = selectedBun.price * 2 + listIngredients.reduce((acc, el) => acc + el.price, 0);
+
   const handleClick = () => {
     const ingredientsId = [...Array(2).fill(selectedBun._id), ...listIngredients.map((el) => el._id)];
     console.log(ingredientsId);
@@ -23,7 +25,7 @@ export function Order() {
     <div>
       <div className={styles.container}>
         <div className={`${styles.blockPrice} mr-10`}>
-          <p className={`${styles.price} text text_type_main-large `}>12345</p>
+          <p className={`${styles.price} text text_type_main-large `}>{sum}</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button htmlType="button" type="primary" size="medium" onClick={handleClick}>

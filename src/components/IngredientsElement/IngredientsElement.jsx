@@ -1,4 +1,6 @@
-import { useDispatch } from "react-redux";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./IngredientsElement.module.css";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -11,7 +13,20 @@ import { useDrag } from "react-dnd";
 
 export function IngredientsElement({ ingredient }) {
   console.log("IngredientsElement");
+  const [itemCount, setItemCount] = useState(0);
+  const [bunCount, setBunCount] = useState(0);
+
   const dispatch = useDispatch();
+  const { listIngredients, selectedBun } = useSelector((state) => state.burgerConstructor);
+
+  useEffect(() => {
+    if (ingredient.type === "bun" && ingredient._id === selectedBun._id) {
+      setBunCount(2);
+    } else {
+      setBunCount(0);
+    }
+    setItemCount(listIngredients.filter((item) => item._id === ingredient._id).length);
+  }, [listIngredients, selectedBun]);
 
   const handleClick = () => {
     dispatch({ type: SET_CURRENT_INGREDIENT, payload: ingredient });
@@ -29,7 +44,9 @@ export function IngredientsElement({ ingredient }) {
   return (
     <div ref={dragRef} draggable="true" style={{ opacity }}>
       <div className={styles.container} onClick={handleClick}>
-        {ingredient.count && <Counter count={ingredient.count} size="default" />}
+        {(bunCount !== 0 || itemCount !== 0) && (
+          <Counter count={ingredient.type === "bun" ? bunCount : itemCount} size="default" />
+        )}
         <img src={ingredient.image} alt={ingredient.name} className={styles.image} />
         <div className={styles.description}>
           <p className={`${styles.price} text text_type_main-default`}>{ingredient.price}</p>

@@ -8,7 +8,7 @@ import styles from "./BurgerConstructor.module.css";
 // import { filling } from "Utils/data";
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT } from "Action/burgerConstructor";
-import { SET_COUNT_INGREDIENT } from "Action/burgerIngredients";
+// import { SET_COUNT_INGREDIENT } from "Action/burgerIngredients";
 
 export function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -23,10 +23,6 @@ export function BurgerConstructor() {
     drop(item) {
       dispatch({
         type: ADD_INGREDIENT,
-        payload: item,
-      });
-      dispatch({
-        type: SET_COUNT_INGREDIENT,
         payload: item,
       });
     },
