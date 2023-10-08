@@ -29,6 +29,8 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       newArrow[action.dragIndex] = hoveredItem;
 
       return { ...state, listIngredients: newArrow }
+
+      // return { ...state, listIngredients: action.sorted }
     }
     default: {
       return state;

@@ -33,7 +33,7 @@ export function IngredientsElement({ ingredient }) {
     dispatch({ type: SET_IS_POPUP_OPEN });
   };
 
-  const [{ opacity }, dragRef] = useDrag({
+  const [{ opacity }, dragRefEl] = useDrag({
     type: "ingr",
     item: ingredient,
     collect: (monitor) => ({
@@ -42,7 +42,7 @@ export function IngredientsElement({ ingredient }) {
   });
 
   return (
-    <div ref={dragRef} draggable style={{ opacity }}>
+    <div ref={dragRefEl} draggable style={{ opacity }}>
       <div className={styles.container} onClick={handleClick}>
         {(bunCount !== 0 || itemCount !== 0) && (
           <Counter count={ingredient.type === "bun" ? bunCount : itemCount} size="default" />

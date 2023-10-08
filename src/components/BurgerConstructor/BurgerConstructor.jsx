@@ -8,14 +8,14 @@ import styles from "./BurgerConstructor.module.css";
 // import { filling } from "Utils/data";
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT } from "Action/burgerConstructor";
-import { FillingElement } from "Components/FillingElement";
+// import { FillingElement } from "Components/FillingElement";
 // import { useCallback } from "react";
+import { v4 } from "uuid";
 
 export function BurgerConstructor() {
   const dispatch = useDispatch();
   const { listIngredients, selectedBun } = useSelector((state) => state.burgerConstructor);
-  // временная история с булочкой
-  // const bun = listIngredients && listIngredients.find((element) => element.type === "bun");
+
   const [{ isOver }, dropTarget] = useDrop({
     accept: "ingr",
     collect: (monitor) => ({
@@ -30,22 +30,20 @@ export function BurgerConstructor() {
   });
 
   return (
-    <div className={styles.container} ref={dropTarget}>
+    <div ref={dropTarget} className={styles.container}>
       <section className={!isOver ? styles.blockIngredients : styles.blockIngredientsHover}>
         <BurgerElement item={selectedBun} isTop isLocked />
 
         <ul className={styles.wrapperList}>
-          {listIngredients.map((item, i) => (
-            <FillingElement item={item} index={i} />
-          ))}
+          {listIngredients &&
+            listIngredients.map((item, i) => {
+              return (
+                <li key={v4()}>
+                  <BurgerElement item={item} index={i} />
+                </li>
+              );
+            })}
         </ul>
-        {/* <ul className={styles.wrapperList}>
-          {listIngredients.map((item, i) => (
-            <li key={i} className={styles.listElement}>
-              <BurgerElement item={item} />
-            </li>
-          ))}{" "}
-        </ul> */}
 
         <BurgerElement item={selectedBun} isBottom isLocked />
       </section>
