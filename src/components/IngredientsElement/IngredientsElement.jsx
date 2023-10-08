@@ -42,7 +42,7 @@ export function IngredientsElement({ ingredient }) {
   });
 
   return (
-    <div ref={dragRef} draggable="true" style={{ opacity }}>
+    <div ref={dragRef} draggable style={{ opacity }}>
       <div className={styles.container} onClick={handleClick}>
         {(bunCount !== 0 || itemCount !== 0) && (
           <Counter count={ingredient.type === "bun" ? bunCount : itemCount} size="default" />

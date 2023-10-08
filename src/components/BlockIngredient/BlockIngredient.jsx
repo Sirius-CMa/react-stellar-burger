@@ -1,9 +1,7 @@
 import { IngredientsElement } from "Components/IngredientsElement";
 import styles from "./BlockIngredient.module.css";
-import { memo } from "react";
-// import { useSelector } from "react-redux";
 
-export const BlockIngredient = memo(function BlockIngredient({ title, ingredients }) {
+export function BlockIngredient({ title, ingredients }) {
   console.log("BlockIngredient");
   return (
     <div>
@@ -17,4 +15,4 @@ export const BlockIngredient = memo(function BlockIngredient({ title, ingredient
       </ul>
     </div>
   );
-});
+}

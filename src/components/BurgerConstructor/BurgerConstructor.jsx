@@ -8,17 +8,18 @@ import styles from "./BurgerConstructor.module.css";
 // import { filling } from "Utils/data";
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT } from "Action/burgerConstructor";
-// import { SET_COUNT_INGREDIENT } from "Action/burgerIngredients";
+import { FillingElement } from "Components/FillingElement";
+// import { useCallback } from "react";
 
 export function BurgerConstructor() {
   const dispatch = useDispatch();
   const { listIngredients, selectedBun } = useSelector((state) => state.burgerConstructor);
   // временная история с булочкой
   // const bun = listIngredients && listIngredients.find((element) => element.type === "bun");
-  const [{ isHover }, dropTarget] = useDrop({
+  const [{ isOver }, dropTarget] = useDrop({
     accept: "ingr",
     collect: (monitor) => ({
-      isHover: monitor.isOver(),
+      isOver: monitor.isOver(),
     }),
     drop(item) {
       dispatch({
@@ -30,19 +31,24 @@ export function BurgerConstructor() {
 
   return (
     <div className={styles.container} ref={dropTarget}>
-      <section className={!isHover ? styles.blockIngredients : styles.blockIngredientsHover}>
+      <section className={!isOver ? styles.blockIngredients : styles.blockIngredientsHover}>
         <BurgerElement item={selectedBun} isTop isLocked />
 
         <ul className={styles.wrapperList}>
+          {listIngredients.map((item, i) => (
+            <FillingElement item={item} index={i} />
+          ))}
+        </ul>
+        {/* <ul className={styles.wrapperList}>
           {listIngredients.map((item, i) => (
             <li key={i} className={styles.listElement}>
               <BurgerElement item={item} />
             </li>
           ))}{" "}
-        </ul>
+        </ul> */}
 
         <BurgerElement item={selectedBun} isBottom isLocked />
-      </section>{" "}
+      </section>
       <Order />
     </div>
   );
@@ -53,3 +59,16 @@ export function BurgerConstructor() {
 //   filling: ingredientsPropTypes,
 //   openPopup: PropTypes.func.isRequired,
 // };
+
+// const moveIngredient = useCallback(
+//   (dragIndex, hoverIndex) => {
+//     const dragItem = listIngredients[dragIndex];
+//     const hoverItem = listIngredients[hoverIndex];
+//     const newIngredients = [...listIngredients];
+//     newIngredients[dragIndex] = hoverItem;
+//     newIngredients[hoverIndex] = dragItem;
+
+//     dispatch({ type: MOVE_INGREDIENT, sorted: newIngredients });
+//   },
+//   [dispatch, listIngredients]
+// );

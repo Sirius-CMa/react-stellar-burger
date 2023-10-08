@@ -3,7 +3,7 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import { ingredientPropTypes } from "../../utils/prop-types";
 import PropTypes from "prop-types";
 
-export function BurgerElement({ item, isTop, isBottom, isLocked }) {
+export function BurgerElement({ item, isTop, isBottom, isLocked, handleClickDelete, index }) {
   return (
     <div className={`${styles.container} ${isLocked && styles.container_notIcon}`}>
       <div className={styles.blockElement}>
@@ -15,6 +15,7 @@ export function BurgerElement({ item, isTop, isBottom, isLocked }) {
           type={isTop ? "top" : isBottom && "bottom"}
           isLocked={isLocked ? true : false}
           price={item.price}
+          handleClose={() => handleClickDelete(index)}
         />
       </div>
     </div>
