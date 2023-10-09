@@ -10,7 +10,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 export function App() {
-  console.log("App");
+  // console.log("App");
 
   return (
     <div className={styles.container}>

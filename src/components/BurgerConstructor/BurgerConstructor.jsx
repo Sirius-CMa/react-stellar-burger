@@ -1,23 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
+import styles from "./BurgerConstructor.module.css";
+
+import { useDrop } from "react-dnd";
 
 import { BurgerElement } from "../BurgerElement";
 import { Order } from "Components/Order";
-import styles from "./BurgerConstructor.module.css";
+
+import { ADD_INGREDIENT } from "Action/burgerConstructor";
+
+import { v4 } from "uuid";
 // import { ingredientsPropTypes } from "Utils/prop-types";
 // import PropTypes from "prop-types";
-// import { filling } from "Utils/data";
-import { useDrop } from "react-dnd";
-import { ADD_INGREDIENT } from "Action/burgerConstructor";
-// import { FillingElement } from "Components/FillingElement";
-// import { useCallback } from "react";
-import { v4 } from "uuid";
 
 export function BurgerConstructor() {
   const dispatch = useDispatch();
   const { listIngredients, selectedBun } = useSelector((state) => state.burgerConstructor);
 
   const [{ isOver }, dropTarget] = useDrop({
-    accept: "ingr",
+    accept: "element",
     collect: (monitor) => ({
       isOver: monitor.isOver(),
     }),
@@ -32,20 +32,20 @@ export function BurgerConstructor() {
   return (
     <div ref={dropTarget} className={styles.container}>
       <section className={!isOver ? styles.blockIngredients : styles.blockIngredientsHover}>
-        <BurgerElement item={selectedBun} isTop isLocked />
+        <BurgerElement ingredient={selectedBun} isTop isLocked />
 
         <ul className={styles.wrapperList}>
           {listIngredients &&
-            listIngredients.map((item, i) => {
+            listIngredients.map((ingredient, i) => {
               return (
-                <li key={v4()}>
-                  <BurgerElement item={item} index={i} />
+                <li key={v4()} className={styles.wrapperList__item}>
+                  <BurgerElement ingredient={ingredient} index={i} />
                 </li>
               );
             })}
         </ul>
 
-        <BurgerElement item={selectedBun} isBottom isLocked />
+        <BurgerElement ingredient={selectedBun} isBottom isLocked />
       </section>
       <Order />
     </div>
@@ -57,16 +57,3 @@ export function BurgerConstructor() {
 //   filling: ingredientsPropTypes,
 //   openPopup: PropTypes.func.isRequired,
 // };
-
-// const moveIngredient = useCallback(
-//   (dragIndex, hoverIndex) => {
-//     const dragItem = listIngredients[dragIndex];
-//     const hoverItem = listIngredients[hoverIndex];
-//     const newIngredients = [...listIngredients];
-//     newIngredients[dragIndex] = hoverItem;
-//     newIngredients[hoverIndex] = dragItem;
-
-//     dispatch({ type: MOVE_INGREDIENT, sorted: newIngredients });
-//   },
-//   [dispatch, listIngredients]
-// );

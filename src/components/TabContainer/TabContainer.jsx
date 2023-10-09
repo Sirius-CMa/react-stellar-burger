@@ -2,7 +2,7 @@ import styles from "./TabContainer.module.css";
 
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export function TabContainer({ ingredientsContainer, current, bunRef, sauceRef, mainRef, handleClick }) {
+export function TabContainer({ current, bunRef, sauceRef, mainRef, handleClick }) {
   return (
     <div className={styles.tabContainer}>
       {" "}

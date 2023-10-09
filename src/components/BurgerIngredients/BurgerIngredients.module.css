@@ -1,20 +1,11 @@
 .container {
   box-sizing: border-box;
   max-width: 620px;
-  max-height: 100%;
-  /* border: 1px solid #ffee00; */
+  max-height: 80vh;
   padding: 10px 0 16px 20px;
 }
 
-/* .tabContainer {
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-} */
-
 .wrapperList {
-  /* border: 1px solid greenyellow; */
   list-style: none;
   box-sizing: border-box;
   margin: 0;
@@ -34,7 +25,6 @@
 
 .ingredients {
   box-sizing: border-box;
-  /* border: 1px solid red; */
   overflow: scroll;
   overflow-x: hidden;
   max-height: 65vh;
@@ -68,14 +58,3 @@
 .ingredients::-webkit-scrollbar-button {
   display: none;
 }
-
-/* .title{
-
-} */
-
-/* .blockIngredient {
-} */
-/* .subtitle {
-  margin: 0;
-  padding: 0;
-} */

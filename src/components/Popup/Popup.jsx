@@ -51,6 +51,6 @@ export function Popup({ children }) {
   );
 }
 
-PopupOverlay.propTypes = {
-  closePopup: PropTypes.func.isRequired,
+Popup.propTypes = {
+  children: PropTypes.element,
 };

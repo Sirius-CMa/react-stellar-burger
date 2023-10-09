@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { DELETE_INGREDIENT, moveIngredient } from "Action/burgerConstructor";
 import { useDrag, useDrop } from "react-dnd";
 
-export function BurgerElement({ item, isTop, isBottom, isLocked, index }) {
+export function BurgerElement({ ingredient, isTop, isBottom, isLocked, index }) {
   const dispatch = useDispatch();
   const ref = useRef(null);
 
@@ -62,11 +62,11 @@ export function BurgerElement({ item, isTop, isBottom, isLocked, index }) {
         {isLocked ? "" : <DragIcon type="secondary" />}
 
         <ConstructorElement
-          text={`${item.name} ${isTop ? " (верх)" : isBottom ? " (низ)" : ""}`}
-          thumbnail={item.image}
+          text={`${ingredient.name} ${isTop ? " (верх)" : isBottom ? " (низ)" : ""}`}
+          thumbnail={ingredient.image}
           type={isTop ? "top" : isBottom && "bottom"}
           isLocked={isLocked ? true : false}
-          price={item.price}
+          price={ingredient.price}
           handleClose={() => handleClickDelete(index)}
         />
       </div>
@@ -75,8 +75,9 @@ export function BurgerElement({ item, isTop, isBottom, isLocked, index }) {
 }
 
 BurgerElement.propTypes = {
-  item: ingredientPropTypes,
-  isTop: PropTypes.oneOfType([PropTypes.bool.isRequired, PropTypes.oneOf([null]).isRequired]),
-  isBottom: PropTypes.oneOfType([PropTypes.bool.isRequired, PropTypes.oneOf([null]).isRequired]),
-  isLocked: PropTypes.oneOfType([PropTypes.bool.isRequired, PropTypes.oneOf([null]).isRequired]),
+  ingredient: ingredientPropTypes,
+  isTop: PropTypes.oneOfType([PropTypes.bool.isRequired, PropTypes.oneOf([null])]),
+  isBottom: PropTypes.oneOfType([PropTypes.bool.isRequired, PropTypes.oneOf([null])]),
+  isLocked: PropTypes.oneOfType([PropTypes.bool.isRequired, PropTypes.oneOf([null])]),
+  index: PropTypes.number,
 };

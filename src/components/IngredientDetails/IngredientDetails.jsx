@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import styles from "./IngredientDetails.module.css";
+
 import { ingredientPropTypes } from "../../utils/prop-types";
 
 export const IngredientDetails = () => {
-  console.log("IngredientDetails");
+  // console.log("IngredientDetails");
   const { currentProduct } = useSelector((store) => store.burgerIngredients);
   return (
     <div className={`${styles.container}  mt-10 mb-15`}>
@@ -31,5 +32,5 @@ export const IngredientDetails = () => {
 };
 
 IngredientDetails.propTypes = {
-  ingredient: ingredientPropTypes,
+  currentProduct: ingredientPropTypes,
 };

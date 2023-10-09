@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux"; //useDispatch,
 
 import styles from "./BurgerIngredients.module.css";
+
 import { titleReplace } from "Utils/titleConstants";
 import { getAllIngredients } from "Action/burgerIngredients";
 
@@ -10,12 +11,11 @@ import { BlockIngredient } from "Components/BlockIngredient";
 import { LoadingScreen } from "Components/LoadingScreen";
 import { Popup } from "Components/Popup";
 import { IngredientDetails } from "Components/IngredientDetails";
-// import { ADD_DRUGGED_INGREDIENT } from "Action/burgerConstructor";
+
 // import { ingredientsPropTypes } from "Utils/prop-types";
-// import PropTypes from "prop-types";
 
 export function BurgerIngredients() {
-  console.log("BurgerIngredients");
+  // console.log("BurgerIngredients");
   const dispatch = useDispatch();
 
   const [current, setCurrent] = useState("bun");
@@ -49,6 +49,7 @@ export function BurgerIngredients() {
   }, [dispatch]);
 
   const { data, isLoading, isError, currentProduct } = useSelector((store) => store.burgerIngredients);
+
   const bun = useMemo(() => data.filter((el) => el.type === "bun"), [data]);
   const main = useMemo(() => data.filter((el) => el.type === "main"), [data]);
   const sauce = useMemo(() => data.filter((el) => el.type === "sauce"), [data]);
@@ -75,14 +76,6 @@ export function BurgerIngredients() {
           <li ref={mainRef} key={3} className={styles.wrapperList}>
             <BlockIngredient title={titleReplace["main"]} ingredients={main} />
           </li>
-          {/* {Object.keys(data).map((oneKey, i) => {
-            return (
-              <li key={i} className={styles.wrapperList}>
-                {" "}
-                <BlockIngredient title={titleReplace[oneKey]} ingredients={data[oneKey]} />
-              </li>
-            );
-          })} */}
         </ul>
       </div>
       {isLoading && (
@@ -102,34 +95,3 @@ export function BurgerIngredients() {
 // BurgerIngredients.propTypes = {
 //   ingredients: ingredientsPropTypes,
 // };
-
-//  <div className={styles.blockIngredient}>
-//     <h3 className={`${styles.subtitle} text text_type_main-medium`}>Булки</h3>
-//     <ul className={styles.wrapperList}>
-//       {data["bun"].map((item) => (
-//         <li key={item._id} className={styles.listItem}>
-//           <IngredientsElement ingredient={item} />
-//         </li>
-//       ))}
-//     </ul>
-//   </div>
-//   <div className={styles.blockIngredients}>
-//     <h3 className={`${styles.subtitle} text text_type_main-medium`}>Соусы</h3>
-//     <ul className={styles.wrapperList}>
-//       {data["sauce"].map((item) => (
-//         <li key={item._id} className={styles.listItem}>
-//           <IngredientsElement ingredient={item} />
-//         </li>
-//       ))}
-//     </ul>
-//   </div>
-//   <div className={styles.blockIngredients}>
-//     <h3 className={`${styles.subtitle} text text_type_main-medium`}>Начинки</h3>
-//     <ul className={styles.wrapperList}>
-//       {data["main"].map((item) => (
-//         <li key={item._id} className={styles.listItem}>
-//           <IngredientsElement ingredient={item} />
-//         </li>
-//       ))}
-//     </ul>
-//   </div>

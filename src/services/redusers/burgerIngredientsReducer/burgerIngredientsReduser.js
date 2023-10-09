@@ -26,7 +26,6 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
       };
     }
     case GET_ALL_INGREDIENTS_SUCCESS: {
-      console.log(action.payload);
       return (
         {
           ...state,

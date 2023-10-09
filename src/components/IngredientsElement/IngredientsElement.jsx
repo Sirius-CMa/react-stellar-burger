@@ -1,18 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useDrag } from "react-dnd";
 
 import styles from "./IngredientsElement.module.css";
+
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { ingredientPropTypes } from "Utils/prop-types";
-// import PropTypes from "prop-types";
 
 import { SET_IS_POPUP_OPEN } from "Action/popup";
 import { SET_CURRENT_INGREDIENT } from "Action/burgerIngredients";
-import { useDrag } from "react-dnd";
+
+import { ingredientPropTypes } from "Utils/prop-types";
+// import PropTypes from "prop-types";
 
 export function IngredientsElement({ ingredient }) {
-  console.log("IngredientsElement");
+  // console.log("IngredientsElement");
   const [itemCount, setItemCount] = useState(0);
   const [bunCount, setBunCount] = useState(0);
 
@@ -34,7 +36,7 @@ export function IngredientsElement({ ingredient }) {
   };
 
   const [{ opacity }, dragRefEl] = useDrag({
-    type: "ingr",
+    type: "element",
     item: ingredient,
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.3 : 1,
@@ -42,18 +44,16 @@ export function IngredientsElement({ ingredient }) {
   });
 
   return (
-    <div ref={dragRefEl} draggable style={{ opacity }}>
-      <div className={styles.container} onClick={handleClick}>
-        {(bunCount !== 0 || itemCount !== 0) && (
-          <Counter count={ingredient.type === "bun" ? bunCount : itemCount} size="default" />
-        )}
-        <img src={ingredient.image} alt={ingredient.name} className={styles.image} />
-        <div className={styles.description}>
-          <p className={`${styles.price} text text_type_main-default`}>{ingredient.price}</p>
-          <CurrencyIcon />
-        </div>
-        <p className={`${styles.name} text text_type_main-small`}>{ingredient.name}</p>
+    <div ref={dragRefEl} draggable className={styles.container} onClick={handleClick} style={{ opacity }}>
+      {(bunCount !== 0 || itemCount !== 0) && (
+        <Counter count={ingredient.type === "bun" ? bunCount : itemCount} size="default" />
+      )}
+      <img src={ingredient.image} alt={ingredient.name} className={styles.image} />
+      <div className={styles.description}>
+        <p className={`${styles.price} text text_type_main-default`}>{ingredient.price}</p>
+        <CurrencyIcon />
       </div>
+      <p className={`${styles.name} text text_type_main-small`}>{ingredient.name}</p>
     </div>
   );
 }

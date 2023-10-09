@@ -1,6 +1,5 @@
 import { Api } from "Api";
 import { dataServer } from "Utils/constants";
-// import { sortIngredients } from "Utils/sortIngredients";
 
 const api = new Api(dataServer);
 
@@ -13,12 +12,6 @@ export const REMOVE_CURRENT_INGREDIENT = 'REMOVE_CURRENT_INGREDIENT';
 export const SET_COUNT_INGREDIENT = 'SET_COUNT_INGREDIENT';
 
 
-
-// export function setCount(){
-//   return function(dispatch){}
-// }
-
-
 export function getAllIngredients() {
   return function (dispatch) {
     dispatch({
@@ -27,8 +20,7 @@ export function getAllIngredients() {
     api
       .loadIngredients()
       .then((res) => {
-        // const ingredients = sortIngredients(res.data)
-        console.log(res.data);
+        // console.log(res.data);
         dispatch({
           type: GET_ALL_INGREDIENTS_SUCCESS,
           payload: res.data
