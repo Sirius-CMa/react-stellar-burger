@@ -8,12 +8,12 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 import { getOrderDetailsAction } from "Action/order";
 import { Popup } from "Components/Popup";
 import { OrderDetails } from "Components/OrderDetails";
-import { burgerConstructor } from "Selectors";
+import { getDataBurgerConstructor } from "Selectors";
 
 export function Order() {
   const dispatch = useDispatch();
   const { number } = useSelector((store) => store.order);
-  const { selectedBun, listIngredients } = useSelector(burgerConstructor);
+  const { selectedBun, listIngredients } = useSelector(getDataBurgerConstructor);
 
   const sum = useMemo(() => {
     return selectedBun.price * 2 + listIngredients.reduce((acc, el) => acc + el.price, 0);

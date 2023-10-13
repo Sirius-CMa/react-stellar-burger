@@ -11,14 +11,14 @@ import PropTypes from "prop-types";
 import { SET_IS_POPUP_CLOSE } from "Action/popup";
 import { REMOVE_ORDER_DATA } from "Action/order";
 import { REMOVE_CURRENT_INGREDIENT } from "Action/burgerIngredients";
-import { burgerIngredients, order } from "Selectors";
+import { getDataBurgerIngredients, getDataOrder } from "Selectors";
 
 const $popupRoot = document.getElementById("popup");
 
 export function Popup({ children }) {
   const dispatch = useDispatch();
-  const { isLoading } = useSelector(burgerIngredients);
-  const { number } = useSelector(order);
+  const { isLoading } = useSelector(getDataBurgerIngredients);
+  const { number } = useSelector(getDataOrder);
 
   useEffect(() => {
     const closePopupByEsc = (evt) => {

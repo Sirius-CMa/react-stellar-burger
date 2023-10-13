@@ -9,14 +9,14 @@ import { Order } from "Components/Order";
 import { ADD_INGREDIENT } from "Action/burgerConstructor";
 
 import { v4 } from "uuid";
-import { burgerConstructor } from "Selectors";
+import { getDataBurgerConstructor } from "Selectors";
 // import { ingredientsPropTypes } from "Utils/prop-types";
 // import PropTypes from "prop-types";
 
 export function BurgerConstructor() {
   const dispatch = useDispatch();
 
-  const { listIngredients, selectedBun } = useSelector(burgerConstructor);
+  const { listIngredients, selectedBun } = useSelector(getDataBurgerConstructor);
 
   const [{ isOver }, dropTarget] = useDrop({
     accept: "element",

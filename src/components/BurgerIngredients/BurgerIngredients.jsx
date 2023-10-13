@@ -11,7 +11,7 @@ import { BlockIngredient } from "Components/BlockIngredient";
 import { LoadingScreen } from "Components/LoadingScreen";
 import { Popup } from "Components/Popup";
 import { IngredientDetails } from "Components/IngredientDetails";
-import { burgerIngredients } from "Selectors";
+import { getDataBurgerIngredients } from "Selectors";
 
 // import { ingredientsPropTypes } from "Utils/prop-types";
 
@@ -49,7 +49,7 @@ export function BurgerIngredients() {
     dispatch(getAllIngredients());
   }, [dispatch]);
 
-  const { data, isLoading, isError, currentProduct } = useSelector(burgerIngredients);
+  const { data, isLoading, isError, currentProduct } = useSelector(getDataBurgerIngredients);
 
   const bun = useMemo(() => data.filter((el) => el.type === "bun"), [data]);
   const main = useMemo(() => data.filter((el) => el.type === "main"), [data]);
