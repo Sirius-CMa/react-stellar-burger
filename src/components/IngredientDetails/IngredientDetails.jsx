@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import styles from "./IngredientDetails.module.css";
 
 import { ingredientPropTypes } from "../../utils/prop-types";
+import { burgerIngredients } from "Selectors";
 
 export const IngredientDetails = () => {
   // console.log("IngredientDetails");
-  const { currentProduct } = useSelector((store) => store.burgerIngredients);
+  const { currentProduct } = useSelector(burgerIngredients);
   return (
     <div className={`${styles.container}  mt-10 mb-15`}>
       <h2 className={`${styles.title} ml-10 text text_type_main-large`}>Детали ингредиента</h2>

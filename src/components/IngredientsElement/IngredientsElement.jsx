@@ -11,6 +11,7 @@ import { SET_IS_POPUP_OPEN } from "Action/popup";
 import { SET_CURRENT_INGREDIENT } from "Action/burgerIngredients";
 
 import { ingredientPropTypes } from "Utils/prop-types";
+import { burgerConstructor } from "Selectors";
 // import PropTypes from "prop-types";
 
 export function IngredientsElement({ ingredient }) {
@@ -19,7 +20,7 @@ export function IngredientsElement({ ingredient }) {
   const [bunCount, setBunCount] = useState(0);
 
   const dispatch = useDispatch();
-  const { listIngredients, selectedBun } = useSelector((state) => state.burgerConstructor);
+  const { listIngredients, selectedBun } = useSelector(burgerConstructor);
 
   useEffect(() => {
     if (ingredient.type === "bun" && ingredient._id === selectedBun._id) {

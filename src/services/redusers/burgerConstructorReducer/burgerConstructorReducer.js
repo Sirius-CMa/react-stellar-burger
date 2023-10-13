@@ -14,6 +14,8 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       if (action.payload.type === "bun") {
         return { ...state, selectedBun: action.payload }
       }
+      // const newEngredient =action.payload
+      // newEngredient.uuid: action.uuid
       return { ...state, listIngredients: [...state.listIngredients, action.payload] }
     }
     case DELETE_INGREDIENT: {

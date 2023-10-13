@@ -23,10 +23,11 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  justify-content: stretch;
   max-height: 39vh;
   overflow-y: scroll;
-  width: 100%;
-  align-items: flex-end;
+  max-width: 100%;
 }
 
 .wrapperList::-webkit-scrollbar {

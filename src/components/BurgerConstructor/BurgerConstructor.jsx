@@ -9,12 +9,14 @@ import { Order } from "Components/Order";
 import { ADD_INGREDIENT } from "Action/burgerConstructor";
 
 import { v4 } from "uuid";
+import { burgerConstructor } from "Selectors";
 // import { ingredientsPropTypes } from "Utils/prop-types";
 // import PropTypes from "prop-types";
 
 export function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { listIngredients, selectedBun } = useSelector((state) => state.burgerConstructor);
+
+  const { listIngredients, selectedBun } = useSelector(burgerConstructor);
 
   const [{ isOver }, dropTarget] = useDrop({
     accept: "element",
@@ -24,7 +26,7 @@ export function BurgerConstructor() {
     drop(item) {
       dispatch({
         type: ADD_INGREDIENT,
-        payload: item,
+        payload: { ...item, uuid: v4() },
       });
     },
   });
@@ -38,7 +40,7 @@ export function BurgerConstructor() {
           {listIngredients &&
             listIngredients.map((ingredient, i) => {
               return (
-                <li key={v4()} className={styles.wrapperList__item}>
+                <li key={ingredient.uuid} className={styles.wrapperList__item}>
                   <BurgerElement ingredient={ingredient} index={i} />
                 </li>
               );

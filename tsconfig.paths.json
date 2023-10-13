@@ -19,6 +19,9 @@
       ],
       "Hooks/*": [
         "src/hooks/*"
+      ],
+      "Selectors": [
+        "src/redux/Selectors/*"
       ]
     }
   }

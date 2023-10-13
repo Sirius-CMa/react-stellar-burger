@@ -54,12 +54,12 @@ export function BurgerElement({ ingredient, isTop, isBottom, isLocked, index }) 
 
   return (
     <div
-      className={`${styles.container} ${isLocked && styles.container_notIcon}`}
+      className={`${isLocked ? styles.container_notIcon : styles.container}`}
       ref={isLocked ? null : ref}
       style={{ opacity }}
     >
       <div className={styles.blockElement}>
-        {isLocked ? "" : <DragIcon type="secondary" />}
+        {isLocked ? "" : <DragIcon type="pimary" />}
 
         <ConstructorElement
           text={`${ingredient.name} ${isTop ? " (верх)" : isBottom ? " (низ)" : ""}`}
