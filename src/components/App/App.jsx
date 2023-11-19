@@ -3,24 +3,49 @@
 import styles from "./App.module.css";
 
 import { AppHeader } from "Components/AppHeader";
-import { BurgerIngredients } from "Components/BurgerIngredients";
-import { BurgerConstructor } from "Components/BurgerConstructor";
+// import { BurgerIngredients } from "Components/BurgerIngredients";
+// import { BurgerConstructor } from "Components/BurgerConstructor";
 
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+// import { DndProvider } from "react-dnd";
+// import { HTML5Backend } from "react-dnd-html5-backend";
+
+import { Route, Routes } from "react-router-dom"; // Switch, useHistory, Route, useLocation
+
+import { HomePage } from "Components/pages/HomePage";
+import { LoginPage } from "AuthPages/LoginPage";
+import { RegisterPage } from "AuthPages/RegisterPage";
+import { ForgotPassword } from "AuthPages/ForgotPasswordPage";
+import { ResetPasswordPage } from "AuthPages/ResetPasswordPage";
+import { Page404 } from "Components/pages/Page404";
 
 export function App() {
   // console.log("App");
+  // const location = useLocation();
+  // const background = location.state && location.state.background;
 
   return (
     <div className={styles.container}>
       <AppHeader />
-      <main className={styles.containerConstructor}>
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </DndProvider>
-      </main>
+      {/* <main className={styles.containerConstructor}>
+        <Routes>
+          <Route path="/">
+            <DndProvider backend={HTML5Backend}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </DndProvider>
+          </Route>
+          <Route path="/login" element={<LoginPage />} exact />
+        </Routes>
+      </main> */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} exact />
+        <Route path="/register" element={<RegisterPage />} exact />
+        <Route path="/forgot-password" element={<ForgotPassword />} exact />
+        <Route path="/reset-password" element={<ResetPasswordPage />} exact />
+        <Route path="/ingredients/:id" element={<LoginPage />} exact />
+        <Route path="/page-404" element={<Page404 />} exact />
+      </Routes>
     </div>
   );
 }
