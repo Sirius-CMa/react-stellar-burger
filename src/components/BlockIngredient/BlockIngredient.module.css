@@ -1,0 +1,17 @@
+.wrapperList {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 0 10px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  column-gap: 20px;
+  justify-content: space-around;
+}
+
+.listItem {
+  list-style: none;
+  margin: 0 0 0 10px;
+  padding: 0;
+}

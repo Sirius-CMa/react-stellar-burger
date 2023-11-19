@@ -1,21 +1,12 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #131316;
-  color: #f2f2f3;
-  box-sizing: border-box;
-  align-items: center;
-  max-width: 2000px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .containerConstructor {
-  box-sizing: border-box;
-  /* border: 2px solid lawngreen; */
+  /* overflow: hidden; */
+  max-width: 1240px;
+  margin: 0 auto;
   display: flex;
-  flex-direction: row;
-  gap: 20px;
-  max-height: 912px;
-  overflow: hidden;
+  justify-content: space-between;
+  align-items: flex-start;
 }

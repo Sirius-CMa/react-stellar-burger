@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "Components/*": [
+        "src/components/*"
+      ],
+      "Utils/*": [
+        "src/utils/*"
+      ],
+      "Action/*": [
+        "src/services/actions/*"
+      ],
+      "Reducer/*": [
+        "src/services/redusers/*"
+      ],
+      "Api/*": [
+        "src/utils/api/*"
+      ],
+      "Hooks/*": [
+        "src/hooks/*"
+      ],
+      "Selectors": [
+        "src/redux/Selectors/*"
+      ]
+    }
+  }
+}

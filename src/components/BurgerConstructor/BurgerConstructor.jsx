@@ -1,50 +1,61 @@
-import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerElement } from "../BurgerElement";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./BurgerConstructor.module.css";
-import { ingredientsPropTypes } from "../../utils/prop-types";
-import PropTypes from "prop-types";
 
-export function BurgerConstructor({ ingredients, filling, openPopup }) {
-  // временная история с булочкой
-  const bun = ingredients.find((element) => element.type === "bun");
+import { useDrop } from "react-dnd";
+
+import { BurgerElement } from "../BurgerElement";
+import { Order } from "Components/Order";
+
+import { ADD_INGREDIENT } from "Action/burgerConstructor";
+
+import { v4 } from "uuid";
+import { getDataBurgerConstructor } from "Selectors";
+// import { ingredientsPropTypes } from "Utils/prop-types";
+// import PropTypes from "prop-types";
+
+export function BurgerConstructor() {
+  const dispatch = useDispatch();
+
+  const { listIngredients, selectedBun } = useSelector(getDataBurgerConstructor);
+
+  const [{ isOver }, dropTarget] = useDrop({
+    accept: "element",
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
+    drop(item) {
+      dispatch({
+        type: ADD_INGREDIENT,
+        payload: { ...item, uuid: v4() },
+      });
+    },
+  });
 
   return (
-    <div className={styles.container}>
-      <section className={styles.blockIngredients}>
-        <BurgerElement item={bun} isTop isLocked />
+    <div ref={dropTarget} className={styles.container}>
+      <section className={!isOver ? styles.blockIngredients : styles.blockIngredientsHover}>
+        <BurgerElement ingredient={selectedBun} isTop isLocked />
 
         <ul className={styles.wrapperList}>
-          {filling.map((item, i) => (
-            <li key={i} className={styles.listElement}>
-              <BurgerElement item={item} />
-            </li>
-          ))}
+          {listIngredients &&
+            listIngredients.map((ingredient, i) => {
+              return (
+                <li key={ingredient.uuid} className={styles.wrapperList__item}>
+                  <BurgerElement ingredient={ingredient} index={i} />
+                </li>
+              );
+            })}
         </ul>
 
-        <BurgerElement item={bun} isBottom isLocked />
+        <BurgerElement ingredient={selectedBun} isBottom isLocked />
       </section>
-      <section className={styles.order}>
-        <div className={`${styles.blockPrice} mr-10`}>
-          <p className={`${styles.price} text text_type_main-large `}>12345</p>
-          <CurrencyIcon type="primary" />
-        </div>
-        <Button
-          htmlType="button"
-          type="primary"
-          size="medium"
-          onClick={() => {
-            openPopup("", "order");
-          }}
-        >
-          Оформить заказ
-        </Button>
-      </section>
+      <Order />
     </div>
   );
 }
 
-BurgerConstructor.propTypes = {
-  ingredients: ingredientsPropTypes,
-  filling: ingredientsPropTypes,
-  openPopup: PropTypes.func.isRequired,
-};
+// BurgerConstructor.propTypes = {
+//   ingredients: ingredientsPropTypes,
+//   filling: ingredientsPropTypes,
+//   openPopup: PropTypes.func.isRequired,
+// };
