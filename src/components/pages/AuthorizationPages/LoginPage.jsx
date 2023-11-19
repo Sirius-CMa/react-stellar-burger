@@ -9,7 +9,7 @@ import { useInputForm } from "Hooks/handleInput";
 export function LoginPage() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log("LoginPage");
+    console.log("Login Page");
   };
 
   const { value, handleChange, textError, isError } = useInputForm({ email: " ", password: " " });

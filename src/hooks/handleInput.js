@@ -9,7 +9,9 @@ export const useInputForm = () => {
   const [isError, setIsError] = useState(defaultValues);
 
   const handleChange = (evt) => {
+    // console.log(evt);
     const { name, value, validity: { valid }, validationMessage } = evt.target;
+    // console.log(valid);
     setValue((state) => ({ ...state, [name]: value }));
     if (!valid) {
       setIsError((state) => ({ ...state, [name]: true }));
@@ -22,8 +24,8 @@ export const useInputForm = () => {
 
   const resetForm = () => {
     setValue(defaultValues);
-    setTextError(defaultValues);
     setIsError(defaultValues);
+    setTextError(defaultValues);
   };
 
   return { value, setValue, textError, isError, handleChange, resetForm };
