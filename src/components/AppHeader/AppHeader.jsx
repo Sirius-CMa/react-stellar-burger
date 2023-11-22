@@ -4,34 +4,34 @@ import styles from "./AppHeader.module.css";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIcon, ListIcon, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons";
 
+import { useLocation, NavLink } from "react-router-dom";
+
 export function AppHeader() {
+  const location = useLocation();
+  const pageLocation = location.pathname;
+
   return (
     <header className={`${styles.header} `}>
       <nav className={`${styles.navBlock}  `}>
-        <ul className={styles.navBlock__wrapperList}>
-          <li className={`${styles.navBlock__navItem}`}>
-            <a href="#" className={`${styles.navBlock__link}`}>
-              <BurgerIcon type="secondary" />
-              <p className={`${styles.text} text text_type_main-default ml-2`}>Конструктор</p>
-            </a>
-          </li>
-          <li className={`${styles.navBlock__navItem} `}>
-            <a href="#" className={`${styles.navBlock__link}`}>
-              <ListIcon type="secondary" />
-              <p className={`${styles.text} text text_type_main-default ml-2`}>Лента заказов</p>
-            </a>
-          </li>
-        </ul>
+        <div className={styles.navBlock__wrapperList}>
+          <NavLink to="/" exact={true} className={styles.link}>
+            <BurgerIcon type={pageLocation === "/" ? "primary" : "secondary"} />
+            <span className={pageLocation === "/" ? styles.linkText_active : styles.linkText}>Конструктор</span>
+          </NavLink>
+          <NavLink to="/feed" exact={true} className={styles.link}>
+            <ListIcon type={pageLocation === "/feed" ? "primary" : "secondary"} />
+            <span className={pageLocation === "/feed" ? styles.linkText_active : styles.linkText}>Лента заказов</span>
+          </NavLink>
+        </div>
 
         <div className={`${styles.header__logo}  `}>
           <Logo />
         </div>
-        <div className={`${styles.navBlock__navItem}`}>
-          <a href="#" className={`${styles.navBlock__link}`}>
-            <ProfileIcon type="secondary" />
-            <p className={`${styles.text} text text_type_main-default ml-2`}>Личный кабинет</p>
-          </a>
-        </div>
+
+        <NavLink to="/profile" exact={true} className={styles.link}>
+          <ProfileIcon type={pageLocation === "/profile" ? "primary" : "secondary"} />
+          <span className={pageLocation === "/profile" ? styles.linkText_active : styles.linkText}>Личный кабинет</span>
+        </NavLink>
       </nav>
     </header>
   );

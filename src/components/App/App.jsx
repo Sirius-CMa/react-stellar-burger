@@ -17,6 +17,8 @@ import { RegisterPage } from "AuthPages/RegisterPage";
 import { ForgotPassword } from "AuthPages/ForgotPasswordPage";
 import { ResetPasswordPage } from "AuthPages/ResetPasswordPage";
 import { Page404 } from "Components/pages/Page404";
+import { ProfilePage } from "Components/pages/ProfilePage/ProfilePage";
+import { ProtectedRoute } from "Components/ProtectedRoute";
 
 export function App() {
   // console.log("App");
@@ -39,11 +41,16 @@ export function App() {
       </main> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} exact />
-        <Route path="/register" element={<RegisterPage />} exact />
-        <Route path="/forgot-password" element={<ForgotPassword />} exact />
+        <Route path="/login" element={<LoginPage />} exact={true} />
+        <Route path="/register" element={<ProtectedRoute element={<RegisterPage />} />} exact />
+        <Route
+          path="/forgot-password"
+          element={<ProtectedRoute onlyAuth={false} element={<ForgotPassword />} />}
+          exact
+        />
         <Route path="/reset-password" element={<ResetPasswordPage />} exact />
         <Route path="/ingredients/:id" element={<LoginPage />} exact />
+        <Route path="/profile" element={<ProtectedRoute onlyAuth={true} element={<ProfilePage />} />} exact />
         <Route path="/page-404" element={<Page404 />} exact />
       </Routes>
     </div>

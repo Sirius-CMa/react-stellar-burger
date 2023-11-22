@@ -1,18 +1,36 @@
 import styles from "./AuthPagesStyles.module.css";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { useInputForm } from "Hooks/handleInput";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "Action/authorization";
+import { getDataAuth } from "Selectors";
+import { useEffect } from "react";
 
 export function LoginPage() {
+  const { value, handleChange, textError, isError } = useInputForm({ email: " ", password: " " });
+  const dispatch = useDispatch();
+  const { auth } = useSelector(getDataAuth);
+  const navigate = useNavigate();
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log("Login Page");
+    dispatch(loginUser({ email: value.email, password: value.password }));
   };
 
-  const { value, handleChange, textError, isError } = useInputForm({ email: " ", password: " " });
+  // if (auth) {
+  //   navigate("/");
+  // }
+
+  useEffect(() => {
+    if (auth) {
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
 
   return (
     <main className={styles.container}>
