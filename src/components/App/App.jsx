@@ -41,17 +41,13 @@ export function App() {
       </main> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} exact={true} />
-        <Route path="/register" element={<ProtectedRoute element={<RegisterPage />} />} exact />
-        <Route
-          path="/forgot-password"
-          element={<ProtectedRoute onlyAuth={false} element={<ForgotPassword />} />}
-          exact
-        />
-        <Route path="/reset-password" element={<ResetPasswordPage />} exact />
-        <Route path="/ingredients/:id" element={<LoginPage />} exact />
-        <Route path="/profile" element={<ProtectedRoute onlyAuth={true} element={<ProfilePage />} />} exact />
-        <Route path="/page-404" element={<Page404 />} exact />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<ProtectedRoute element={<RegisterPage />} />} />
+        <Route path="/forgot-password" element={<ProtectedRoute onlyAuth={false} element={<ForgotPassword />} />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/ingredients/:id" element={<LoginPage />} />
+        <Route path="/profile" element={<ProtectedRoute onlyAuth={true} element={<ProfilePage />} />} />
+        <Route path="/page-404" element={<Page404 />} />
       </Routes>
     </div>
   );

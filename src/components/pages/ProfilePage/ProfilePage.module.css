@@ -14,9 +14,10 @@
   cursor: pointer;
   width: 320px;
   height: 64px;
-  color: #8585ad;
   text-decoration: none;
   background-color: transparent;
+  /* color: #8585ad; */
+  composes: text text_type_main-medium text_color_inactive ml-2 from global;
 }
 
 .link:hover {
@@ -24,5 +25,6 @@
 }
 
 .link_active {
+  composes: link;
   color: white;
 }

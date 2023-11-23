@@ -1,6 +1,6 @@
 import { Api } from "Api";
 import { dataServer } from "Utils/constants";
-import { getCookie, setCookie } from "Utils/cookie";
+import { deleteCookie, getCookie, setCookie } from "Utils/cookie";
 
 const api = new Api(dataServer);
 
@@ -14,11 +14,106 @@ export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
 export const REGISTER_USER_FAILED = 'REGISTER_USER_FAILED'
 
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST'
-export const LOGIN_USER_SUCCESS = 'LOGINR_USER_SUCCESS'
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LOGIN_USER_FAILED = 'LOGIN_USER_FAILED'
 
+export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST'
+export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS'
+export const LOGOUT_USER_FAILED = 'LOGOUT_USER_FAILED'
+
+export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST'
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'
+export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED'
+
+export const FORGOT_PASSWORD_USER_REQUEST = 'FORGOT_PASSWORD_USER_REQUEST'
+export const FORGOT_PASSWORD_USER_SUCCESS = 'FORGOT_PASSWORD_USER_SUCCESS'
+export const FORGOT_PASSWORD_USER_FAILED = 'FORGOT_PASSWORD_USER_FAILED'
+
+export const RESET_PASSWORD_USER_REQUEST = 'RESET_PASSWORD_USER_REQUEST'
+export const RESET_PASSWORD_USER_SUCCESS = 'RESET_PASSWORD_USER_SUCCESS'
+export const RESET_PASSWORD_USER_FAILED = 'RESET_PASSWORD_USER_FAILED'
+
+
+
+export function resetPassword(body) {
+  return function (dispatch) {
+    dispatch({
+      type: RESET_PASSWORD_USER_REQUEST
+    });
+    api.resetPassword(body)
+      .then(res => {
+        dispatch({
+          type: RESET_PASSWORD_USER_SUCCESS,
+          payload: res
+
+        })
+      })
+      .catch(error => {
+        console.log('fail', error);
+        dispatch({
+          type: RESET_PASSWORD_USER_FAILED,
+          payload: error
+        });
+      })
+  };
+}
+
+export function forgotPassword(body) {
+  return function (dispatch) {
+    dispatch({
+      type: FORGOT_PASSWORD_USER_REQUEST
+    });
+    api.forgotPassword(body)
+      .then(res => {
+        dispatch({
+          type: FORGOT_PASSWORD_USER_SUCCESS,
+          payload: res
+
+        })
+      })
+      .catch(error => {
+        console.log('fail', error);
+        dispatch({
+          type: FORGOT_PASSWORD_USER_FAILED,
+          payload: error
+        });
+      })
+  };
+}
+
+
+
+export function logoutUser() {
+  console.log('logOut');
+  return function (dispatch) {
+    dispatch({
+      type: LOGOUT_USER_REQUEST
+    });
+    api.logoutUser({ token: localStorage.getItem('refreshToken') })
+      .then(res => {
+        if (res && res.success) {
+          console.log('succces logout');
+          deleteCookie("token")
+          localStorage.removeItem("refreshToken");
+          dispatch({
+            type: LOGOUT_USER_SUCCESS
+          });
+        }
+      })
+      .catch(error => {
+        console.log('fail', error);
+        dispatch({
+          type: LOGOUT_USER_FAILED,
+          payload: error
+        });
+      })
+  };
+}
+
+
+
+
 export function getUser() {
-  console.log('getUser');
   return function (dispatch) {
     dispatch({
       type: AUTH_USER_REQUEST,
@@ -26,19 +121,17 @@ export function getUser() {
     });
     api.getUserAuth(getCookie('token'))
       .then(res => {
-        if (res && res.success) {
-          console.log('succces');
-          dispatch({
-            type: AUTH_USER_SUCCESS,
-            user: res.user,
-          });
-        }
+
+        dispatch({
+          type: AUTH_USER_SUCCESS,
+          user: res.user
+        })
       })
-      .catch(err => {
-        console.log('user fail');
+      .catch(error => {
+        console.log('fail', error.message);
         dispatch({
           type: AUTH_USER_FAILED,
-          err
+          payload: error
         });
       })
   };
@@ -49,8 +142,7 @@ export function registerUser(body) {
   console.log('body', body);
   return function (dispatch) {
     dispatch({
-      type: REGISTER_USER_REQUEST,
-      authChecked: false,
+      type: REGISTER_USER_REQUEST
     });
     api.registerUser(body)
       .then(res => {
@@ -63,44 +155,61 @@ export function registerUser(body) {
           });
         }
       })
-      .catch(err => {
-
-        console.log('user fail', err);
+      .catch((error) => {
+        console.log('user fail', error);
         dispatch({
           type: REGISTER_USER_FAILED,
-          err
+          payload: error
         });
       })
   };
 }
 
 export function loginUser(body) {
-  console.log('body', body);
   return function (dispatch) {
     dispatch({
-      type: LOGIN_USER_REQUEST,
-      authChecked: false,
+      type: LOGIN_USER_REQUEST
     });
     api.loginUser(body)
       .then(res => {
 
         localStorage.setItem("refreshToken", res.refreshToken);
         setCookie('token', res.accessToken);
-
-        console.log('куки и рефрештокен установлены');
-
         dispatch({
           type: LOGIN_USER_SUCCESS,
-          user: res.user,
+          payload: res.user,
         });
 
       })
-      .catch(err => {
-
-        console.log('user fail', err);
+      .catch((error) => {
+        console.log('fail', error);
         dispatch({
           type: LOGIN_USER_FAILED,
-          err
+          payload: error
+        });
+      })
+  };
+}
+
+
+export function updateUser(body) {
+  console.log('body', body);
+  return function (dispatch) {
+    dispatch({
+      type: UPDATE_USER_REQUEST
+    });
+    api.updateUser(getCookie('token'), body)
+      .then(res => {
+        dispatch({
+          type: UPDATE_USER_SUCCESS,
+          payload: res.user,
+        });
+      })
+      .catch(error => {
+        console.log('user fail', error);
+        dispatch({
+          type: UPDATE_USER_FAILED,
+          payload: error
         });
       })
   };

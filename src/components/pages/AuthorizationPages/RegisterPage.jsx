@@ -12,13 +12,12 @@ import { getDataAuth } from "Selectors";
 
 export function RegisterPage() {
   const { value, handleChange, textError, isError } = useInputForm({ name: " ", email: " ", password: " " });
-  const { auth } = useSelector(getDataAuth);
+  const { auth, registerRequest } = useSelector(getDataAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(value.name, value.email, value.password, "RegisterPage");
     dispatch(registerUser({ email: value.email, password: value.password, name: value.name }));
   };
 
@@ -69,7 +68,7 @@ export function RegisterPage() {
           // required
         />
         <Button extraClass={styles.submitButton} type="primary" htmlType="submit" size="large">
-          Зарегистрироваться
+          {!registerRequest ? "Зарегистрироваться" : "Регистрация..."}
         </Button>
       </form>
       <p className={`${styles.text} text text_color_inactive text_type_main-default `}>

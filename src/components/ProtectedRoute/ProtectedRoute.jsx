@@ -7,14 +7,12 @@ import { getDataAuth } from "Selectors";
 import { getUser } from "Action/authorization";
 
 export const ProtectedRoute = ({ onlyAuth = false, element, ...rest }) => {
-  console.log("onlyAuth", onlyAuth);
   const { auth } = useSelector(getDataAuth);
   const location = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUser());
-    console.log(auth, "реакция");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -35,5 +33,5 @@ export const ProtectedRoute = ({ onlyAuth = false, element, ...rest }) => {
 ProtectedRoute.propTypes = {
   props: PropTypes.node,
   onlyAuth: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };

@@ -67,4 +67,52 @@ export class Api {
       .then(this._onResponse)
   }
 
+  logoutUser(body) {
+    return fetch(`${this._baseUrl}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+      .then(this._onResponse)
+  }
+
+  updateUser(token, body) {
+    console.log('update', body);
+    return fetch(`${this._baseUrl}/auth/user`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token
+      },
+      body: JSON.stringify(body)
+    })
+      .then(this._onResponse)
+  }
+
+  forgotPassword(body) {
+    return fetch(`${this._baseUrl}/password-reset`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body)
+    })
+      .then(this._onResponse)
+  }
+
+  resetPassword(body) {
+    return fetch(`${this._baseUrl}/password-reset/reset`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body)
+    })
+      .then(this._onResponse)
+  }
+
+
+
 }

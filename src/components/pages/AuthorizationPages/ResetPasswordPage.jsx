@@ -1,17 +1,24 @@
 import styles from "./AuthPagesStyles.module.css";
 
+import { useDispatch, useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 
 import { Button, PasswordInput, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { useInputForm } from "Hooks/handleInput";
+import { resetPassword } from "Action/authorization";
+import { getDataAuth } from "Selectors";
 
 export function ResetPasswordPage() {
+  const dispatch = useDispatch();
   const { value, handleChange, textError, isError } = useInputForm({ password: "", token: "" });
+  const { resetPasswordRequest } = useSelector(getDataAuth);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     console.log("ForgotPassword");
+    dispatch(resetPassword({ token: value.token, password: value.password }));
   };
 
   return (
@@ -23,7 +30,7 @@ export function ResetPasswordPage() {
           placeholder="Токен"
           type="text"
           onChange={handleChange}
-          name={"name"}
+          name={"token"}
           value={value.token || ""}
           errorText={textError.token}
           error={isError.token}
@@ -40,7 +47,7 @@ export function ResetPasswordPage() {
           error={isError.password}
         />
         <Button extraClass={styles.submitButton} type="primary" htmlType="submit" size="large">
-          Зарегистрироваться
+          {!resetPasswordRequest ? "Сбросить пароль" : "Отправка данных..."}
         </Button>
       </form>
       <p className={`${styles.text} text text_color_inactive text_type_main-default `}>

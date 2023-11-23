@@ -1,18 +1,32 @@
 import styles from "./AuthPagesStyles.module.css";
 
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Link, useNavigate } from "react-router-dom";
 
 import { Button, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { useInputForm } from "Hooks/handleInput";
+import { forgotPassword } from "Action/authorization";
+import { getDataAuth } from "Selectors";
 
 export function ForgotPassword() {
-  const { value, handleChange, textError, isError } = useInputForm({ password: "" });
+  const { forgotPasswordRequest, forgotPasswordData } = useSelector(getDataAuth);
+  const dispatch = useDispatch();
+  const { value, handleChange, textError, isError } = useInputForm({ email: "" });
+  const navigate = useNavigate();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log("ForgotPassword");
+    dispatch(forgotPassword({ email: value.email }));
+    if (forgotPasswordData.success) {
+      navigate("/reset-password");
+    }
   };
+
+  // useEffect(() => {
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [forgotPasswordData]);
 
   return (
     <main className={styles.container}>
@@ -30,7 +44,7 @@ export function ForgotPassword() {
         />
 
         <Button extraClass={styles.submitButton} type="primary" htmlType="submit" size="large">
-          Зарегистрироваться
+          {!forgotPasswordRequest ? "Отправить запрос" : "Отправка запроса..."}
         </Button>
       </form>
       <p className={`${styles.text} text text_color_inactive text_type_main-default`}>

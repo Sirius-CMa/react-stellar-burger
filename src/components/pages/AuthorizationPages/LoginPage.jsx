@@ -11,21 +11,19 @@ import { getDataAuth } from "Selectors";
 import { useEffect } from "react";
 
 export function LoginPage() {
-  const { value, handleChange, textError, isError } = useInputForm({ email: " ", password: " " });
-  const dispatch = useDispatch();
-  const { auth } = useSelector(getDataAuth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { value, handleChange, textError, isError, setValue } = useInputForm({ email: " ", password: " " });
+  const { auth, loginRequest } = useSelector(getDataAuth);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     dispatch(loginUser({ email: value.email, password: value.password }));
   };
 
-  // if (auth) {
-  //   navigate("/");
-  // }
-
   useEffect(() => {
+    setValue({ email: "", password: "" });
     if (auth) {
       navigate("/");
     }
@@ -56,7 +54,7 @@ export function LoginPage() {
           error={isError.password}
         />
         <Button extraClass={styles.submitButton} type="primary" htmlType="submit" size="large">
-          Войти
+          {!loginRequest ? "Войти" : "Отправка данных..."}
         </Button>
       </form>
       <p className={`${styles.text} text text_color_inactive text_type_main-default `}>
