@@ -33,6 +33,10 @@ export const RESET_PASSWORD_USER_REQUEST = 'RESET_PASSWORD_USER_REQUEST'
 export const RESET_PASSWORD_USER_SUCCESS = 'RESET_PASSWORD_USER_SUCCESS'
 export const RESET_PASSWORD_USER_FAILED = 'RESET_PASSWORD_USER_FAILED'
 
+export const REFRESH_TOKEN_REQUEST = 'REFRESH_TOKEN_REQUEST'
+export const REFRESH_TOKEN_SUCCESS = 'REFRESH_TOKEN_SUCCESS'
+export const REFRESH_TOKEN_FAILED = 'REFRESH_TOKEN_FAILED'
+
 
 
 export function resetPassword(body) {
@@ -91,14 +95,13 @@ export function logoutUser() {
     });
     api.logoutUser({ token: localStorage.getItem('refreshToken') })
       .then(res => {
-        if (res && res.success) {
-          console.log('succces logout');
-          deleteCookie("token")
-          localStorage.removeItem("refreshToken");
-          dispatch({
-            type: LOGOUT_USER_SUCCESS
-          });
-        }
+
+        console.log('succces logout');
+        deleteCookie("token")
+        localStorage.removeItem("refreshToken");
+        dispatch({
+          type: LOGOUT_USER_SUCCESS
+        });
       })
       .catch(error => {
         console.log('fail', error);
@@ -172,7 +175,6 @@ export function loginUser(body) {
     });
     api.loginUser(body)
       .then(res => {
-
         localStorage.setItem("refreshToken", res.refreshToken);
         setCookie('token', res.accessToken);
         dispatch({
@@ -214,3 +216,40 @@ export function updateUser(body) {
       })
   };
 }
+
+
+// POST https://norma.nomoreparties.space/api/auth/token
+
+
+
+
+export function refreshToken(token) {
+  console.log('body', token);
+  return function (dispatch) {
+    dispatch({
+      type: REFRESH_TOKEN_REQUEST
+    });
+    api.refreshToken(token)
+      .then(res => {
+        localStorage.setItem("refreshToken", res.refreshToken);
+        setCookie('token', res.accessToken);
+        dispatch({
+          type: REFRESH_TOKEN_SUCCESS,
+          payload: res,
+        });
+      })
+      .catch(error => {
+        console.log('refresh fail', error);
+        dispatch({
+          type: REFRESH_TOKEN_FAILED,
+          payload: error
+        });
+      })
+  };
+}
+
+// {
+//   "success": true,
+//   "accessToken": "Bearer ...",
+//   "refreshToken": ""
+// }

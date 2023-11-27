@@ -8,6 +8,7 @@ import { Button, Input, PasswordInput, EmailInput } from "@ya.praktikum/react-de
 import { useInputForm } from "Hooks/handleInput";
 import { getDataAuth } from "Selectors";
 import { logoutUser, updateUser } from "Action/authorization";
+import { NavBlockProfile } from "Components/NavBlockProfile";
 
 export function ProfilePage() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export function ProfilePage() {
   // className={`${styles.link} `} activeClassName={`${styles.link_active}`}
   return (
     <div className={`${styles.container}`}>
-      <div className={`${styles.navBlock}`}>
+      {/* <div className={`${styles.navBlock}`}>
         <NavLink to="/profile" className={({ isActive }) => styles[!isActive ? "link" : "link_active"]}>
           Профиль
         </NavLink>
@@ -55,7 +56,8 @@ export function ProfilePage() {
         <p className={"text text_type_main-default text_color_inactive mt-20"}>
           В этом разделе вы можете изменить свои персональные данные
         </p>
-      </div>
+      </div> */}
+      <NavBlockProfile />
       <form className={`${styles.form}`}>
         <Input
           extraClass={`${styles.input} mb-6`}

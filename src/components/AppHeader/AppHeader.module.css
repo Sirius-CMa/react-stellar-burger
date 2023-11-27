@@ -43,8 +43,7 @@
 }
 
 .linkText_active {
-  composes: linkText;
-  /* composes: text text_type_main-default ml-2 from global; */
+  composes: text text_type_main-default ml-2 from global;
   color: #f2f2f3;
 }
 

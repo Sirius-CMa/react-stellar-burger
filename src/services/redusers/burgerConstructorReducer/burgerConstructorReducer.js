@@ -1,4 +1,9 @@
-import { ADD_INGREDIENT, DELETE_INGREDIENT, MOVE_INGREDIENT } from 'Action/burgerConstructor'
+import {
+  ADD_INGREDIENT,
+  DELETE_INGREDIENT,
+  MOVE_INGREDIENT,
+  CLEAR_INGREDIENT
+} from 'Action/burgerConstructor'
 import { DEFAULT_BUN } from 'Utils/constants';
 
 
@@ -14,8 +19,6 @@ export const burgerConstructorReducer = (state = initialState, action) => {
       if (action.payload.type === "bun") {
         return { ...state, selectedBun: action.payload }
       }
-      // const newEngredient =action.payload
-      // newEngredient.uuid: action.uuid
       return { ...state, listIngredients: [...state.listIngredients, action.payload] }
     }
     case DELETE_INGREDIENT: {
@@ -32,6 +35,11 @@ export const burgerConstructorReducer = (state = initialState, action) => {
 
       return { ...state, listIngredients: newArrow }
     }
+
+    case CLEAR_INGREDIENT: {
+      return { ...state, listIngredients: [], selectedBun: initialState.selectedBun }
+    }
+
     default: {
       return state;
     }

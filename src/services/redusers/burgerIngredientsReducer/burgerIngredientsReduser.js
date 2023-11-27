@@ -2,16 +2,23 @@ import {
   GET_ALL_INGREDIENTS_REQUEST,
   GET_ALL_INGREDIENTS_SUCCESS,
   GET_ALL_INGREDIENTS_FAILED,
+
+  GET_ONE_INGREDIENTS_REQUEST,
+  GET_ONE_INGREDIENTS_SUCCESS,
+  GET_ONE_INGREDIENTS_FAILED,
+
   SET_CURRENT_INGREDIENT,
   REMOVE_CURRENT_INGREDIENT,
   SET_COUNT_INGREDIENT
 } from 'Action/burgerIngredients'
+import { sortIngredientsById } from 'Utils/sort-ingredients-by-id';
 
 
 
 
 const initialState = {
   data: [],
+  sortDataById: [],
   isLoading: false,
   isError: false,
   currentProduct: null
@@ -32,6 +39,7 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
           data: action.payload,
           isLoading: false,
           isError: false,
+          sortDataById: sortIngredientsById(action.payload)
         })
     }
     case GET_ALL_INGREDIENTS_FAILED: {
@@ -56,6 +64,30 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
     case SET_COUNT_INGREDIENT: {
 
       return state;
+    }
+
+    case GET_ONE_INGREDIENTS_REQUEST: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+    case GET_ONE_INGREDIENTS_SUCCESS: {
+      return (
+        {
+          ...state,
+          currentProduct: action.payload,
+          isLoading: false,
+          isError: false,
+          sortDataById: sortIngredientsById(action.payload)
+        })
+    }
+    case GET_ONE_INGREDIENTS_FAILED: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      }
     }
 
     default: {

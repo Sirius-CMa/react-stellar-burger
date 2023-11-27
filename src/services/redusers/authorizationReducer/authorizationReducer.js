@@ -1,4 +1,8 @@
 import {
+  REFRESH_TOKEN_REQUEST,
+  REFRESH_TOKEN_SUCCESS,
+  REFRESH_TOKEN_FAILED,
+
   RESET_PASSWORD_USER_REQUEST,
   RESET_PASSWORD_USER_SUCCESS,
   RESET_PASSWORD_USER_FAILED,
@@ -21,7 +25,11 @@ import {
 
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILED
+  LOGIN_USER_FAILED,
+
+  AUTH_USER_REQUEST,
+  AUTH_USER_SUCCESS,
+  AUTH_USER_FAILED
 } from 'Action/authorization'
 
 // добавить AUTH из getUSER
@@ -44,12 +52,33 @@ const initialState = {
   forgotPasswordData: {},
 
   resetPasswordRequest: false,
-  resetPasswordRequestError: false
+  resetPasswordRequestError: false,
+
+  refreshRequest: null,
+  dataRefresh: null,
+  refreshRequestError: null,
+
+  authRequest: null,
+  authRequestError: null
 }
 
 
 export const authorizationReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case AUTH_USER_REQUEST: {
+      return { ...state, authRequest: true }
+    }
+    case AUTH_USER_SUCCESS: {
+
+      return { ...state, authRequest: false, authRequestError: false }
+    }
+    case AUTH_USER_FAILED: {
+      return {
+        ...state, authRequest: false,
+        authRequestError: action.payload
+      }
+    }
 
     case RESET_PASSWORD_USER_REQUEST: {
       return { ...state, resetPasswordRequest: true }
@@ -131,6 +160,22 @@ export const authorizationReducer = (state = initialState, action) => {
         registerRequestError: action.payload
       }
     }
+
+    case REFRESH_TOKEN_REQUEST: {
+      return { ...state, refreshRequest: true }
+    }
+    case REFRESH_TOKEN_SUCCESS: {
+      return { ...state, dataRefresh: action.payload, auth: true, refreshRequest: false, }
+    }
+    case REFRESH_TOKEN_FAILED: {
+      return {
+        ...state, refreshRequest: false,
+        refreshRequestError: action.payload
+      }
+    }
+
+
+
     default: { return state }
   }
 }

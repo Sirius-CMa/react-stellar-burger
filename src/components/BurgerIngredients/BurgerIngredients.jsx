@@ -10,14 +10,15 @@ import { TabContainer } from "Components/TabContainer";
 import { BlockIngredient } from "Components/BlockIngredient";
 import { LoadingScreen } from "Components/LoadingScreen";
 import { Popup } from "Components/Popup";
-import { IngredientDetails } from "Components/IngredientDetails";
 import { getDataBurgerIngredients } from "Selectors";
+import { useLocation } from "react-router-dom";
 
 // import { ingredientsPropTypes } from "Utils/prop-types";
 
 export function BurgerIngredients() {
   // console.log("BurgerIngredients");
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [current, setCurrent] = useState("bun");
   const ingredientsContainer = useRef();
@@ -49,7 +50,7 @@ export function BurgerIngredients() {
     dispatch(getAllIngredients());
   }, [dispatch]);
 
-  const { data, isLoading, isError, currentProduct } = useSelector(getDataBurgerIngredients);
+  const { data, isLoading, isError } = useSelector(getDataBurgerIngredients);
 
   const bun = useMemo(() => data.filter((el) => el.type === "bun"), [data]);
   const main = useMemo(() => data.filter((el) => el.type === "main"), [data]);
@@ -69,7 +70,7 @@ export function BurgerIngredients() {
 
         <ul className={`${styles.ingredients}`} ref={ingredientsContainer} onScroll={switchTabs}>
           <li ref={bunRef} key={1} className={styles.wrapperList}>
-            <BlockIngredient title={titleReplace["bun"]} ingredients={bun} />
+            <BlockIngredient title={titleReplace["bun"]} ingredients={bun} location={location} />
           </li>
           <li ref={sauceRef} key={2} className={styles.wrapperList}>
             <BlockIngredient title={titleReplace["sauce"]} ingredients={sauce} />
@@ -84,11 +85,11 @@ export function BurgerIngredients() {
           <LoadingScreen isLoading={isLoading} isError={isError} />
         </Popup>
       )}
-      {currentProduct && (
+      {/* {currentProduct && (
         <Popup>
           <IngredientDetails />
         </Popup>
-      )}
+      )} */}
     </div>
   );
 }

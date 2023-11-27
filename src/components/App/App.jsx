@@ -9,7 +9,7 @@ import { AppHeader } from "Components/AppHeader";
 // import { DndProvider } from "react-dnd";
 // import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { Route, Routes } from "react-router-dom"; // Switch, useHistory, Route, useLocation
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"; // Switch, useHistory, Route, useLocation
 
 import { HomePage } from "Components/pages/HomePage";
 import { LoginPage } from "AuthPages/LoginPage";
@@ -19,36 +19,69 @@ import { ResetPasswordPage } from "AuthPages/ResetPasswordPage";
 import { Page404 } from "Components/pages/Page404";
 import { ProfilePage } from "Components/pages/ProfilePage/ProfilePage";
 import { ProtectedRoute } from "Components/ProtectedRoute";
+import { IngredientDetails } from "Components/IngredientDetails";
+import { Popup } from "Components/Popup";
+import { IngredientPage } from "Components/pages/IngredientPage";
+import { FeedOrdersPage } from "Components/pages/FeedOrdersPage/FeedOrdersPage";
+import { OrderDataFeed } from "Components/OrderDataFeed";
+import { HistoryOrdersPage } from "Components/pages/HistoryOrdersPage";
+import { OrderView } from "Components/OrderView";
 
 export function App() {
   // console.log("App");
-  // const location = useLocation();
-  // const background = location.state && location.state.background;
+
+  const location = useLocation();
+  const background = location.state && location.state.background;
+  const navigate = useNavigate();
+
+  const handleClosePopup = () => {
+    navigate(location.state.background.pathname);
+  };
 
   return (
     <div className={styles.container}>
       <AppHeader />
-      {/* <main className={styles.containerConstructor}>
-        <Routes>
-          <Route path="/">
-            <DndProvider backend={HTML5Backend}>
-              <BurgerIngredients />
-              <BurgerConstructor />
-            </DndProvider>
-          </Route>
-          <Route path="/login" element={<LoginPage />} exact />
-        </Routes>
-      </main> */}
-      <Routes>
+      <Routes location={background || location}>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<ProtectedRoute element={<RegisterPage />} />} />
         <Route path="/forgot-password" element={<ProtectedRoute onlyAuth={false} element={<ForgotPassword />} />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/ingredients/:id" element={<LoginPage />} />
-        <Route path="/profile" element={<ProtectedRoute onlyAuth={true} element={<ProfilePage />} />} />
+        <Route path="/ingredients/:id" element={<IngredientPage notPopup={true} />} />
+        <Route path="/profile" element={<ProtectedRoute onlyAuth={true} element={<ProfilePage />} />}></Route>{" "}
+        <Route path="/profile/orders" element={<HistoryOrdersPage />} />
         <Route path="/page-404" element={<Page404 />} />
+        <Route path="/feed" element={<FeedOrdersPage />} />
+        <Route path="/feed/:number" element={<OrderView />} />
       </Routes>
+      {background && (
+        <Routes>
+          <Route
+            path="ingredients/:id"
+            element={
+              <Popup handleClosePopup={handleClosePopup}>
+                <IngredientDetails />
+              </Popup>
+            }
+          ></Route>
+          <Route
+            path="feed/:number"
+            element={
+              <Popup handleClosePopup={handleClosePopup}>
+                <OrderDataFeed />
+              </Popup>
+            }
+          ></Route>
+          <Route
+            path="profile/orders/:number"
+            element={
+              <Popup handleClosePopup={handleClosePopup}>
+                <OrderDataFeed />
+              </Popup>
+            }
+          ></Route>
+        </Routes>
+      )}
     </div>
   );
 }

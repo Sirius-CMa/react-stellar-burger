@@ -21,3 +21,10 @@ export const DEFAULT_BUN = {
   __v: 0,
   _id: '0',
 }
+
+export const orderStatus = {
+  done: ["Выполнен", "00CCCC"],
+  pending: ["В обработке", "ligntblue"],
+  created: ["Создан", "white"],
+  canceled: ["Отменен", "yellow"],
+};

@@ -17,29 +17,32 @@ export class Api {
       .then(this._onResponse)
   }
 
-  getOrderDetailsServer(ingredients) {
-    // console.log('Api - ', ingredients)
+  loadOneIngredients(id) {
+    return fetch(`${this._baseUrl}/ingredients/${id}`, {
+      headers: this._headers
+    })
+      .then(this._onResponse)
+  }
+
+  getOrderDetailsServer(ingredients, token) {
     return fetch(`${this._baseUrl}/orders`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: token
       },
       body: JSON.stringify(ingredients)
     })
       .then(this._onResponse)
   }
+
   getUserAuth(token) {
     return fetch(`${this._baseUrl}/auth/user`, {
       method: 'GET',
-      // mode: 'cors',
-      // cache: 'no-cache',
-      // credentials: 'same-origin',
       headers: {
         "Content-Type": "application/json",
         Authorization: token
       },
-      // redirect: 'follow',
-      // referrerPolicy: 'no-referrer'
 
     })
       .then(this._onResponse)
@@ -79,7 +82,6 @@ export class Api {
   }
 
   updateUser(token, body) {
-    console.log('update', body);
     return fetch(`${this._baseUrl}/auth/user`, {
       method: 'PATCH',
       headers: {
@@ -113,6 +115,15 @@ export class Api {
       .then(this._onResponse)
   }
 
-
+  refreshToken(token) {
+    return fetch(`${this._baseUrl}/token`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(token)
+    })
+      .then(this._onResponse)
+  }
 
 }
