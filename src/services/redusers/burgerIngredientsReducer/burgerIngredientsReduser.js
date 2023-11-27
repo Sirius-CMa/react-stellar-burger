@@ -18,7 +18,7 @@ import { sortIngredientsById } from 'Utils/sort-ingredients-by-id';
 
 const initialState = {
   data: [],
-  sortDataById: [],
+  sortDataById: null,
   isLoading: false,
   isError: false,
   currentProduct: null

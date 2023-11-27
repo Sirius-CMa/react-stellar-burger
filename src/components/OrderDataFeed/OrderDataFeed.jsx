@@ -1,41 +1,48 @@
 import styles from "./OrderDataFeed.module.css";
 
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { format } from "date-fns";
 
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 import { getDataBurgerIngredients } from "Selectors";
-import { getCurrentDate } from "Utils/formatTime";
-import { getDataFeed } from "Selectors";
+import { reformatData } from "Utils/formatTime";
+// import { getDataFeed } from "Selectors";
 import { getTotalPrice } from "Utils/service-functions";
 import { orderStatus } from "Utils/constants";
+import { getOneOrder } from "Action/getOneOrder";
+import { getDataOneOrder } from "Selectors";
+import { getAllIngredients } from "Action/burgerIngredients";
 
-export function OrderDataFeed({ card }) {
-  console.log(88);
+export function OrderDataFeed({ notPopup }) {
+  const dispatch = useDispatch();
   const { number } = useParams();
-  console.log(number);
-  // const location = useLocation();
-  const { sortedOrdersByNumber } = useSelector(getDataFeed);
+
+  // const { sortedOrdersByNumber } = useSelector(getDataFeed);
   const { sortDataById } = useSelector(getDataBurgerIngredients);
+  const { order } = useSelector(getDataOneOrder);
 
-  const turgetOrder = sortedOrdersByNumber[number];
-  const listIngredients = turgetOrder.ingredients;
+  useEffect(() => {
+    dispatch(getOneOrder(number));
+    dispatch(getAllIngredients());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
-  const time = format(new Date(turgetOrder.createdAt), "hh:mm");
-  const date = new Date(turgetOrder.createdAt);
-  const currentDay = getCurrentDate(date);
+  if (sortDataById === null || order === null) return null;
+
+  const turgetOrder = order[0];
+
+  const listIngredients = turgetOrder.ingredients.filter((a) => a);
+
+  const { time, currentDay } = reformatData(turgetOrder);
 
   const totalPrice = getTotalPrice(turgetOrder.ingredients, sortDataById);
 
-  // GET https://norma.nomoreparties.space/api/orders/{номер заказа}
-  // http://localhost:3000/feed/27376 создать отдельный редьюсер и action
-
   return (
     //: реализовать выбор класса через пропс для popup и страницы
-    <div className={styles.container}>
-      <p className="text text_type_digits-default mb-10 mt-1">#0{turgetOrder.number}</p>
+    <div className={notPopup ? styles.containerPage : styles.container}>
+      <p className={`${notPopup && styles.title} text text_type_digits-default mb-10 mt-1`}>#0{turgetOrder.number}</p>
       <h2 className="text text_type_main-medium mb-2">{turgetOrder.name}</h2>
       <p
         className={`${styles.statusText} text text_type_main-default mb-10`}

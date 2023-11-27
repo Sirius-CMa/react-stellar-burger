@@ -6,6 +6,7 @@ import { burgerIngredientsReducer } from 'Reducer/burgerIngredientsReducer';
 import { authorizationReducer } from 'Reducer/authorizationReducer';
 import { wsFeedReducer } from 'Reducer/wsFeedReduser';
 import { wsProfileFeedReducer } from 'Reducer/wsProfileFeedReducer';
+import { oneOrderReduser } from 'Reducer/getOneOrderReducer';
 
 
 
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
   order: orderReduser,
   auth: authorizationReducer,
   wsFeed: wsFeedReducer,
-  wsProfileFeed: wsProfileFeedReducer
+  wsProfileFeed: wsProfileFeedReducer,
+  oneOrder: oneOrderReduser
 });

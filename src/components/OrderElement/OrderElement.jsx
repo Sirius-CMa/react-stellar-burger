@@ -4,9 +4,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { format } from "date-fns";
-
-import { getCurrentDate } from "Utils/formatTime";
+import { reformatData } from "Utils/formatTime";
 
 import { getDataBurgerIngredients } from "Selectors";
 import { getTotalPrice } from "Utils/service-functions";
@@ -16,9 +14,9 @@ export function OrderElement({ card }) {
   const { sortDataById } = useSelector(getDataBurgerIngredients);
   const location = useLocation();
 
-  const time = format(new Date(card.createdAt), "hh:mm");
-  const date = new Date(card.createdAt);
-  const currentDay = getCurrentDate(date);
+  if (sortDataById === null) return null;
+
+  const { time, currentDay } = reformatData(card);
 
   const cardIngredients = card.ingredients.filter((a) => a);
   const totalPrice = getTotalPrice(card.ingredients, sortDataById);

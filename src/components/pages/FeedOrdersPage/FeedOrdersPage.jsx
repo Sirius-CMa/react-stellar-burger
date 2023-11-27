@@ -3,7 +3,7 @@ import styles from "./FeedOrdersPage.module.css";
 import { v4 as uuid } from "uuid";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { connectWsFeed, disconnectWsFeed } from "Action/ws";
 import { getDataFeed } from "Selectors";
 import { OrderElement } from "Components/OrderElement";

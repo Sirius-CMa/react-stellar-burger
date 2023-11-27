@@ -5,6 +5,15 @@
   z-index: 10;
 }
 
+.containerPage {
+  composes: container;
+  max-height: 620px;
+}
+
+.title {
+  text-align: center;
+}
+
 .listIngredients {
   width: 100%;
   max-height: 312px;

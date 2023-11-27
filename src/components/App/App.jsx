@@ -1,13 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-
 import styles from "./App.module.css";
 
 import { AppHeader } from "Components/AppHeader";
-// import { BurgerIngredients } from "Components/BurgerIngredients";
-// import { BurgerConstructor } from "Components/BurgerConstructor";
-
-// import { DndProvider } from "react-dnd";
-// import { HTML5Backend } from "react-dnd-html5-backend";
 
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom"; // Switch, useHistory, Route, useLocation
 
@@ -49,9 +43,11 @@ export function App() {
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/ingredients/:id" element={<IngredientPage notPopup={true} />} />
         <Route path="/profile" element={<ProtectedRoute onlyAuth={true} element={<ProfilePage />} />}></Route>{" "}
-        <Route path="/profile/orders" element={<HistoryOrdersPage />} />
+        <Route path="/profile/orders" element={<ProtectedRoute onlyAuth={true} element={<HistoryOrdersPage />} />} />
+        <Route path="/profile/orders/:number" element={<ProtectedRoute onlyAuth={true} element={<OrderView />} />} />
+        {/* <Route path="/profile/orders/:number" element={<OrderView />} /> */}
         <Route path="/page-404" element={<Page404 />} />
-        <Route path="/feed" element={<FeedOrdersPage />} />
+        <Route path="/feed" element={<FeedOrdersPage />}></Route>
         <Route path="/feed/:number" element={<OrderView />} />
       </Routes>
       {background && (

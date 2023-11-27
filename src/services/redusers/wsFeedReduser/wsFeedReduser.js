@@ -11,7 +11,7 @@ const inisialstate = {
   status: '',
   data: null,
   connectingError: null,
-  sortedOrdersById: null
+  sortedOrdersByNumber: null
 }
 
 export const wsFeedReducer = (state = inisialstate, action) => {

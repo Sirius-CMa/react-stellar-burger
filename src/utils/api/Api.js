@@ -17,9 +17,10 @@ export class Api {
       .then(this._onResponse)
   }
 
-  loadOneIngredients(id) {
-    return fetch(`${this._baseUrl}/ingredients/${id}`, {
-      headers: this._headers
+  getOneOrder(number) {
+    return fetch(` https://norma.nomoreparties.space/api/orders/${number}`, {
+      headers: this._headers,
+      method: 'GET'
     })
       .then(this._onResponse)
   }

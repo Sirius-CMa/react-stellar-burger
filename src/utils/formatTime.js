@@ -1,26 +1,5 @@
 import { isToday, format, isYesterday } from 'date-fns';
 
-// export const getIngr = (array: TCardData | null, burgerIngredientsArray: Array<TBasketCard>) => {
-//   let Ingr: Array<TBasketCard> = [];
-//   array!.ingredients.map((id: string) => {
-//     return burgerIngredientsArray.forEach((item: TBasketCard) => {
-//       if (item._id === id) {
-//         Ingr.push(item!);
-//       }
-//     });
-//   });
-//   return Ingr;
-// };
-
-// export const getTotalPrice = (array: Array<TBasketCard>) => {
-//   let totalSum = 0;
-//   let ingrPrices: Array<number> = [];
-//   array.forEach((item) => ingrPrices.push(item.price!));
-//   for (let i = 0; i < ingrPrices.length; i++) {
-//     totalSum += ingrPrices[i];
-//   }
-//   return totalSum;
-// };
 
 export const getCurrentDate = (date) => {
   if (isToday(date)) {
@@ -32,17 +11,9 @@ export const getCurrentDate = (date) => {
   }
 };
 
-// export function filterOrderFeed(array, id) {
-//   let filteredArray = array.filter((obj) => obj._id === id);
-//   return filteredArray[0];
-// }
-
-// export const getNumberOfIngrs = (array) => {
-//   const idArray = {};
-//   array &&
-//   array.ingredients.forEach((id) => {
-//     if (!idArray[id]) idArray[id] = 0;
-//       idArray[id]++;
-//     });
-//   return idArray;
-// };
+export const reformatData = (turgetOrder) => {
+  const time = format(new Date(turgetOrder.createdAt), "hh:mm");
+  const date = new Date(turgetOrder.createdAt);
+  const currentDay = getCurrentDate(date);
+  return { time, currentDay };
+};

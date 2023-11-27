@@ -5,8 +5,7 @@ import { OrderDataFeed } from "Components/OrderDataFeed";
 export function OrderView() {
   return (
     <div className={styles.container}>
-      <p>ffgh</p>
-      <OrderDataFeed />
+      <OrderDataFeed notPopup={true} />
     </div>
   );
 }
