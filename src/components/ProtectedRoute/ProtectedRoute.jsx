@@ -1,37 +1,25 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 // import { getUser } from "../../services/actions/Registration";
 import PropTypes from "prop-types";
 import { getDataAuth } from "Selectors";
-import { getUser } from "Action/authorization";
+import { paths } from "Utils/paths";
 
-export const ProtectedRoute = ({ onlyAuth = false, element, ...rest }) => {
+export const ProtectedRoute = ({ element, onlyNotAuth = false, ...rest }) => {
   const { auth } = useSelector(getDataAuth);
-  const location = useLocation();
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUser());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (!auth && onlyAuth) {
-    return (
-      <Navigate
-        to={{
-          pathname: "/login",
-          state: { from: location },
-        }}
-      />
-    );
+  if (!auth && !onlyNotAuth) {
+    return <Navigate to={paths.login} />;
   }
 
+  if (auth && onlyNotAuth) {
+    return <Navigate to={paths.home} />;
+  }
   return element;
 };
 
 ProtectedRoute.propTypes = {
   props: PropTypes.node,
-  onlyAuth: PropTypes.bool,
+  onlyNotAuth: PropTypes.bool,
   children: PropTypes.node,
 };

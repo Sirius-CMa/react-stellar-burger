@@ -1,6 +1,6 @@
 import styles from "./AuthPagesStyles.module.css";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -8,27 +8,18 @@ import { useInputForm } from "Hooks/handleInput";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "Action/authorization";
 import { getDataAuth } from "Selectors";
-import { useEffect } from "react";
+import { paths } from "Utils/paths";
 
 export function LoginPage() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { value, handleChange, textError, isError, setValue } = useInputForm({ email: " ", password: " " });
-  const { auth, loginRequest } = useSelector(getDataAuth);
+  const { value, handleChange, textError, isError } = useInputForm({ email: " ", password: " " });
+  const { loginRequest } = useSelector(getDataAuth);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     dispatch(loginUser({ email: value.email, password: value.password }));
   };
-
-  useEffect(() => {
-    setValue({ email: "", password: "" });
-    if (auth) {
-      navigate("/");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth]);
 
   return (
     <main className={styles.container}>
@@ -59,13 +50,13 @@ export function LoginPage() {
       </form>
       <p className={`${styles.text} text text_color_inactive text_type_main-default `}>
         Вы — новый пользователь?{" "}
-        <Link className={styles.link} to="/register">
+        <Link className={styles.link} to={paths.register}>
           Зарегистрироваться
         </Link>
       </p>
       <p className={`${styles.text} text text_type_main-default text_color_inactive`}>
         Забыли пароль?{" "}
-        <Link className={styles.link} to="/forgot-password">
+        <Link className={styles.link} to={paths.forgotPassword}>
           Восстановить пароль
         </Link>
       </p>

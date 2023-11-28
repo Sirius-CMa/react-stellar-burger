@@ -9,6 +9,8 @@ import { Button, EmailInput } from "@ya.praktikum/react-developer-burger-ui-comp
 import { useInputForm } from "Hooks/handleInput";
 import { forgotPassword } from "Action/authorization";
 import { getDataAuth } from "Selectors";
+import { useEffect } from "react";
+import { paths } from "Utils/paths";
 
 export function ForgotPassword() {
   const { forgotPasswordRequest, forgotPasswordData } = useSelector(getDataAuth);
@@ -19,14 +21,14 @@ export function ForgotPassword() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     dispatch(forgotPassword({ email: value.email }));
-    if (forgotPasswordData.success) {
-      navigate("/reset-password");
-    }
   };
 
-  // useEffect(() => {
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [forgotPasswordData]);
+  useEffect(() => {
+    if (forgotPasswordData.success) {
+      navigate(paths.resetPassword);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [forgotPasswordData]);
 
   return (
     <main className={styles.container}>

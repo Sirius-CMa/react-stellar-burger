@@ -9,6 +9,7 @@ import { Button, PasswordInput, Input } from "@ya.praktikum/react-developer-burg
 import { useInputForm } from "Hooks/handleInput";
 import { resetPassword } from "Action/authorization";
 import { getDataAuth } from "Selectors";
+import { paths } from "Utils/paths";
 
 export function ResetPasswordPage() {
   const dispatch = useDispatch();
@@ -17,7 +18,6 @@ export function ResetPasswordPage() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log("ForgotPassword");
     dispatch(resetPassword({ token: value.token, password: value.password }));
   };
 
@@ -52,7 +52,7 @@ export function ResetPasswordPage() {
       </form>
       <p className={`${styles.text} text text_color_inactive text_type_main-default `}>
         Вспимнили пароль?{" "}
-        <Link className={styles.link} to="/login">
+        <Link className={styles.link} to={paths.login}>
           Войти
         </Link>
       </p>

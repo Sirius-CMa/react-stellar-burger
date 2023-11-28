@@ -9,6 +9,7 @@ import { useInputForm } from "Hooks/handleInput";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "Action/authorization";
 import { getDataAuth } from "Selectors";
+import { paths } from "Utils/paths";
 
 export function RegisterPage() {
   const { value, handleChange, textError, isError } = useInputForm({ name: " ", email: " ", password: " " });
@@ -23,7 +24,7 @@ export function RegisterPage() {
 
   useEffect(() => {
     if (auth) {
-      navigate("/");
+      navigate(paths.home);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);

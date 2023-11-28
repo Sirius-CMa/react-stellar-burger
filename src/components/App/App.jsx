@@ -25,6 +25,8 @@ import { Popup } from "Components/Popup";
 import { OrderDataFeed } from "Components/OrderDataFeed";
 import { OrderView } from "Components/OrderView";
 
+import { paths } from "Utils/paths";
+
 export function App() {
   // console.log("App");
 
@@ -40,24 +42,25 @@ export function App() {
     <div className={styles.container}>
       <AppHeader />
       <Routes location={background || location}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<ProtectedRoute element={<RegisterPage />} />} />
-        <Route path="/forgot-password" element={<ProtectedRoute onlyAuth={false} element={<ForgotPassword />} />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/ingredients/:id" element={<IngredientPage notPopup={true} />} />
-        <Route path="/profile" element={<ProtectedRoute onlyAuth={true} element={<ProfilePage />} />}></Route>{" "}
-        <Route path="/profile/orders" element={<ProtectedRoute onlyAuth={true} element={<HistoryOrdersPage />} />} />
-        <Route path="/profile/orders/:number" element={<ProtectedRoute onlyAuth={true} element={<OrderView />} />} />
+        <Route path={paths.home} element={<HomePage />} />
+        <Route path={paths.login} element={<ProtectedRoute element={<LoginPage />} onlyNotAuth={true} />} />
+        <Route path={paths.register} element={<ProtectedRoute element={<RegisterPage />} onlyNotAuth={true} />} />
+        <Route path={paths.forgotPassword} element={<ProtectedRoute element={<ForgotPassword />} onlyNotAuth={true} />} />
+        <Route path={paths.resetPassword} element={<ProtectedRoute element={<ResetPasswordPage />} onlyNotAuth={true} />} />
+        <Route path={paths.ingredientsId} element={<IngredientPage notPopup={true} />} />
+        {""}
+        <Route path={paths.profile} element={<ProtectedRoute element={<ProfilePage />} />}></Route>
+        <Route path={paths.profileOrders} element={<ProtectedRoute element={<HistoryOrdersPage />} />} />
+        <Route path={paths.profileOrdersNumber} element={<ProtectedRoute element={<OrderView />} />} />
         {/* <Route path="/profile/orders/:number" element={<OrderView />} /> */}
-        <Route path="/page-404" element={<Page404 />} />
-        <Route path="/feed" element={<FeedOrdersPage />}></Route>
-        <Route path="/feed/:number" element={<OrderView />} />
+        <Route path={paths.page404} element={<Page404 />} />
+        <Route path={paths.feed} element={<FeedOrdersPage />}></Route>
+        <Route path={paths.feedNumber} element={<OrderView />} />
       </Routes>
       {background && (
         <Routes>
           <Route
-            path="ingredients/:id"
+            path={paths.ingredientsId}
             element={
               <Popup handleClosePopup={handleClosePopup}>
                 <IngredientDetails />
@@ -65,7 +68,7 @@ export function App() {
             }
           ></Route>
           <Route
-            path="feed/:number"
+            path={paths.feedNumber}
             element={
               <Popup handleClosePopup={handleClosePopup}>
                 <OrderDataFeed />
@@ -73,10 +76,10 @@ export function App() {
             }
           ></Route>
           <Route
-            path="profile/orders/:number"
+            path={paths.profileOrdersNumber}
             element={
               <Popup handleClosePopup={handleClosePopup}>
-                <OrderDataFeed />
+                <ProtectedRoute element={<OrderDataFeed />} />
               </Popup>
             }
           ></Route>

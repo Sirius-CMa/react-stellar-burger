@@ -1,19 +1,19 @@
 import styles from "./ProfilePage.module.css";
 
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Input, PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { useInputForm } from "Hooks/handleInput";
 import { getDataAuth } from "Selectors";
-import { logoutUser, updateUser } from "Action/authorization";
+import { updateUser } from "Action/authorization";
 import { NavBlockProfile } from "Components/NavBlockProfile";
 
 export function ProfilePage() {
   const dispatch = useDispatch();
 
   const { auth, user } = useSelector(getDataAuth);
+
   const { value, handleChange, textError, isError, resetForm, setValue } = useInputForm({
     name: user.name,
     email: user.email,
@@ -28,9 +28,9 @@ export function ProfilePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, auth]);
 
-  const onLogOut = () => {
-    dispatch(logoutUser());
-  };
+  // const onLogOut = () => {
+  //   dispatch(logoutUser());
+  // };
 
   const handleSubmitSave = () => {
     dispatch(updateUser({ name: value.name, email: value.email, password: value.password }));
@@ -40,23 +40,8 @@ export function ProfilePage() {
     resetForm();
     setValue({ name: user.name, email: user.email, password: "" });
   };
-  // className={`${styles.link} `} activeClassName={`${styles.link_active}`}
   return (
     <div className={`${styles.container}`}>
-      {/* <div className={`${styles.navBlock}`}>
-        <NavLink to="/profile" className={({ isActive }) => styles[!isActive ? "link" : "link_active"]}>
-          Профиль
-        </NavLink>
-        <NavLink to="/profile/orders" className={({ isActive }) => styles[!isActive ? "link" : "link_active"]}>
-          История заказов
-        </NavLink>
-        <NavLink to="/login" className={styles.link} onClick={onLogOut}>
-          Выход
-        </NavLink>
-        <p className={"text text_type_main-default text_color_inactive mt-20"}>
-          В этом разделе вы можете изменить свои персональные данные
-        </p>
-      </div> */}
       <NavBlockProfile />
       <form className={`${styles.form}`}>
         <Input
