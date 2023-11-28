@@ -40,11 +40,7 @@ export function OrderElement({ card }) {
           <ul className={styles.ingrList}>
             {cardIngredients.length > 5 ? (
               <li className={styles.ingItem} key={5}>
-                <img
-                  src={sortDataById[card.ingredients[5]].image}
-                  alt={sortDataById[card.ingredients[5]].name}
-                  className={styles.img}
-                />
+                <img src={sortDataById[card.ingredients[5]].image} alt={sortDataById[card.ingredients[5]].name} className={styles.img} />
                 <p className={`${styles.ingDigit} text text_type_digits-default`}>{`+${cardIngredients.length - 5}`}</p>
               </li>
             ) : null}

@@ -13,12 +13,7 @@ export const BlockIngredient = memo(function BlockIngredient({ title, ingredient
       <h3 className={`${styles.subtitle} text text_type_main-medium`}>{title}</h3>
       <ul className={styles.wrapperList}>
         {ingredients.map((item) => (
-          <NavLink
-            to={`ingredients/${item._id}`}
-            className={styles.link}
-            key={item._id}
-            state={{ background: location }}
-          >
+          <NavLink to={`ingredients/${item._id}`} className={styles.link} key={item._id} state={{ background: location }}>
             <li key={item._id} className={styles.listItem}>
               <IngredientsElement ingredient={item} />
             </li>

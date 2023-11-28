@@ -12,6 +12,7 @@ import { Popup } from "Components/Popup";
 import { OrderDetails } from "Components/OrderDetails";
 import { getDataBurgerConstructor } from "Selectors";
 import { getDataAuth } from "Selectors";
+import { paths } from "Utils/paths";
 
 export function Order() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export function Order() {
 
   const handleClick = () => {
     if (!auth) {
-      navigate("/login");
+      navigate(paths.login);
     } else {
       const ingredientsId = [...Array(2).fill(selectedBun._id), ...listIngredients.map((el) => el._id)];
       dispatch(getOrderDetailsAction({ ingredients: ingredientsId }));

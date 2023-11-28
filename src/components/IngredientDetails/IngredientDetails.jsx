@@ -10,20 +10,20 @@ import { useParams } from "react-router-dom";
 import { getAllIngredients } from "Action/burgerIngredients";
 
 export const IngredientDetails = ({ notPopup }) => {
-  console.log(notPopup);
-
   const dispatch = useDispatch();
 
   const { id } = useParams();
   const { sortDataById } = useSelector(getDataBurgerIngredients);
 
-  let ingredient = sortDataById[id];
-
+  console.log(id, sortDataById);
   useEffect(() => {
     dispatch(getAllIngredients());
   }, [dispatch]);
 
-  if (!ingredient) return null;
+  if (!sortDataById) return null;
+
+  let ingredient = sortDataById[id];
+
   return (
     <div className={notPopup ? styles.containerPage : styles.container}>
       <h2 className={`${styles.title}  text text_type_main-large`}>Детали ингредиента</h2>
