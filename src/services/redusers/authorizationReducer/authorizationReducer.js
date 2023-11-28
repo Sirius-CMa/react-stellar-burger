@@ -53,6 +53,7 @@ const initialState = {
 
   resetPasswordRequest: false,
   resetPasswordRequestError: false,
+  resetPasswordData: false,
 
   refreshRequest: null,
   dataRefresh: null,
@@ -85,7 +86,7 @@ export const authorizationReducer = (state = initialState, action) => {
     }
     case RESET_PASSWORD_USER_SUCCESS: {
 
-      return { ...state, resetPassword: action.payload, resetPasswordRequest: false, resetPasswordRequestError: false }
+      return { ...state, resetPasswordData: action.payload, resetPasswordRequest: false, resetPasswordRequestError: false, forgotPasswordData: false }
     }
     case RESET_PASSWORD_USER_FAILED: {
       return {
@@ -126,7 +127,7 @@ export const authorizationReducer = (state = initialState, action) => {
       return { ...state, logoutRequest: true }
     }
     case LOGOUT_USER_SUCCESS: {
-      return { ...state, user: null, auth: false, logoutRequest: false, logoutRequestError: false }
+      return { ...state, user: null, auth: false, logoutRequest: false, logoutRequestError: false, }
     }
     case LOGOUT_USER_FAILED: {
       return {
@@ -139,7 +140,7 @@ export const authorizationReducer = (state = initialState, action) => {
       return { ...state, loginRequest: true }
     }
     case LOGIN_USER_SUCCESS: {
-      return { ...state, user: action.payload, auth: true, loginRequest: false, loginRequestError: false }
+      return { ...state, user: action.payload, auth: true, loginRequest: false, loginRequestError: false, forgotPasswordData: false, resetPasswordData: false }
     }
     case LOGIN_USER_FAILED: {
       return {
