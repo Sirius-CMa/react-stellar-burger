@@ -5,20 +5,24 @@ import { AppHeader } from "Components/AppHeader";
 
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom"; // Switch, useHistory, Route, useLocation
 
-import { HomePage } from "Components/pages/HomePage";
+import { HomePage } from "Pages/HomePage";
+import { ProfilePage } from "Pages/ProfilePage";
+import { HistoryOrdersPage } from "Pages/HistoryOrdersPage";
+
+import { IngredientPage } from "Pages/IngredientPage";
+import { FeedOrdersPage } from "Pages/FeedOrdersPage";
+
+import { Page404 } from "Pages/Page404";
+
 import { LoginPage } from "AuthPages/LoginPage";
 import { RegisterPage } from "AuthPages/RegisterPage";
 import { ForgotPassword } from "AuthPages/ForgotPasswordPage";
 import { ResetPasswordPage } from "AuthPages/ResetPasswordPage";
-import { Page404 } from "Components/pages/Page404";
-import { ProfilePage } from "Components/pages/ProfilePage/ProfilePage";
+
 import { ProtectedRoute } from "Components/ProtectedRoute";
 import { IngredientDetails } from "Components/IngredientDetails";
 import { Popup } from "Components/Popup";
-import { IngredientPage } from "Components/pages/IngredientPage";
-import { FeedOrdersPage } from "Components/pages/FeedOrdersPage/FeedOrdersPage";
 import { OrderDataFeed } from "Components/OrderDataFeed";
-import { HistoryOrdersPage } from "Components/pages/HistoryOrdersPage";
 import { OrderView } from "Components/OrderView";
 
 export function App() {
