@@ -1,20 +1,17 @@
 import styles from "./FeedOrdersPage.module.css";
 
-import { v4 as uuid } from "uuid";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { connectWsFeed, disconnectWsFeed } from "Action/ws";
 import { getDataFeed } from "Selectors";
 import { OrderElement } from "Components/OrderElement";
-
-const url = "wss://norma.nomoreparties.space/orders/all";
+import { urlOrdersFeed } from "Utils/constants";
 
 export function FeedOrdersPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(connectWsFeed(url));
+    dispatch(connectWsFeed(urlOrdersFeed));
     return () => dispatch(disconnectWsFeed());
   }, [dispatch]);
 
@@ -23,9 +20,6 @@ export function FeedOrdersPage() {
 
   let doneOrders = data.orders.filter((obj) => obj.status === "done").slice(0, 5);
   let orderInProgress = data.orders.filter((obj) => obj.status !== "done").slice(0, 5);
-
-  // doneOrders = data.orders.filter((obj) => obj.status === "done").slice(0, 5);
-  // orderInProgress = data.orders.filter((obj) => obj.status !== "done").slice(0, 5);
 
   return (
     <div className={styles.container}>
@@ -50,13 +44,13 @@ export function FeedOrdersPage() {
             </ul>
             <ul className={styles.orderListReady}>
               {orderInProgress.length === 0 ? (
-                <li key={uuid()} className="text text_type_main-small">
+                <li key={101} className="text text_type_main-small">
                   Все текущие заказы готовы!
                 </li>
               ) : (
                 orderInProgress &&
                 orderInProgress.map((card, index) => (
-                  <li key={uuid()} className="text text_type_digits-default mb-2">
+                  <li key={102} className="text text_type_digits-default mb-2">
                     0{card.number}
                   </li>
                 ))

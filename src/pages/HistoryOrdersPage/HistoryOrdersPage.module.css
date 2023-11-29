@@ -1,10 +1,8 @@
 .container {
   display: flex;
-
-  /* margin-top: 120px; */
 }
 
-.ii {
+.containerNavBlock {
   margin: 120px 0 0 10%;
 }
 

@@ -9,7 +9,7 @@ import { reformatData } from "Utils/formatTime";
 import { getDataBurgerIngredients } from "Selectors";
 import { getTotalPrice } from "Utils/service-functions";
 import { orderStatus } from "Utils/constants";
-import { ingredientPropTypes } from "Utils/prop-types";
+import { orderPropType } from "Utils/prop-types";
 
 import PropTypes from "prop-types";
 
@@ -64,6 +64,6 @@ export function OrderElement({ card, index }) {
   );
 }
 OrderElement.propTypes = {
-  card: ingredientPropTypes,
-  index: PropTypes.string,
+  card: orderPropType,
+  index: PropTypes.number,
 };

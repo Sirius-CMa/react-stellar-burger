@@ -1,5 +1,8 @@
-import { IngredientDetails } from "Components/IngredientDetails";
 import styles from "./IngredientPage.module.css";
+
+import { IngredientDetails } from "Components/IngredientDetails";
+
+import PropTypes from "prop-types";
 
 export function IngredientPage({ notPopup }) {
   return (
@@ -8,3 +11,7 @@ export function IngredientPage({ notPopup }) {
     </div>
   );
 }
+
+IngredientPage.propTypes = {
+  notPopup: PropTypes.bool,
+};

@@ -28,10 +28,6 @@ export function ProfilePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, auth]);
 
-  // const onLogOut = () => {
-  //   dispatch(logoutUser());
-  // };
-
   const handleSubmitSave = () => {
     dispatch(updateUser({ name: value.name, email: value.email, password: value.password }));
   };
