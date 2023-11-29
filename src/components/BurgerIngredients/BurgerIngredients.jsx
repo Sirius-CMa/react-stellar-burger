@@ -60,13 +60,7 @@ export function BurgerIngredients() {
     <div>
       <div className={styles.container}>
         <h2 className={`${styles.title}  text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
-        <TabContainer
-          current={current}
-          bunRef={bunRef}
-          sauceRef={sauceRef}
-          mainRef={mainRef}
-          handleClick={handleClick}
-        />
+        <TabContainer current={current} bunRef={bunRef} sauceRef={sauceRef} mainRef={mainRef} handleClick={handleClick} />
 
         <ul className={`${styles.ingredients}`} ref={ingredientsContainer} onScroll={switchTabs}>
           <li ref={bunRef} key={1} className={styles.wrapperList}>

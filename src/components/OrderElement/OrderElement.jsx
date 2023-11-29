@@ -9,6 +9,9 @@ import { reformatData } from "Utils/formatTime";
 import { getDataBurgerIngredients } from "Selectors";
 import { getTotalPrice } from "Utils/service-functions";
 import { orderStatus } from "Utils/constants";
+import { ingredientPropTypes } from "Utils/prop-types";
+
+import PropTypes from "prop-types";
 
 export function OrderElement({ card, index }) {
   const { sortDataById } = useSelector(getDataBurgerIngredients);
@@ -60,3 +63,7 @@ export function OrderElement({ card, index }) {
     </li>
   );
 }
+OrderElement.propTypes = {
+  card: ingredientPropTypes,
+  index: PropTypes.string,
+};

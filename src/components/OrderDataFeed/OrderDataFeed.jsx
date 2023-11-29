@@ -5,6 +5,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 
 import { getDataBurgerIngredients } from "Selectors";
 import { reformatData } from "Utils/formatTime";
@@ -70,3 +71,7 @@ export function OrderDataFeed({ notPopup }) {
     </div>
   );
 }
+
+OrderDataFeed.propTypes = {
+  notPopup: PropTypes.bool,
+};
