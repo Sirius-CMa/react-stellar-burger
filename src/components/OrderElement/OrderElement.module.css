@@ -1,43 +1,4 @@
-.orderHistory {
-  max-height: 80vh;
-  width: 100%;
-}
-
-.list {
-  max-height: 77vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  overflow-y: scroll;
-}
-
-.profileList {
-  composes: list;
-  max-width: 100%;
-  align-self: flex-start;
-}
-
-.list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.list::-webkit-scrollbar-track {
-  background: #2f2f37;
-}
-
-.list::-webkit-scrollbar-thumb {
-  background: #a5a5d6;
-}
-
-.list::-webkit-scrollbar-thumb:hover {
-  background: #8585ad;
-}
-
-.listItem {
+.container {
   width: 90%;
   background: #1c1c21;
   border-radius: 40px;
@@ -45,7 +6,7 @@
   transition: 0.2s;
 }
 
-.listItem:hover {
+.container:hover {
   transform: scale(0.97);
 }
 
@@ -59,7 +20,7 @@
   transition: 0.2s;
 }
 
-.textBox {
+.info {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -71,16 +32,16 @@
   justify-content: space-between;
 }
 
-.ingrList {
-  list-style-type: none;
+.ingredientList {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   justify-content: flex-start;
   padding: 0 0 0 20px;
+  list-style-type: none;
 }
 
-.ingItem {
+.imageContainer {
   position: relative;
   width: 64px;
   height: 64px;
@@ -93,21 +54,7 @@
   /* 4 */
 }
 
-.ingDigit {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  width: 110%;
-  height: 110%;
-  z-index: 1;
-  /* 3 */
-  top: -5px;
-}
-
-.img {
+.imgage {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
@@ -117,7 +64,21 @@
   object-fit: cover;
 }
 
-.textContainer {
+.number {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  left: 7px;
+  bottom: 0px;
+}
+
+.priceContainer {
   display: flex;
   align-items: center;
 }

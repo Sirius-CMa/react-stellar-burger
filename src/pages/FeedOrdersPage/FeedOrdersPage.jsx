@@ -32,10 +32,9 @@ export function FeedOrdersPage() {
       <h1 className="text text_type_main-large mt-10 mb-5">Лента заказов</h1>
       <div className={styles.dataBlock}>
         <ul className={styles.feed}>
-          {data &&
-            data.orders.map((card) => (
-              <OrderElement card={card} run={"/feed"} /> //feed={false}
-            ))}
+          {data.orders.map((card, index) => (
+            <OrderElement card={card} index={index} />
+          ))}
         </ul>
         <div className={styles.ordersData}>
           <div className={`${styles.ordersInfo} mb-15`}>
@@ -44,7 +43,7 @@ export function FeedOrdersPage() {
             <ul className={styles.orderList}>
               {doneOrders &&
                 doneOrders.map((card, index) => (
-                  <li key={uuid()} className="text text_type_digits-default mb-2">
+                  <li key={index} className="text text_type_digits-default mb-2">
                     0{card.number}
                   </li>
                 ))}

@@ -119,7 +119,9 @@ export const authorizationReducer = (state = initialState, action) => {
     case UPDATE_USER_FAILED: {
       return {
         ...state, updateRequest: false,
-        updateRequestError: action.payload
+        updateRequestError: action.payload,
+        auth: false,
+        user: null
       }
     }
 

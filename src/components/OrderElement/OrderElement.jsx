@@ -10,7 +10,7 @@ import { getDataBurgerIngredients } from "Selectors";
 import { getTotalPrice } from "Utils/service-functions";
 import { orderStatus } from "Utils/constants";
 
-export function OrderElement({ card }) {
+export function OrderElement({ card, index }) {
   const { sortDataById } = useSelector(getDataBurgerIngredients);
   const location = useLocation();
 
@@ -22,9 +22,9 @@ export function OrderElement({ card }) {
   const totalPrice = getTotalPrice(card.ingredients, sortDataById);
 
   return (
-    <li className={`${styles.listItem} mb-6`}>
+    <li className={`${styles.container} mb-6`} key={index}>
       <Link className={styles.link} to={`${location.pathname}/${card.number}`} state={{ background: location }}>
-        <div className={`${styles.textBox} mb-6`}>
+        <div className={`${styles.info} mb-6`}>
           <p className="text text_type_digits-default">{`#0${card.number}`}</p>
           <p className="text text_type_main-default text_color_inactive">{`${currentDay}, в ${time} i-GMT+3`}</p>
         </div>
@@ -37,21 +37,21 @@ export function OrderElement({ card }) {
           {orderStatus[card.status][0]}
         </p>
         <div className={styles.dataBox}>
-          <ul className={styles.ingrList}>
+          <ul className={styles.ingredientList}>
             {cardIngredients.length > 5 ? (
-              <li className={styles.ingItem} key={5}>
-                <img src={sortDataById[card.ingredients[5]].image} alt={sortDataById[card.ingredients[5]].name} className={styles.img} />
-                <p className={`${styles.ingDigit} text text_type_digits-default`}>{`+${cardIngredients.length - 5}`}</p>
+              <li className={styles.imageContainer} key={5}>
+                <img className={styles.imgage} src={sortDataById[card.ingredients[5]].image} alt={sortDataById[card.ingredients[5]].name} />
+                <p className={`${styles.number} text text_type_digits-default`}>{`+${cardIngredients.length - 5}`}</p>
               </li>
             ) : null}
             {cardIngredients &&
               cardIngredients.slice(0, 4).map((card, index) => (
-                <li className={styles.ingItem} key={index}>
-                  <img src={sortDataById[card].image} alt={sortDataById[card].name} className={styles.img} />
+                <li className={styles.imageContainer} key={index}>
+                  <img className={styles.imgage} src={sortDataById[card].image} alt={sortDataById[card].name} />
                 </li>
               ))}
           </ul>
-          <div className={styles.textContainer}>
+          <div className={styles.priceContainer}>
             <p className="text text_type_digits-default mr-2">{totalPrice}</p>
             <CurrencyIcon type="primary" />
           </div>

@@ -20,7 +20,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
     "uuid": "^8.3.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "homepage": "./"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -28,6 +29,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
+    "gh-pages": "^6.1.0",
     "parcel-resolver-tspaths": "^0.0.9",
     "react-app-rewire-alias": "^1.1.7",
     "react-app-rewired": "^2.2.1",
@@ -37,7 +39,9 @@
     "start": "react-app-rewired start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

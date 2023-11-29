@@ -213,6 +213,8 @@ export function updateUser(body) {
           type: UPDATE_USER_FAILED,
           payload: error
         });
+
+        //LOGOUT_USER_SUCCESS
       })
   };
 }

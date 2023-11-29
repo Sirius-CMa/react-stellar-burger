@@ -49,7 +49,7 @@ export function OrderDataFeed({ notPopup }) {
         {listIngredients &&
           listIngredients.map((idIngredient, index) => (
             <li className={styles.ingredient} key={index}>
-              <div className={`${styles.imagContainer}`}>
+              <div className={`${styles.description}`}>
                 <img src={sortDataById[idIngredient].image} alt={sortDataById[idIngredient].name} className={`${styles.image} mr-4`} />
                 <p className={`text text_type_main-default`}>{sortDataById[idIngredient].name}</p>
               </div>
