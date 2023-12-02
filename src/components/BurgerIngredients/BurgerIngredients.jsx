@@ -45,16 +45,15 @@ export function BurgerIngredients() {
     setCurrent(target);
     ref.current.scrollIntoView({ behavior: "smooth" });
   }
-
-  useEffect(() => {
-    dispatch(getAllIngredients());
-  }, [dispatch]);
-
   const { data, isLoading, isError } = useSelector(getDataBurgerIngredients);
 
   const bun = useMemo(() => data.filter((el) => el.type === "bun"), [data]);
   const main = useMemo(() => data.filter((el) => el.type === "main"), [data]);
   const sauce = useMemo(() => data.filter((el) => el.type === "sauce"), [data]);
+
+  useEffect(() => {
+    !data && dispatch(getAllIngredients());
+  }, [dispatch, data]);
 
   return (
     <div>
@@ -67,10 +66,10 @@ export function BurgerIngredients() {
             <BlockIngredient title={titleReplace["bun"]} ingredients={bun} location={location} />
           </li>
           <li ref={sauceRef} key={2} className={styles.wrapperList}>
-            <BlockIngredient title={titleReplace["sauce"]} ingredients={sauce} />
+            <BlockIngredient title={titleReplace["sauce"]} ingredients={sauce} location={location} />
           </li>
           <li ref={mainRef} key={3} className={styles.wrapperList}>
-            <BlockIngredient title={titleReplace["main"]} ingredients={main} />
+            <BlockIngredient title={titleReplace["main"]} ingredients={main} location={location} />
           </li>
         </ul>
       </div>

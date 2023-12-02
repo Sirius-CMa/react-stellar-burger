@@ -4,6 +4,7 @@ import { useLocation, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { logoutUser } from "Action/authorization";
+import { PROFILE_FEED_CLEAN } from "Action/wsProfileFeed";
 
 export function NavBlockProfile() {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export function NavBlockProfile() {
 
   const onLogOut = () => {
     dispatch(logoutUser());
+    dispatch({ type: PROFILE_FEED_CLEAN });
   };
 
   return (

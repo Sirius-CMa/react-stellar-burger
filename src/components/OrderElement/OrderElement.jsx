@@ -13,7 +13,7 @@ import { orderPropType } from "Utils/prop-types";
 
 import PropTypes from "prop-types";
 
-export function OrderElement({ card, index }) {
+export function OrderElement({ card, index, feed }) {
   const { sortDataById } = useSelector(getDataBurgerIngredients);
   const location = useLocation();
 
@@ -25,7 +25,7 @@ export function OrderElement({ card, index }) {
   const totalPrice = getTotalPrice(card.ingredients, sortDataById);
 
   return (
-    <li className={`${styles.container} mb-6`} key={index}>
+    <li className={`${feed ? styles.containerFeed : styles.container} mb-6`} key={card._id}>
       <Link className={styles.link} to={`${location.pathname}/${card.number}`} state={{ background: location }}>
         <div className={`${styles.info} mb-6`}>
           <p className="text text_type_digits-default">{`#0${card.number}`}</p>
@@ -66,4 +66,5 @@ export function OrderElement({ card, index }) {
 OrderElement.propTypes = {
   card: orderPropType,
   index: PropTypes.number,
+  feed: PropTypes.bool,
 };

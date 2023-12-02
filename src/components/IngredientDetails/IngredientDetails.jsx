@@ -15,7 +15,7 @@ export const IngredientDetails = ({ notPopup }) => {
   const { id } = useParams();
   const { sortDataById } = useSelector(getDataBurgerIngredients);
 
-  console.log(id, sortDataById);
+  // console.log(id, sortDataById);
   useEffect(() => {
     dispatch(getAllIngredients());
   }, [dispatch]);

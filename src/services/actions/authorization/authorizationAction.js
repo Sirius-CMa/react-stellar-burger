@@ -2,7 +2,7 @@ import { Api } from "Api";
 import { dataServer } from "Utils/constants";
 import { deleteCookie, getCookie, setCookie } from "Utils/cookie";
 
-const api = new Api(dataServer);
+const api = new Api(dataServer, getCookie, setCookie, deleteCookie);
 
 
 export const AUTH_USER_REQUEST = 'AUTH_USER_REQUEST'
@@ -37,6 +37,7 @@ export const REFRESH_TOKEN_REQUEST = 'REFRESH_TOKEN_REQUEST'
 export const REFRESH_TOKEN_SUCCESS = 'REFRESH_TOKEN_SUCCESS'
 export const REFRESH_TOKEN_FAILED = 'REFRESH_TOKEN_FAILED'
 
+export const CHEK_FAILED = 'CHEK_FAILED'
 
 
 export function resetPassword(body) {
@@ -69,6 +70,9 @@ export function forgotPassword(body) {
     });
     api.forgotPassword(body)
       .then(res => {
+        localStorage.setItem("refreshToken", res.refreshToken);
+        deleteCookie('token');
+        setCookie('token', res.accessToken);
         dispatch({
           type: FORGOT_PASSWORD_USER_SUCCESS,
           payload: res
@@ -95,8 +99,7 @@ export function logoutUser() {
     });
     api.logoutUser({ token: localStorage.getItem('refreshToken') })
       .then(res => {
-
-        console.log('succces logout');
+        console.log('logout', res.success, res.message);
         deleteCookie("token")
         localStorage.removeItem("refreshToken");
         dispatch({
@@ -194,14 +197,15 @@ export function loginUser(body) {
 }
 
 
+
 export function updateUser(body) {
   console.log('body', body);
   return function (dispatch) {
     dispatch({
       type: UPDATE_USER_REQUEST
     });
-    api.updateUser(getCookie('token'), body)
-      .then(res => {
+    api.updateUserWithRefresh(getCookie('token'), body)
+      .then((res) => {
         dispatch({
           type: UPDATE_USER_SUCCESS,
           payload: res.user,
@@ -213,20 +217,17 @@ export function updateUser(body) {
           type: UPDATE_USER_FAILED,
           payload: error
         });
-
-        //LOGOUT_USER_SUCCESS
       })
-  };
+  }
 }
 
 
-// POST https://norma.nomoreparties.space/api/auth/token
 
 
 
 
 export function refreshToken(token) {
-  console.log('body', token);
+  console.log('refreshTokenAction', token);
   return function (dispatch) {
     dispatch({
       type: REFRESH_TOKEN_REQUEST
@@ -234,7 +235,7 @@ export function refreshToken(token) {
     api.refreshToken(token)
       .then(res => {
         localStorage.setItem("refreshToken", res.refreshToken);
-        setCookie('token', res.accessToken);
+        // setCookie('token', res.accessToken);
         dispatch({
           type: REFRESH_TOKEN_SUCCESS,
           payload: res,

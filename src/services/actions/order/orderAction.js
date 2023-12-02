@@ -19,9 +19,8 @@ export function getOrderDetailsAction(ingredients) {
       type: GET_ORDER_DATA_REQUEST,
     });
     api
-      .getOrderDetailsServer(ingredients, getCookie('token'))
+      .getOrderDetailsServerWithRefresh(ingredients, getCookie('token'))
       .then((res) => {
-        // console.log('ответ серверв с заказом - ', res.order.number)
         const { name, order } = res
         dispatch({
           type: GET_ORDER_DATA_SUCCESS,

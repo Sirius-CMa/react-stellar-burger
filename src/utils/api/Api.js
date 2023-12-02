@@ -1,14 +1,24 @@
+
 export class Api {
-  constructor(dataServer) {
+  constructor(dataServer, getCookie, setCookie, deleteCookie) {
     this._baseUrl = dataServer.baseUrl;
     this._headers = dataServer.headers;
+    this._getCookie = getCookie;
+    this._setCookie = setCookie;
+    this._deleteCookie = deleteCookie;
   }
 
   _onResponse(res) {
     return res.ok
       ? res.json()
-      : Promise.reject(`Ошибка: ${res.status}`)
+      : res.json().then((error) => {
+        error.statusCode = res.status;
+        return Promise.reject(error);
+      })//Promise.reject(res`Ошибка: ${res.status}`)
   }
+
+
+
 
   loadIngredients() {
     return fetch(`${this._baseUrl}/ingredients`, {
@@ -44,7 +54,6 @@ export class Api {
         "Content-Type": "application/json",
         Authorization: token
       },
-
     })
       .then(this._onResponse)
   }
@@ -83,6 +92,7 @@ export class Api {
   }
 
   updateUser(token, body) {
+    // console.log('up', token, body)
     return fetch(`${this._baseUrl}/auth/user`, {
       method: 'PATCH',
       headers: {
@@ -117,7 +127,8 @@ export class Api {
   }
 
   refreshToken(token) {
-    return fetch(`${this._baseUrl}/token`, {
+    console.log('refresh', token)
+    return fetch(`${this._baseUrl}/auth/token`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -125,6 +136,88 @@ export class Api {
       body: JSON.stringify(token)
     })
       .then(this._onResponse)
+  }
+
+  updateUserWithRefresh = async (token, body) => {
+    try {
+      return await this.updateUser(token, body)
+    } catch (error) {
+      console.log('error message', error.message);
+      if (error.message === 'invalid token' || error.message === 'jwt expired') {
+        const refreshData = await this.refreshToken({ token: localStorage.getItem("refreshToken") })
+        console.log(refreshData);
+        if (refreshData.success) {
+          localStorage.setItem("refreshToken", refreshData.refreshToken);
+          let accessToken = refreshData.accessToken
+          this._deleteCookie('token')
+          this._setCookie('token', accessToken)
+          return await this.updateUser(accessToken, body)
+        }
+      } else {
+        Promise.reject(error)
+      }
+    }
+  }
+
+  getUserAuthWithRefresh = async (token) => {
+    console.log('getUserAuthWithRefresh');
+    try {
+      return await this.getUserAuth(token)
+    } catch (error) {
+      console.log('error message', error.message);
+      if (error.message === 'invalid token' || error.message === 'jwt expired') {
+        const refreshData = await this.refreshToken({ token: localStorage.getItem("refreshToken") })
+        if (refreshData.success) {
+          localStorage.setItem("refreshToken", refreshData.refreshToken);
+          let accessToken = refreshData.accessToken
+          this._setCookie('token', accessToken)
+          return await this.getUserAuth(accessToken)
+        }
+      } else {
+        Promise.reject(error)
+      }
+    }
+  }
+
+  getOrderDetailsServerWithRefresh = async (ingredients, token) => {
+    console.log('getUserAuthWithRefresh');
+    try {
+      return await this.getOrderDetailsServer(ingredients, token)
+    } catch (error) {
+      console.log('error message', error.message);
+      if (error.message === 'invalid token' || error.message === 'jwt expired') {
+        const refreshData = await this.refreshToken({ token: localStorage.getItem("refreshToken") })
+        if (refreshData.success) {
+          localStorage.setItem("refreshToken", refreshData.refreshToken);
+          let accessToken = refreshData.accessToken
+          this._setCookie('token', accessToken)
+          return await this.getOrderDetailsServer(ingredients, accessToken)
+        }
+      } else {
+        Promise.reject(error)
+      }
+    }
+  }
+
+  checkUserAuth = async (token) => {
+    console.log('checkUserAuth');
+    try {
+      return await this.getUserAuth(token)
+    } catch (error) {
+      console.log('error message', error.message);
+      if (error.message === 'invalid token' || error.message === 'jwt expired') {
+        const refreshData = await this.refreshToken({ token: localStorage.getItem("refreshToken") })
+        if (refreshData.success) {
+          localStorage.setItem("refreshToken", refreshData.refreshToken);
+          let accessToken = refreshData.accessToken;
+          this._deleteCookie('token')
+          this._setCookie('token', accessToken);
+          return await this.getUserAuth(accessToken)
+        }
+      } else {
+        Promise.reject(error)
+      }
+    }
   }
 
 }

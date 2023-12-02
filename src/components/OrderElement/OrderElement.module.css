@@ -1,9 +1,14 @@
-.container {
-  width: 90%;
+.containerFeed {
+  width: 535px;
   background: #1c1c21;
   border-radius: 40px;
   padding: 24px;
+  margin-right: 8px;
   transition: 0.2s;
+}
+.container {
+  composes: containerFeed;
+  width: 830px;
 }
 
 .container:hover {

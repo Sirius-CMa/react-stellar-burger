@@ -16,7 +16,7 @@ export function ResetPasswordPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { value, handleChange, textError, isError } = useInputForm({ password: "", token: "" });
-  const { resetPasswordRequest, resetPasswordData } = useSelector(getDataAuth);
+  const { resetPasswordRequest, resetPasswordData, isPasswordReset, failedResetPassword } = useSelector(getDataAuth);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -27,8 +27,15 @@ export function ResetPasswordPage() {
     if (resetPasswordData.success) {
       navigate(paths.login);
     }
+    if (!isPasswordReset && !resetPasswordData.success) {
+      navigate(paths.forgotPassword);
+    }
+    if (isPasswordReset && failedResetPassword) {
+      navigate(paths.forgotPassword);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resetPasswordData]);
+  }, [resetPasswordData, isPasswordReset, failedResetPassword]);
 
   return (
     <main className={styles.container}>

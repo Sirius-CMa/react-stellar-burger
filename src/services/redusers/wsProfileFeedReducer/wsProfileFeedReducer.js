@@ -3,7 +3,8 @@ import {
   PROFILE_FEED_WS_OPEN,
   PROFILE_FEED_WS_CLOSE,
   PROFILE_FEED_WS_ERROR,
-  PROFILE_FEED_WS_MESSAGE
+  PROFILE_FEED_WS_MESSAGE,
+  PROFILE_FEED_CLEAN
 } from 'Action/wsProfileFeed'
 import { sortOrdersById } from 'Utils/sort-ingredients-by-id'
 
@@ -30,6 +31,9 @@ export const wsProfileFeedReducer = (state = inisialstate, action) => {
 
     case PROFILE_FEED_WS_CLOSE:
       return { ...state, status: 'close' }
+
+    case PROFILE_FEED_CLEAN:
+      return { ...state, status: 'close', data: null }
 
     default: return state
   }

@@ -1,20 +1,12 @@
-.container {
-  display: flex;
-}
-
-.containerNavBlock {
-  margin: 120px 0 0 10%;
-}
-
 .feed {
-  width: 85%;
-  max-height: 85vh;
   display: flex;
+  max-width: 90%;
+  max-height: 85vh;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   padding: 0;
-  margin: 20px 56px 0 0;
+  margin: 0;
   overflow-y: scroll;
   list-style-type: none;
 }

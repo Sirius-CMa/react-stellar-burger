@@ -4,7 +4,8 @@ import {
   FEED_WS_CLOSE,
   FEED_WS_ERROR,
   FEED_WS_MESSAGE
-} from 'Action/ws'
+}
+  from 'Action/ws'
 import { sortOrdersByNumber } from 'Utils/sort-ingredients-by-id'
 
 const inisialstate = {
@@ -30,6 +31,8 @@ export const wsFeedReducer = (state = inisialstate, action) => {
 
     case FEED_WS_CLOSE:
       return { ...state, status: 'close' }
+
+
 
     default: return state
   }

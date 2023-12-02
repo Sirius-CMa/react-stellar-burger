@@ -27,7 +27,7 @@ export function FeedOrdersPage() {
       <div className={styles.dataBlock}>
         <ul className={styles.feed}>
           {data.orders.map((card, index) => (
-            <OrderElement card={card} index={index} />
+            <OrderElement card={card} index={index} feed />
           ))}
         </ul>
         <div className={styles.ordersData}>
@@ -44,13 +44,13 @@ export function FeedOrdersPage() {
             </ul>
             <ul className={styles.orderListReady}>
               {orderInProgress.length === 0 ? (
-                <li key={101} className="text text_type_main-small">
+                <li key={1111} className="text text_type_main-small">
                   Все текущие заказы готовы!
                 </li>
               ) : (
                 orderInProgress &&
                 orderInProgress.map((card, index) => (
-                  <li key={102} className="text text_type_digits-default mb-2">
+                  <li key={index} className="text text_type_digits-default mb-2">
                     0{card.number}
                   </li>
                 ))

@@ -1,4 +1,5 @@
 import {
+  CHEK_FAILED,
   REFRESH_TOKEN_REQUEST,
   REFRESH_TOKEN_SUCCESS,
   REFRESH_TOKEN_FAILED,
@@ -54,6 +55,7 @@ const initialState = {
   resetPasswordRequest: false,
   resetPasswordRequestError: false,
   resetPasswordData: false,
+  failedResetPassword: true,
 
   refreshRequest: null,
   dataRefresh: null,
@@ -86,20 +88,43 @@ export const authorizationReducer = (state = initialState, action) => {
     }
     case RESET_PASSWORD_USER_SUCCESS: {
 
-      return { ...state, resetPasswordData: action.payload, resetPasswordRequest: false, resetPasswordRequestError: false, forgotPasswordData: false }
+      return {
+        ...state,
+        resetPasswordData: action.payload,
+        resetPasswordRequest: false,
+        resetPasswordRequestError: false,
+        forgotPasswordData: false,
+        isPasswordReset: false,
+        failedResetPassword: false
+
+      }
     }
     case RESET_PASSWORD_USER_FAILED: {
       return {
         ...state, resetPasswordRequest: false,
-        resetPasswordRequestError: action.payload
+        resetPasswordRequestError: action.payload,
+        isPasswordReset: false,
+        forgotPasswordData: false,
+        failedResetPassword: true
       }
     }
 
     case FORGOT_PASSWORD_USER_REQUEST: {
-      return { ...state, forgotPasswordRequest: true }
+      return {
+        ...state,
+        forgotPasswordRequest: true,
+        failedResetPassword: false
+      }
     }
     case FORGOT_PASSWORD_USER_SUCCESS: {
-      return { ...state, forgotPasswordData: action.payload, forgotPasswordRequest: false, forgotPasswordRequestError: false }
+      return {
+        ...state,
+        forgotPasswordData: action.payload,
+        forgotPasswordRequest: false,
+        forgotPasswordRequestError: false,
+        isPasswordReset: action.payload.success,
+
+      }
     }
     case FORGOT_PASSWORD_USER_FAILED: {
       return {
@@ -129,7 +154,13 @@ export const authorizationReducer = (state = initialState, action) => {
       return { ...state, logoutRequest: true }
     }
     case LOGOUT_USER_SUCCESS: {
-      return { ...state, user: null, auth: false, logoutRequest: false, logoutRequestError: false, }
+      return {
+        ...state,
+        user: null, auth: false,
+        logoutRequest: false,
+        logoutRequestError: false,
+        dataRefresh: null
+      }
     }
     case LOGOUT_USER_FAILED: {
       return {
@@ -168,7 +199,7 @@ export const authorizationReducer = (state = initialState, action) => {
       return { ...state, refreshRequest: true }
     }
     case REFRESH_TOKEN_SUCCESS: {
-      return { ...state, dataRefresh: action.payload, auth: true, refreshRequest: false, }
+      return { ...state, dataRefresh: action.payload, auth: true, refreshRequest: false }
     }
     case REFRESH_TOKEN_FAILED: {
       return {
@@ -177,6 +208,11 @@ export const authorizationReducer = (state = initialState, action) => {
       }
     }
 
+    case CHEK_FAILED: {
+      return {
+        ...state, auth: false
+      }
+    }
 
 
     default: { return state }

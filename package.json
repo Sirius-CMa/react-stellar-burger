@@ -8,6 +8,7 @@
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
     "homepage": "./",
+    "lodash.throttle": "^4.1.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.1",
     "react-dnd": "^14.0.5",

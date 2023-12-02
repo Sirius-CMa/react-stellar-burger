@@ -25,14 +25,8 @@ export function HistoryOrdersPage() {
   if (!data) return null;
 
   return (
-    <div className={styles.container}>
-      <div className={styles.containerNavBlock}>
-        <NavBlockProfile />
-      </div>
-
-      <div className={styles.containerFeed}>
-        <ul className={styles.feed}>{data && data.orders.map((card, index) => <OrderElement card={card} index={index} />)}</ul>
-      </div>
-    </div>
+    <>
+      <ul className={styles.feed}>{data && data.orders.map((card, index) => <OrderElement card={card} index={index} />)}</ul>
+    </>
   );
 }

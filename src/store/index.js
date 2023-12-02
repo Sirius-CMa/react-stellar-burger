@@ -1,6 +1,11 @@
+import throttle from 'lodash.throttle'
+import { loadState, saveState } from 'Utils/service-functions';
+
 import { rootReducer } from 'Reducer/';
 import { configureStore } from '@reduxjs/toolkit';
+
 import { socketMiddleware } from '../middelware/socket-middleware';
+
 import {
   FEED_CONNECT,
   FEED_DISCONNECT,
@@ -10,6 +15,7 @@ import {
   FEED_WS_MESSAGE,
   FEED_WS_OPEN
 } from 'Action/ws';
+
 import {
   PROFILE_FEED_CONNECT,
   PROFILE_FEED_DISCONNECT,
@@ -19,6 +25,8 @@ import {
   PROFILE_FEED_WS_MESSAGE,
   PROFILE_FEED_WS_OPEN
 } from 'Action/wsProfileFeed';
+
+
 
 const feedSocketMiddlewareFeed = socketMiddleware({
   wsConnect: FEED_CONNECT,
@@ -40,12 +48,18 @@ const feedSocketMiddlewareProfileFeed = socketMiddleware({
   wsDisconnect: PROFILE_FEED_DISCONNECT
 })
 
+const preloadedState = loadState();
+
 export const store = configureStore({
   reducer: rootReducer,
+
   middleware: (getDefaultMiddelware) => {
     return getDefaultMiddelware({ serializableCheck: false }).concat(feedSocketMiddlewareFeed, feedSocketMiddlewareProfileFeed)
-  }
+  },
+  preloadedState
 });
 
 
-
+store.subscribe(throttle(() => {
+  saveState(store.getState())
+}, 1000));

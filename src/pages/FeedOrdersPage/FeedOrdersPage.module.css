@@ -1,6 +1,6 @@
 .container {
-  margin: 0;
-  width: 100%;
+  margin: 0 auto;
+  width: 1280px;
 }
 
 .dataBlock {
@@ -11,7 +11,7 @@
 }
 
 .feed {
-  width: 100%;
+  width: 600px;
   max-height: 77vh;
   display: flex;
   flex-direction: column;
@@ -43,7 +43,7 @@
 
 .ordersData {
   width: 90%;
-  max-width: 584px;
+  max-width: 600px;
 }
 
 .ordersInfo {
