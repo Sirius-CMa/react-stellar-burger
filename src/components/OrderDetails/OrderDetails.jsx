@@ -17,5 +17,5 @@ export function OrderDetails({ number }) {
 }
 
 OrderDetails.propTypes = {
-  number: PropTypes.string,
+  number: PropTypes.number,
 };

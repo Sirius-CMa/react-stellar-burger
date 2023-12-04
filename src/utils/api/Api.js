@@ -62,6 +62,17 @@ export class Api {
       .then(this._onResponse)
   }
 
+  getOrderDetailsServer(ingredients, token) {
+    return fetch(`${this._baseUrl}/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+      body: JSON.stringify(ingredients)
+    })
+      .then(this._onResponse)
+  }
 
 
 

@@ -1,4 +1,4 @@
-import { CLEAN_ALL_INGREDIENTS } from "Action/burgerIngredients";
+// import { CLEAN_ALL_INGREDIENTS } from "Action/burgerIngredients";
 import { Api } from "Api";
 import { dataServer } from "Utils/constants";
 import { deleteCookie, getCookie, setCookie } from "Utils/cookie";
