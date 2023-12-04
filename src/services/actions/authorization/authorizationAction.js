@@ -108,6 +108,8 @@ export function logoutUser() {
       })
       .catch(error => {
         console.log('fail', error);
+        deleteCookie("token")
+        localStorage.removeItem("refreshToken");
         dispatch({
           type: LOGOUT_USER_FAILED,
           payload: error
@@ -145,21 +147,20 @@ export function getUser() {
 
 //https://norma.nomoreparties.space/api/auth/register
 export function registerUser(body) {
-  console.log('body', body);
+  // console.log('body', body);
   return function (dispatch) {
     dispatch({
       type: REGISTER_USER_REQUEST
     });
     api.registerUser(body)
       .then(res => {
-        console.log(22);
-        if (res && res.success) {
-          console.log('succces');
-          dispatch({
-            type: REGISTER_USER_SUCCESS,
-            user: res.user,
-          });
-        }
+        localStorage.setItem("refreshToken", res.refreshToken);
+        setCookie('token', res.accessToken);
+        dispatch({
+          type: REGISTER_USER_SUCCESS,
+          payload: res.user,
+        });
+
       })
       .catch((error) => {
         console.log('user fail', error);
@@ -199,7 +200,7 @@ export function loginUser(body) {
 
 
 export function updateUser(body) {
-  console.log('body', body);
+  // console.log('body', body);
   return function (dispatch) {
     dispatch({
       type: UPDATE_USER_REQUEST
@@ -227,7 +228,7 @@ export function updateUser(body) {
 
 
 export function refreshToken(token) {
-  console.log('refreshTokenAction', token);
+  // console.log('refreshTokenAction', token);
   return function (dispatch) {
     dispatch({
       type: REFRESH_TOKEN_REQUEST

@@ -1,7 +1,8 @@
 import { Api } from "Api";
 import { dataServer } from "Utils/constants";
+import { getCookie } from "Utils/cookie";
 
-const api = new Api(dataServer);
+const api = new Api(dataServer, getCookie);
 
 export const GET_ALL_INGREDIENTS_REQUEST = 'GET_ALL_INGREDIENTS_REQUEST';
 export const GET_ALL_INGREDIENTS_SUCCESS = 'GET_ALL_INGREDIENTS_SUCCESS';

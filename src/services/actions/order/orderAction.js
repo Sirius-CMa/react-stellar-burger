@@ -10,7 +10,7 @@ export const REMOVE_ORDER_DATA = 'REMOVE_ORDER_DATA';
 
 
 
-const api = new Api(dataServer)
+const api = new Api(dataServer, getCookie)
 
 
 export function getOrderDetailsAction(ingredients) {

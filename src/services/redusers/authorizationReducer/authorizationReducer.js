@@ -156,7 +156,8 @@ export const authorizationReducer = (state = initialState, action) => {
     case LOGOUT_USER_SUCCESS: {
       return {
         ...state,
-        user: null, auth: false,
+        auth: false,
+        user: null,
         logoutRequest: false,
         logoutRequestError: false,
         dataRefresh: null
@@ -164,8 +165,12 @@ export const authorizationReducer = (state = initialState, action) => {
     }
     case LOGOUT_USER_FAILED: {
       return {
-        ...state, logoutRequest: false,
-        logoutRequestError: action.payload
+        ...state,
+        auth: false,
+        user: null,
+        logoutRequest: false,
+        logoutRequestError: action.payload,
+
       }
     }
 
@@ -173,7 +178,15 @@ export const authorizationReducer = (state = initialState, action) => {
       return { ...state, loginRequest: true }
     }
     case LOGIN_USER_SUCCESS: {
-      return { ...state, user: action.payload, auth: true, loginRequest: false, loginRequestError: false, forgotPasswordData: false, resetPasswordData: false }
+      return {
+        ...state,
+        user: action.payload,
+        auth: true,
+        loginRequest: false,
+        loginRequestError: false,
+        forgotPasswordData: false,
+        resetPasswordData: false
+      }
     }
     case LOGIN_USER_FAILED: {
       return {

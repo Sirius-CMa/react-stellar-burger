@@ -17,6 +17,7 @@ export function ProfileForm() {
     email: "",
     password: "",
   });
+
   useEffect(() => {
     if (auth && user.name && user.email) {
       resetForm();
