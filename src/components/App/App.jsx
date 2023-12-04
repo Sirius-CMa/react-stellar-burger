@@ -37,7 +37,6 @@ export function App() {
 
   const handleClosePopup = () => {
     navigate(location.state.background.pathname);
-    // navigate(-1);
   };
 
   return (
