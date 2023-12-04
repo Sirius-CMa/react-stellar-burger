@@ -20,7 +20,6 @@ export function FeedOrdersPage() {
 
   let doneOrders = data.orders.filter((obj) => obj.status === "done").slice(0, 5);
   let orderInProgress = data.orders.filter((obj) => obj.status !== "done").slice(0, 5);
-
   return (
     <div className={styles.container}>
       <h1 className="text text_type_main-large mt-10 mb-5">Лента заказов</h1>

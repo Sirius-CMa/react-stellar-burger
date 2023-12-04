@@ -9,7 +9,8 @@ import {
 
   SET_CURRENT_INGREDIENT,
   REMOVE_CURRENT_INGREDIENT,
-  SET_COUNT_INGREDIENT
+  SET_COUNT_INGREDIENT,
+  CLEAN_ALL_INGREDIENTS
 } from 'Action/burgerIngredients'
 import { sortIngredientsById } from 'Utils/sort-ingredients-by-id';
 
@@ -26,6 +27,15 @@ const initialState = {
 
 export const burgerIngredientsReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case CLEAN_ALL_INGREDIENTS: {
+      return {
+        ...state,
+        data: null,
+        sortDataById: null
+      };
+    }
+
     case GET_ALL_INGREDIENTS_REQUEST: {
       return {
         ...state,

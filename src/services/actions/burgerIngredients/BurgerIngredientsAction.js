@@ -16,7 +16,7 @@ export const SET_CURRENT_INGREDIENT = 'SET_CURRENT_INGREDIENT';
 export const REMOVE_CURRENT_INGREDIENT = 'REMOVE_CURRENT_INGREDIENT';
 
 export const SET_COUNT_INGREDIENT = 'SET_COUNT_INGREDIENT';
-
+export const CLEAN_ALL_INGREDIENTS = 'CLEAN_ALL_INGREDIENTS';
 
 export function getAllIngredients() {
   return function (dispatch) {

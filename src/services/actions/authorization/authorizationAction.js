@@ -1,3 +1,4 @@
+import { CLEAN_ALL_INGREDIENTS } from "Action/burgerIngredients";
 import { Api } from "Api";
 import { dataServer } from "Utils/constants";
 import { deleteCookie, getCookie, setCookie } from "Utils/cookie";
@@ -89,8 +90,6 @@ export function forgotPassword(body) {
   };
 }
 
-
-
 export function logoutUser() {
   console.log('logOut');
   return function (dispatch) {
@@ -105,6 +104,7 @@ export function logoutUser() {
         dispatch({
           type: LOGOUT_USER_SUCCESS
         });
+
       })
       .catch(error => {
         console.log('fail', error);

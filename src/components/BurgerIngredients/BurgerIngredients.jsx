@@ -52,8 +52,8 @@ export function BurgerIngredients() {
   const sauce = useMemo(() => data.filter((el) => el.type === "sauce"), [data]);
 
   useEffect(() => {
-    !data && dispatch(getAllIngredients());
-  }, [dispatch, data]);
+    dispatch(getAllIngredients());
+  }, [dispatch]);
 
   return (
     <div>

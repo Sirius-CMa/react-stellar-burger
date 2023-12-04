@@ -23,7 +23,6 @@ export function OrderElement({ card, index, feed }) {
 
   const cardIngredients = card.ingredients.filter((a) => a);
   const totalPrice = getTotalPrice(card.ingredients, sortDataById);
-
   return (
     <li className={`${feed ? styles.containerFeed : styles.container} mb-6`} key={card._id}>
       <Link className={styles.link} to={`${location.pathname}/${card.number}`} state={{ background: location }}>
