@@ -1,17 +1,34 @@
-import { useSelector } from "react-redux";
 import styles from "./IngredientDetails.module.css";
+
+import { useSelector, useDispatch } from "react-redux";
+
+import { useEffect } from "react";
 
 import { ingredientPropTypes } from "../../utils/prop-types";
 import { getDataBurgerIngredients } from "Selectors";
+import { useParams } from "react-router-dom";
+import { getAllIngredients } from "Action/burgerIngredients";
 
-export const IngredientDetails = () => {
-  // console.log("IngredientDetails");
-  const { currentProduct } = useSelector(getDataBurgerIngredients);
+export const IngredientDetails = ({ notPopup }) => {
+  const dispatch = useDispatch();
+
+  const { id } = useParams();
+  const { sortDataById } = useSelector(getDataBurgerIngredients);
+
+  // console.log(id, sortDataById);
+  useEffect(() => {
+    dispatch(getAllIngredients());
+  }, [dispatch]);
+
+  if (!sortDataById) return null;
+
+  let ingredient = sortDataById[id];
+
   return (
-    <div className={`${styles.container}  mt-10 mb-15`}>
-      <h2 className={`${styles.title} ml-10 text text_type_main-large`}>Детали ингредиента</h2>
-      <img src={currentProduct.image_large} alt={currentProduct.name} className={`ml-4 mr-4`} />
-      <h3 className={`text text_type_main-medium`}>{currentProduct.name}</h3>
+    <div className={notPopup ? styles.containerPage : styles.container}>
+      <h2 className={`${styles.title}  text text_type_main-large`}>Детали ингредиента</h2>
+      <img src={ingredient.image_large} alt={ingredient.name} className={`ml-4 mr-4`} />
+      <h3 className={`text text_type_main-medium`}>{ingredient.name}</h3>
       <table className={`${styles.table}`}>
         <tbody>
           <tr>
@@ -21,10 +38,10 @@ export const IngredientDetails = () => {
             <th className="text text_type_main-default text_color_inactive">Углеводы, г</th>
           </tr>
           <tr>
-            <th className="text text_type_main-default text_color_inactive">{currentProduct.calories}</th>
-            <th className="text text_type_main-default text_color_inactive">{currentProduct.proteins}</th>
-            <th className="text text_type_main-default text_color_inactive">{currentProduct.fat}</th>
-            <th className="text text_type_main-default text_color_inactive">{currentProduct.carbohydrates}</th>
+            <th className="text text_type_main-default text_color_inactive">{ingredient.calories}</th>
+            <th className="text text_type_main-default text_color_inactive">{ingredient.proteins}</th>
+            <th className="text text_type_main-default text_color_inactive">{ingredient.fat}</th>
+            <th className="text text_type_main-default text_color_inactive">{ingredient.carbohydrates}</th>
           </tr>
         </tbody>
       </table>

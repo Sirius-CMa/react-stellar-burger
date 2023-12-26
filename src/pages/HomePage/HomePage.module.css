@@ -1,0 +1,11 @@
+.container {
+  margin: 0 auto;
+}
+
+.containerConstructor {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}

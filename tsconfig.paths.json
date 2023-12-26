@@ -22,6 +22,12 @@
       ],
       "Selectors": [
         "src/redux/Selectors/*"
+      ],
+      "AuthPages/*": [
+        "src/pages/AuthorizationPages/*"
+      ],
+      "Pages/*": [
+        "src/pages/*"
       ]
     }
   }

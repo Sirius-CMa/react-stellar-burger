@@ -10,14 +10,15 @@ import { TabContainer } from "Components/TabContainer";
 import { BlockIngredient } from "Components/BlockIngredient";
 import { LoadingScreen } from "Components/LoadingScreen";
 import { Popup } from "Components/Popup";
-import { IngredientDetails } from "Components/IngredientDetails";
 import { getDataBurgerIngredients } from "Selectors";
+import { useLocation } from "react-router-dom";
 
 // import { ingredientsPropTypes } from "Utils/prop-types";
 
 export function BurgerIngredients() {
   // console.log("BurgerIngredients");
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [current, setCurrent] = useState("bun");
   const ingredientsContainer = useRef();
@@ -44,38 +45,31 @@ export function BurgerIngredients() {
     setCurrent(target);
     ref.current.scrollIntoView({ behavior: "smooth" });
   }
-
-  useEffect(() => {
-    dispatch(getAllIngredients());
-  }, [dispatch]);
-
-  const { data, isLoading, isError, currentProduct } = useSelector(getDataBurgerIngredients);
+  const { data, isLoading, isError } = useSelector(getDataBurgerIngredients);
 
   const bun = useMemo(() => data.filter((el) => el.type === "bun"), [data]);
   const main = useMemo(() => data.filter((el) => el.type === "main"), [data]);
   const sauce = useMemo(() => data.filter((el) => el.type === "sauce"), [data]);
 
+  useEffect(() => {
+    dispatch(getAllIngredients());
+  }, [dispatch]);
+
   return (
     <div>
       <div className={styles.container}>
         <h2 className={`${styles.title}  text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
-        <TabContainer
-          current={current}
-          bunRef={bunRef}
-          sauceRef={sauceRef}
-          mainRef={mainRef}
-          handleClick={handleClick}
-        />
+        <TabContainer current={current} bunRef={bunRef} sauceRef={sauceRef} mainRef={mainRef} handleClick={handleClick} />
 
         <ul className={`${styles.ingredients}`} ref={ingredientsContainer} onScroll={switchTabs}>
           <li ref={bunRef} key={1} className={styles.wrapperList}>
-            <BlockIngredient title={titleReplace["bun"]} ingredients={bun} />
+            <BlockIngredient title={titleReplace["bun"]} ingredients={bun} location={location} />
           </li>
           <li ref={sauceRef} key={2} className={styles.wrapperList}>
-            <BlockIngredient title={titleReplace["sauce"]} ingredients={sauce} />
+            <BlockIngredient title={titleReplace["sauce"]} ingredients={sauce} location={location} />
           </li>
           <li ref={mainRef} key={3} className={styles.wrapperList}>
-            <BlockIngredient title={titleReplace["main"]} ingredients={main} />
+            <BlockIngredient title={titleReplace["main"]} ingredients={main} location={location} />
           </li>
         </ul>
       </div>
@@ -84,11 +78,11 @@ export function BurgerIngredients() {
           <LoadingScreen isLoading={isLoading} isError={isError} />
         </Popup>
       )}
-      {currentProduct && (
+      {/* {currentProduct && (
         <Popup>
           <IngredientDetails />
         </Popup>
-      )}
+      )} */}
     </div>
   );
 }

@@ -7,6 +7,9 @@ export const dataServer = {
   }
 };
 
+export const urlOrdersFeed = "wss://norma.nomoreparties.space/orders/all";
+export const urlOrdersFeedProfile = "wss://norma.nomoreparties.space/orders"; // ?token=${accessToken}
+
 export const DEFAULT_BUN = {
   calories: 0,
   carbohydrates: 0,
@@ -21,3 +24,10 @@ export const DEFAULT_BUN = {
   __v: 0,
   _id: '0',
 }
+
+export const orderStatus = {
+  done: ["Выполнен", "#00CCCC"],
+  pending: ["В обработке", "#add8e6"],
+  created: ["Создан", "#ffffff"],
+  canceled: ["Отменен", "#ffff00"],
+};
