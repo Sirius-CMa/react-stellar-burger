@@ -8,18 +8,18 @@ import {
 }
   from 'Action/ws'
 import { sortOrdersByNumber } from 'Utils/sort-ingredients-by-id'
-import { TOrder, TSortedOrdersByNumber } from '../../../typesData'
+import { TWSFeedInisialstate } from '../../../typesData'
 
-export type TWSFeedInisialstate = {
-  status: string;
-  data: Array<TOrder>;
-  connectingError: string | null;
-  sortedOrdersByNumber: TSortedOrdersByNumber
-}
+
 
 const inisialstate: TWSFeedInisialstate = {
   status: '',
-  data: [],
+  data: {
+    success: false,
+    orders: [],
+    total: null,
+    totalToday: null,
+  },
   connectingError: null,
   sortedOrdersByNumber: []
 }
@@ -36,6 +36,7 @@ export const wsFeedReducer = (state = inisialstate, action: TWSActionFeed) => {
       return { ...state, connectingError: action.payload }
 
     case FEED_WS_MESSAGE:
+      console.log(55, action.payload);
       return { ...state, data: action.payload, sortedOrdersByNumber: sortOrdersByNumber(action.payload) }
 
     case FEED_WS_CLOSE:

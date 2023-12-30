@@ -1,7 +1,8 @@
 import { isToday, format, isYesterday } from 'date-fns';
+import { TOrder } from 'src/typesData';
 
 
-export const getCurrentDate = (date) => {
+export const getCurrentDate = (date: Date | number) => {
   if (isToday(date)) {
     return 'Сегодня'
   } else if (isYesterday(date)) {
@@ -11,7 +12,7 @@ export const getCurrentDate = (date) => {
   }
 };
 
-export const reformatData = (turgetOrder) => {
+export const reformatData = (turgetOrder: TOrder) => {
   const time = format(new Date(turgetOrder.createdAt), "hh:mm");
   const date = new Date(turgetOrder.createdAt);
   const currentDay = getCurrentDate(date);

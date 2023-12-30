@@ -20,12 +20,12 @@ export interface IGET_ONE_ORDER_REQUEST {
 
 export interface IGET_ONE_ORDER_SUCCESS {
   readonly type: typeof GET_ONE_ORDER_SUCCESS;
-  readonly payload: TOrder;
+  readonly payload: TOrder[];
 }
 
 export interface IGET_ONE_ORDER_FAILED {
   readonly type: typeof GET_ONE_ORDER_FAILED;
-  readonly errorText: string;
+  readonly error: any;
 }
 
 
@@ -45,7 +45,7 @@ export function getOneOrder(number: number | string | undefined) {
       .catch(error => {
         dispatch({
           type: GET_ONE_ORDER_FAILED,
-          errorText: error
+          error: error
         })
       })
   }

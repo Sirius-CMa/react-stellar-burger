@@ -15,7 +15,12 @@ import { IIngredientTypes, useAppDispatch, useAppSelector } from "../../typesDat
 
 
 export function BurgerIngredients() {
+  const { data } = useAppSelector<any>(getDataBurgerIngredients);
+  const { isLoading, isError } = useAppSelector(getDataBurgerIngredients);
+
+
   // console.log("BurgerIngredients");
+
   const dispatch = useAppDispatch();
   const location = useLocation();
 
@@ -44,16 +49,23 @@ export function BurgerIngredients() {
     setCurrent(target);
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }
-  const { data, isLoading, isError } = useAppSelector(getDataBurgerIngredients);
 
-  const bun = useMemo(() => data.filter((el: IIngredientTypes) => el.type === "bun"), [data]);
-  const main = useMemo(() => data.filter((el: IIngredientTypes) => el.type === "main"), [data]);
-  const sauce = useMemo(() => data.filter((el: IIngredientTypes) => el.type === "sauce"), [data]);
+
 
   useEffect(() => {
     dispatch(getAllIngredients());
   }, [dispatch]);
 
+  const sortedIngredients = useMemo(() => ({
+    bun: data.filter((el: IIngredientTypes) => el.type === "bun"),
+    main: data.filter((el: IIngredientTypes) => el.type === "main"),
+    sauce: data.filter((el: IIngredientTypes) => el.type === "sauce")
+  }), [data])
+
+  // const bun = useMemo(() => data.filter((el: IIngredientTypes) => el.type === "bun"), [data]);
+  // const main = useMemo(() => data.filter((el: IIngredientTypes) => el.type === "main"), [data]);
+  // const sauce = useMemo(() => data.filter((el: IIngredientTypes) => el.type === "sauce"), [data]);
+  if (!data) return null
   return (
     <div>
       <div className={styles.container}>
@@ -62,13 +74,13 @@ export function BurgerIngredients() {
 
         <ul className={`${styles.ingredients}`} ref={ingredientsContainer} onScroll={switchTabs}>
           <li ref={bunRef} key={1} className={styles.wrapperList}>
-            <BlockIngredient title={titleReplace["bun"]} ingredients={bun} location={location} />
+            <BlockIngredient title={titleReplace["bun"]} ingredients={sortedIngredients.bun} location={location} />
           </li>
           <li ref={sauceRef} key={2} className={styles.wrapperList}>
-            <BlockIngredient title={titleReplace["sauce"]} ingredients={sauce} location={location} />
+            <BlockIngredient title={titleReplace["sauce"]} ingredients={sortedIngredients.sauce} location={location} />
           </li>
           <li ref={mainRef} key={3} className={styles.wrapperList}>
-            <BlockIngredient title={titleReplace["main"]} ingredients={main} location={location} />
+            <BlockIngredient title={titleReplace["main"]} ingredients={sortedIngredients.main} location={location} />
           </li>
         </ul>
       </div>

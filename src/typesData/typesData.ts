@@ -45,11 +45,12 @@ export type TOrder = {
   createdAt: string;
   ingredients: Array<string>;
   name: string;
-  number: number;
+  number: number | null;
+  owner: string;
   status: string;
   updatedAt: string;
+  __v: number | null;
   _id: string;
-
 }
 
 export type TBurgerElement = {
@@ -145,21 +146,43 @@ export type TSortDataById = { [key: string]: IIngredientTypes };
 
 export type TBurgerIngredientsInitialState = {
   data: Array<IIngredientTypes>,
-  sortDataById: TSortDataById | null,
+  sortDataById: TSortDataById,
   isLoading: boolean;
   isError: boolean;
   currentProduct: {}
 }
 
-export type TOneOrdeeInitialState = {
+
+// export type TErrorOneOrder = {
+//   success: boolean;
+//   message: string;
+//   statusCode: number | null;
+// }
+
+
+export type TOneOrderInitialState = {
   number: number | null;
-  order: number | null;
   requestOneOrder: boolean;
-  errorOneOrder: boolean;
+  errorOneOrder: any;
+  order: TOrder[];
 }
 
 export type TPopupInitialState = {
   isPopupOpen: boolean
+}
+
+export type TDataWS = {
+  success: boolean;
+  orders: Array<TOrder>;
+  total: number | null;
+  totalToday: number | null;
+}
+
+export type TWSFeedInisialstate = {
+  status: string;
+  data: TDataWS | null;
+  connectingError: string | null;
+  sortedOrdersByNumber: TSortedOrdersByNumber;
 }
 
 export type TSortedOrdersByNumber = Record<number, Array<Object>>;
@@ -167,6 +190,8 @@ export type TSortedOrdersByNumber = Record<number, Array<Object>>;
 export type TIngredientPageProps = TOptionalProps;
 export type IngredientDetailsProps = TOptionalProps;
 export type TOrderDataFeedProps = TOptionalProps;
+
+
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

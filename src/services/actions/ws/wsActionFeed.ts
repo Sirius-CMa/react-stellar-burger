@@ -1,4 +1,4 @@
-import { AppDispatch, TOrder } from "../../../typesData"
+import { AppDispatch, TDataWS } from "../../../typesData"
 
 export const FEED_CONNECT: 'FEED_CONNECT' = 'FEED_CONNECT';
 export const FEED_DISCONNECT: 'FEED_DISCONNECT' = 'FEED_DISCONNECT';
@@ -48,7 +48,7 @@ export interface IFEED_WS_ERROR {
 
 export interface IFEED_WS_MESSAGE {
   readonly type: typeof FEED_WS_MESSAGE;
-  readonly payload: Array<TOrder>;
+  readonly payload: TDataWS;
 }
 
 

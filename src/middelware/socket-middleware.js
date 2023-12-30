@@ -34,6 +34,7 @@ export const socketMiddleware = (wsActions) => {
         socket.onmessage = event => {
           const { data } = event;
           const parsedData = JSON.parse(data);
+          console.log(1, parsedData);
           if (parsedData.message === 'Invalid or missing token') {
             dispatch(refreshToken({ token: localStorage.getItem("refreshToken") }))
           } else { dispatch({ type: onMessage, payload: parsedData }); }

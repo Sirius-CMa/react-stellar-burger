@@ -5,29 +5,28 @@ import {
   GET_ONE_ORDER_FAILED,
   TOneOrder
 } from 'Action/getOneOrder'
-import { TOneOrdeeInitialState } from '../../../typesData'
+import { TOneOrderInitialState } from '../../../typesData'
 
 
-
-const initialState: TOneOrdeeInitialState = {
+const initialState: TOneOrderInitialState = {
   number: null,
-  order: null,
+  order: [],
   requestOneOrder: false,
-  errorOneOrder: false
+  errorOneOrder: null
 
 }
 
 export const oneOrderReduser = (state = initialState, action: TOneOrder) => {
   switch (action.type) {
     case GET_ONE_ORDER_REQUEST: {
-      return { ...state, requestOneOrder: true }
+      return { ...state, requestOneOrder: true, errorOneOrder: {} }
     }
     case GET_ONE_ORDER_SUCCESS: {
       return { ...state, order: action.payload, requestOneOrder: false }
     }
 
     case GET_ONE_ORDER_FAILED: {
-      return { ...state, requestOneOrder: false, errorOneOrder: action.errorText }
+      return { ...state, requestOneOrder: false, errorOneOrder: action.error }
     }
     default: {
       return state

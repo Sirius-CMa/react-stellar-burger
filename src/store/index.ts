@@ -2,7 +2,7 @@
 import { throttle } from 'lodash';
 import { loadState, saveState } from 'Utils/service-functions';
 
-import { rootReducer } from '../services/redusers';
+// import { rootReducer } from '../services/redusers';
 import { configureStore } from '@reduxjs/toolkit';
 
 
@@ -28,6 +28,14 @@ import {
   PROFILE_FEED_WS_MESSAGE,
   PROFILE_FEED_WS_OPEN
 } from 'Action/wsProfileFeed';
+import { burgerIngredientsReducer } from 'Reducer/burgerIngredientsReducer';
+import { popupReducer } from 'Reducer/popup';
+import { burgerConstructorReducer } from 'Reducer/burgerConstructorReducer';
+import { orderReduser } from 'Reducer/orderReducer';
+import { authorizationReducer } from 'Reducer/authorizationReducer';
+import { wsFeedReducer } from 'Reducer/wsFeedReduser';
+import { wsProfileFeedReducer } from 'Reducer/wsProfileFeedReducer';
+import { oneOrderReduser } from 'Reducer/getOneOrderReducer';
 
 
 
@@ -54,7 +62,16 @@ const feedSocketMiddlewareProfileFeed = socketMiddleware({
 const preloadedState = loadState();
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    burgerIngredients: burgerIngredientsReducer,
+    popup: popupReducer,
+    burgerConstructor: burgerConstructorReducer,
+    order: orderReduser,
+    auth: authorizationReducer,
+    wsFeed: wsFeedReducer,
+    wsProfileFeed: wsProfileFeedReducer,
+    oneOrder: oneOrderReduser
+  },
 
   middleware: (getDefaultMiddelware) => {
     return getDefaultMiddelware({ serializableCheck: false }).concat(feedSocketMiddlewareFeed, feedSocketMiddlewareProfileFeed)

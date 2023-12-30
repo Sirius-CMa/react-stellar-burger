@@ -1,20 +1,20 @@
-export const getTotalPrice = (ingredients, sortDataById) => {
-  function bouncer(array) {
-    return array.filter(function (e) {
+import { RootState, TSortDataById } from "../typesData";
+
+export const getTotalPrice = (ingredients: Array<string>, sortDataById: TSortDataById) => {
+  function bouncer(array: any = {}) {
+    return array.filter(function (e: string) {
       return e;
     });
   }
-  let a = bouncer(ingredients)
+  let ingredientsNotNull = bouncer(ingredients)
 
-
-  return a.reduce((acc, currentValue) => {
-
+  return ingredientsNotNull.reduce((acc: number, currentValue: string) => {
     return acc + sortDataById[currentValue].price;
   }, 0);
 };
 
 
-export const saveState = (state) => {
+export const saveState = (state: RootState) => {
   try {
     const serialisedState = JSON.stringify(state);
 

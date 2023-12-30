@@ -9,7 +9,7 @@ import { getDataBurgerIngredients, getDataOneOrder } from "../../redux/Selectors
 import { reformatData } from "Utils/formatTime";
 import { getTotalPrice } from "Utils/service-functions";
 // import { orderStatus } from "Utils/constants";
-import { TOrder, TOrderDataFeedProps, TSortDataById, orderStatus, useAppDispatch, useAppSelector } from "../../typesData";
+import { TOrderDataFeedProps, TSortDataById, orderStatus, useAppDispatch, useAppSelector } from "../../typesData";
 import { getOneOrder } from "Action/getOneOrder";
 import { getAllIngredients } from "Action/burgerIngredients";
 import { DEFAULT_BUN } from "Utils/constants";
@@ -29,19 +29,19 @@ export const OrderDataFeed: FC<TOrderDataFeedProps> = ({ notPopup }) => {
   }, [dispatch]);
 
   const { sortDataById } = useAppSelector(getDataBurgerIngredients);
-  const { order } = useAppSelector(getDataOneOrder);
+  const { order } = useAppSelector<any>(getDataOneOrder);
+  console.log('fff', order);
 
 
 
-  const turgetOrder: TOrder = order[0];
-
+  const turgetOrder = order[0];
   const listIngredients: Array<string> = turgetOrder.ingredients.filter((a: any) => a);
 
   const { time, currentDay } = reformatData(turgetOrder);
   const totalPrice = getTotalPrice(turgetOrder.ingredients, sortDataById);
-  let sortListIngredientsById: TSortDataById = !sortDataById ? { '': DEFAULT_BUN } : sortDataById
-
+  let sortListIngredientsById: TSortDataById = !sortDataById ? { '': DEFAULT_BUN } : sortDataById;
   if (sortDataById === null || order === null) return null;
+
 
   return (
     <div className={notPopup ? styles.containerPage : styles.container}>

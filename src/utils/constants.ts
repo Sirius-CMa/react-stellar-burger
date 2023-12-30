@@ -27,7 +27,7 @@ export const DEFAULT_BUN = {
   _id: '0',
 
 }
-export const defSortArr = { '': DEFAULT_BUN }
+
 
 export const orderStatus = {
   done: ["Выполнен", "#00CCCC"],

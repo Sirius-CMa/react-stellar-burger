@@ -16,7 +16,6 @@ import {
 
 import { sortIngredientsById } from 'Utils/sort-ingredients-by-id';
 import { TBurgerIngredientsInitialState, } from '../../../typesData';
-import { DEFAULT_BUN } from 'Utils/constants';
 
 
 
@@ -24,7 +23,7 @@ import { DEFAULT_BUN } from 'Utils/constants';
 
 const initialState: TBurgerIngredientsInitialState = {
   data: [],
-  sortDataById: { '': DEFAULT_BUN },
+  sortDataById: {},
   isLoading: false,
   isError: false,
   currentProduct: {}
@@ -36,8 +35,8 @@ export const burgerIngredientsReducer = (state = initialState, action: TBurgerIn
     case CLEAN_ALL_INGREDIENTS: {
       return {
         ...state,
-        data: null,
-        sortDataById: null
+        data: [],
+        sortDataById: {}
       };
     }
 
@@ -73,7 +72,7 @@ export const burgerIngredientsReducer = (state = initialState, action: TBurgerIn
     case REMOVE_CURRENT_INGREDIENT: {
       return {
         ...state,
-        currentProduct: null
+        currentProduct: {}
       }
     }
     case SET_COUNT_INGREDIENT: {
