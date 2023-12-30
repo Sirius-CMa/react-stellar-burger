@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@dizmo/types-uuid": "^1.0.5",
     "@reduxjs/toolkit": "^1.9.5",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
     "clsx": "^1.2.1",
@@ -28,8 +29,10 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/lodash": "^4.14.202",
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
+    "@types/uuid": "^9.0.7",
     "gh-pages": "^6.1.0",
     "parcel-resolver-tspaths": "^0.0.9",
     "react-app-rewire-alias": "^1.1.7",

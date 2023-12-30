@@ -27,6 +27,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  z-index: 11;
 }
 
 .closeButton_loadScreen {
