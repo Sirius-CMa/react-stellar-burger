@@ -17,7 +17,7 @@ export function ResetPasswordPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { value, handleChange, textError, isErrors } = useInputForm({ password: "", token: "" });
-  const { resetPasswordRequest, resetPasswordData, isPasswordReset, failedResetPassword } = useAppSelector(getDataAuth);
+  const { resetPasswordRequest, resetPasswordData, isPasswordReset, failedResetPassword, isPasswordResetSuccess } = useAppSelector(getDataAuth);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -25,10 +25,10 @@ export function ResetPasswordPage() {
   };
 
   useEffect(() => {
-    if (resetPasswordData.success) {
+    if (isPasswordResetSuccess) {
       navigate(paths.login);
     }
-    if (!isPasswordReset && !resetPasswordData.success) {
+    if (!isPasswordReset && !isPasswordResetSuccess) {
       navigate(paths.forgotPassword);
     }
     if (isPasswordReset && failedResetPassword) {

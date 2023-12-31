@@ -14,7 +14,7 @@ import { paths } from "Utils/paths";
 
 
 export function ForgotPassword() {
-  const { forgotPasswordRequest, forgotPasswordData } = useAppSelector(getDataAuth);
+  const { forgotPasswordRequest, forgotPasswordData, isForgotPassword } = useAppSelector(getDataAuth);
   const dispatch = useAppDispatch();
   const { value, handleChange } = useInputForm({ email: "" });
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export function ForgotPassword() {
   };
 
   useEffect(() => {
-    if (forgotPasswordData.success) {
+    if (isForgotPassword) {
       navigate(paths.resetPassword);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

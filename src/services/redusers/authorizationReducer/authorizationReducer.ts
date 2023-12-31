@@ -30,51 +30,118 @@ import {
 
   AUTH_USER_REQUEST,
   AUTH_USER_SUCCESS,
-  AUTH_USER_FAILED
+  AUTH_USER_FAILED,
+  TAuthorizationActions
 } from 'Action/authorization'
+import { TLoginResponse } from '../../../typesData/authTypes';
 
 // добавить AUTH из getUSER
 
-const initialState = {
-  user: null,
+export type TAuthorizationInitialState = {
+  user: TLoginResponse,
+  auth: boolean;
+
+  registerRequest: boolean;
+  registerRequestError: {};
+
+  loginRequest: boolean;
+  loginRequestError: {};
+
+  logoutRequest: boolean;
+  logoutSuccess: boolean;
+  logoutRequestError: {};
+
+  forgotPasswordRequest: boolean;
+  forgotPasswordRequestError: {};
+  forgotPasswordData: {},
+  isForgotPassword: boolean;
+  isPasswordReset: boolean;
+
+  resetPasswordRequest: boolean;
+  resetPasswordRequestError: {};
+  resetPasswordData: {};
+  isPasswordResetSuccess: boolean;
+  failedResetPassword: boolean;
+
+  refreshRequest: boolean;
+  dataRefresh: {};
+  refreshRequestError: {};
+
+  authRequest: boolean;
+  authRequestError: {};
+}
+
+const initialState: TAuthorizationInitialState = {
+  user: {
+    email: '',
+    name: ''
+  },
   auth: false,
 
-  registerRequest: false,
-  registerRequestError: false,
-
   loginRequest: false,
-  loginRequestError: false,
+  loginRequestError: {},
+
+  registerRequest: false,
+  registerRequestError: {},
+
+
 
   logoutRequest: false,
-  logoutRequestError: false,
+  logoutSuccess: false,
+  logoutRequestError: {},
 
   forgotPasswordRequest: false,
-  forgotPasswordRequestError: false,
+  forgotPasswordRequestError: {},
   forgotPasswordData: {},
+  isForgotPassword: false,
+  isPasswordReset: false,
 
   resetPasswordRequest: false,
-  resetPasswordRequestError: false,
-  resetPasswordData: false,
+  resetPasswordRequestError: {},
+  resetPasswordData: {},
+  isPasswordResetSuccess: false,
   failedResetPassword: true,
 
-  refreshRequest: null,
-  dataRefresh: null,
-  refreshRequestError: null,
+  refreshRequest: false,
+  dataRefresh: {},
+  refreshRequestError: {},
 
-  authRequest: null,
-  authRequestError: null
+  authRequest: false,
+  authRequestError: {}
 }
 
 
-export const authorizationReducer = (state = initialState, action) => {
+export const authorizationReducer = (state = initialState, action: TAuthorizationActions) => {
   switch (action.type) {
 
+    case LOGIN_USER_REQUEST: {
+      return { ...state, loginRequest: true, isForgotPassword: false, isPasswordResetSuccess: false }
+    }
+    case LOGIN_USER_SUCCESS: {
+      return {
+        ...state,
+        user: action.payload,
+        auth: true,
+        loginRequest: false,
+        loginRequestError: {},
+        forgotPasswordData: {},
+        resetPasswordData: {}
+      }
+    }
+    case LOGIN_USER_FAILED: {
+      return {
+        ...state, loginRequest: false,
+        loginRequestError: action.payload
+      }
+    }
+
+
     case AUTH_USER_REQUEST: {
-      return { ...state, authRequest: true }
+      return { ...state, authRequest: true, authRequestError: {} }
     }
     case AUTH_USER_SUCCESS: {
 
-      return { ...state, authRequest: false, authRequestError: false }
+      return { ...state, authRequest: false, user: action.payload }
     }
     case AUTH_USER_FAILED: {
       return {
@@ -91,11 +158,13 @@ export const authorizationReducer = (state = initialState, action) => {
       return {
         ...state,
         resetPasswordData: action.payload,
+        isPasswordResetSuccess: action.payload.success,
         resetPasswordRequest: false,
-        resetPasswordRequestError: false,
-        forgotPasswordData: false,
+        resetPasswordRequestError: {},
+        forgotPasswordData: {},
         isPasswordReset: false,
-        failedResetPassword: false
+        failedResetPassword: false,
+        isForgotPassword: false
 
       }
     }
@@ -104,7 +173,7 @@ export const authorizationReducer = (state = initialState, action) => {
         ...state, resetPasswordRequest: false,
         resetPasswordRequestError: action.payload,
         isPasswordReset: false,
-        forgotPasswordData: false,
+        forgotPasswordData: {},
         failedResetPassword: true
       }
     }
@@ -120,8 +189,9 @@ export const authorizationReducer = (state = initialState, action) => {
       return {
         ...state,
         forgotPasswordData: action.payload,
+        isForgotPassword: true,
         forgotPasswordRequest: false,
-        forgotPasswordRequestError: false,
+        forgotPasswordRequestError: {},
         isPasswordReset: action.payload.success,
 
       }
@@ -139,14 +209,17 @@ export const authorizationReducer = (state = initialState, action) => {
       return { ...state, updateRequest: true }
     }
     case UPDATE_USER_SUCCESS: {
-      return { ...state, user: action.payload, auth: true, updateRequest: false, updateRequestError: false }
+      return { ...state, user: action.payload, auth: true, updateRequest: false, updateRequestError: {} }
     }
     case UPDATE_USER_FAILED: {
       return {
         ...state, updateRequest: false,
         updateRequestError: action.payload,
         auth: false,
-        user: null
+        user: {
+          email: '',
+          name: ''
+        }
       }
     }
 
@@ -157,43 +230,30 @@ export const authorizationReducer = (state = initialState, action) => {
       return {
         ...state,
         auth: false,
-        user: null,
+        user: {
+          email: '',
+          name: ''
+        },
         logoutRequest: false,
-        logoutRequestError: false,
-        dataRefresh: null
+        logoutRequestError: {},
+        dataRefresh: {}
       }
     }
     case LOGOUT_USER_FAILED: {
       return {
         ...state,
         auth: false,
-        user: null,
+        user: {
+          email: '',
+          name: ''
+        },
         logoutRequest: false,
         logoutRequestError: action.payload,
 
       }
     }
 
-    case LOGIN_USER_REQUEST: {
-      return { ...state, loginRequest: true }
-    }
-    case LOGIN_USER_SUCCESS: {
-      return {
-        ...state,
-        user: action.payload,
-        auth: true,
-        loginRequest: false,
-        loginRequestError: false,
-        forgotPasswordData: false,
-        resetPasswordData: false
-      }
-    }
-    case LOGIN_USER_FAILED: {
-      return {
-        ...state, loginRequest: false,
-        loginRequestError: action.payload
-      }
-    }
+
 
     case REGISTER_USER_REQUEST: {
       return { ...state, registerRequest: true }
