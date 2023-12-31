@@ -18,7 +18,7 @@ export function HistoryOrdersPage() {
   }, [dispatch]);
 
   const { data } = useAppSelector(getDataProfileFeed);
-  if (!data) return null;
+  if (!data.success) return null;
 
   return (
     <>

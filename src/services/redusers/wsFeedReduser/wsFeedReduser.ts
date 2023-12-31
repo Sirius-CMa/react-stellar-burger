@@ -27,6 +27,7 @@ const inisialstate: TWSFeedInisialstate = {
 export const wsFeedReducer = (state = inisialstate, action: TWSActionFeed) => {
   switch (action.type) {
     case FEED_WS_CONNECTING:
+      console.log('Сервер установил соединение для FEED.');
       return { ...state, status: 'connecting' }
 
     case FEED_WS_OPEN:
@@ -36,7 +37,6 @@ export const wsFeedReducer = (state = inisialstate, action: TWSActionFeed) => {
       return { ...state, connectingError: action.payload }
 
     case FEED_WS_MESSAGE:
-      console.log(55, action.payload);
       return { ...state, data: action.payload, sortedOrdersByNumber: sortOrdersByNumber(action.payload) }
 
     case FEED_WS_CLOSE:

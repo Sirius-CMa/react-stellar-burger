@@ -1,13 +1,13 @@
 import { dataServer } from "Utils/constants"
 import { Api } from "../../../utils/api"
-import { getCookie } from "Utils/cookie"
+import { deleteCookie, getCookie, setCookie } from "Utils/cookie"
 import { AppDispatch, TOrder } from "../../../typesData"
 
 export const GET_ONE_ORDER_REQUEST: 'GET_ONE_ORDER_REQUEST' = 'GET_ONE_ORDER_REQUEST'
 export const GET_ONE_ORDER_SUCCESS: 'GET_ONE_ORDER_SUCCESS' = 'GET_ONE_ORDER_SUCCESS'
 export const GET_ONE_ORDER_FAILED: 'GET_ONE_ORDER_FAILED' = 'GET_ONE_ORDER_FAILED'
 
-const api = new Api(dataServer, getCookie)
+const api = new Api(dataServer, getCookie, setCookie, deleteCookie)
 
 export type TOneOrder =
   IGET_ONE_ORDER_REQUEST |

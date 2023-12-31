@@ -30,7 +30,6 @@ export const OrderDataFeed: FC<TOrderDataFeedProps> = ({ notPopup }) => {
 
   const { sortDataById } = useAppSelector(getDataBurgerIngredients);
   const { order } = useAppSelector<any>(getDataOneOrder);
-  console.log('fff', order);
 
 
 

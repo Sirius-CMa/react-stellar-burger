@@ -1,7 +1,7 @@
 import { CLEAR_INGREDIENT } from "Action/burgerConstructor";
 import { Api } from "../../../utils/api"
 import { dataServer } from "Utils/constants";
-import { getCookie } from "Utils/cookie";
+import { deleteCookie, getCookie, setCookie } from "Utils/cookie";
 import { AppDispatch } from "../../../typesData";
 
 export const GET_ORDER_DATA_REQUEST: 'GET_ORDER_DATA_REQUEST' = 'GET_ORDER_DATA_REQUEST';
@@ -39,17 +39,16 @@ export type TOrderActions =
   IREMOVE_ORDER_DATA;
 
 
-const api = new Api(dataServer, getCookie)
+const api = new Api(dataServer, getCookie, setCookie, deleteCookie)
 
 
 export function getOrderDetailsAction(ingredients: any | undefined) {
-  // ! type Order
   return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_ORDER_DATA_REQUEST,
     });
     api
-      .getOrderDetailsServerWithRefresh(ingredients, getCookie('token'))
+      .getOrderDetailsServer(ingredients)
       .then((res) => {
         const { name, order } = res
         dispatch({

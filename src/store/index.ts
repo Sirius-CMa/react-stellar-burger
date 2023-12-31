@@ -40,23 +40,27 @@ import { oneOrderReduser } from 'Reducer/getOneOrderReducer';
 
 
 const feedSocketMiddlewareFeed = socketMiddleware({
-  wsConnect: FEED_CONNECT,
-  onOpen: FEED_WS_OPEN,
-  onClose: FEED_WS_CLOSE,
-  onError: FEED_WS_ERROR,
-  onMessage: FEED_WS_MESSAGE,
-  wsConnecting: FEED_WS_CONNECTING,
-  wsDisconnect: FEED_DISCONNECT
+  wsActions: {
+    wsConnect: FEED_CONNECT,
+    onOpen: FEED_WS_OPEN,
+    onClose: FEED_WS_CLOSE,
+    onError: FEED_WS_ERROR,
+    onMessage: FEED_WS_MESSAGE,
+    wsConnecting: FEED_WS_CONNECTING,
+    wsDisconnect: FEED_DISCONNECT
+  }
 })
 
 const feedSocketMiddlewareProfileFeed = socketMiddleware({
-  wsConnect: PROFILE_FEED_CONNECT,
-  onOpen: PROFILE_FEED_WS_OPEN,
-  onClose: PROFILE_FEED_WS_CLOSE,
-  onError: PROFILE_FEED_WS_ERROR,
-  onMessage: PROFILE_FEED_WS_MESSAGE,
-  wsConnecting: PROFILE_FEED_WS_CONNECTING,
-  wsDisconnect: PROFILE_FEED_DISCONNECT
+  wsActions: {
+    wsConnect: PROFILE_FEED_CONNECT,
+    onOpen: PROFILE_FEED_WS_OPEN,
+    onClose: PROFILE_FEED_WS_CLOSE,
+    onError: PROFILE_FEED_WS_ERROR,
+    onMessage: PROFILE_FEED_WS_MESSAGE,
+    wsConnecting: PROFILE_FEED_WS_CONNECTING,
+    wsDisconnect: PROFILE_FEED_DISCONNECT
+  }
 })
 
 const preloadedState = loadState();

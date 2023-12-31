@@ -1,9 +1,9 @@
 import { Api } from "../../../utils/api";
 import { dataServer } from "Utils/constants";
-import { getCookie } from "Utils/cookie";
+import { deleteCookie, getCookie, setCookie } from "Utils/cookie";
 import { AppDispatch, IIngredientTypes } from "../../../typesData";
 
-const api = new Api(dataServer, getCookie);
+const api = new Api(dataServer, getCookie, setCookie, deleteCookie);
 
 export const GET_ALL_INGREDIENTS_REQUEST: 'GET_ALL_INGREDIENTS_REQUEST' = 'GET_ALL_INGREDIENTS_REQUEST';
 export const GET_ALL_INGREDIENTS_SUCCESS: 'GET_ALL_INGREDIENTS_SUCCESS' = 'GET_ALL_INGREDIENTS_SUCCESS';
@@ -103,24 +103,4 @@ export function getAllIngredients() {
   }
 }
 
-// export function getOneIngredients(id) {
-//   return function (dispatch: AppDispatch) {
-//     dispatch({
-//       type: GET_ONE_INGREDIENTS_REQUEST,
-//     });
-//     api.
-//     api.loadOneIngredients(id)
-//       .then((res) => {
-//         // console.log(res.data);
-//         dispatch({
-//           type: GET_ONE_INGREDIENTS_SUCCESS,
-//           payload: res.data
-//         })
-//       })
-//       .catch(error => {
-//         dispatch({
-//           type: GET_ONE_INGREDIENTS_FAILED,
-//         })
-//       })
-//   }
-// }
+

@@ -31,7 +31,6 @@ export function Order() {
     } else {
       const ingredientsId: Array<string> = [...Array(2).fill(selectedBun._id), ...listIngredients.map((el: IIngredientTypes) => el._id)];
       dispatch(getOrderDetailsAction({ ingredients: ingredientsId }));
-      // ! orderAction
     }
   };
 

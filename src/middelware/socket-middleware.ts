@@ -1,21 +1,32 @@
 import { refreshToken } from "Action/authorization";
+import { Middleware } from "redux";
+import { TWSActions } from "../typesData/WSTypes";
 
-export const socketMiddleware = (wsActions) => {
+
+
+type Props = {
+  wsActions: TWSActions;
+}
+
+export const socketMiddleware = ({ wsActions }: Props): Middleware<{}> => {
   return store => {
-    let socket = null;
+    let socket: (WebSocket | null) = null;
 
     return next => action => {
       const { dispatch } = store;
+
       const { type } = action;
       const {
         wsConnect,
-        wsSendMessage,
+        wsDisconnect,
+
         onOpen,
         onClose,
         onError,
         onMessage,
+
         wsConnecting,
-        wsDisconnect
+        // wsSendMessage
       } = wsActions;
 
       if (type === wsConnect) {
@@ -34,9 +45,11 @@ export const socketMiddleware = (wsActions) => {
         socket.onmessage = event => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          console.log(1, parsedData);
+          // console.log('parsedData', parsedData);
           if (parsedData.message === 'Invalid or missing token') {
-            dispatch(refreshToken({ token: localStorage.getItem("refreshToken") }))
+            console.log('WS middelware - ', parsedData.message);
+            // dispatch(refreshToken())
+            dispatch({ type: wsConnecting })
           } else { dispatch({ type: onMessage, payload: parsedData }); }
 
 
@@ -46,9 +59,9 @@ export const socketMiddleware = (wsActions) => {
           dispatch({ type: onClose });
         };
 
-        if (wsSendMessage && type === wsSendMessage) {
-          socket.send(JSON.stringify(action.payload));
-        }
+        // if (wsSendMessage && type === wsSendMessage) {
+        //   socket.send(JSON.stringify(action.payload));
+        // }
 
         if (type === wsDisconnect) {
           socket.close();

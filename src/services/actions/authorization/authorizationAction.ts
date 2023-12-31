@@ -89,7 +89,7 @@ export function getUser() {
       type: AUTH_USER_REQUEST,
       authChecked: false,
     });
-    api.getUserAuth(getCookie('token'))
+    api.getUserAuth()// api.getUserAuth(getCookie('token'))
       .then(res => {
 
         dispatch({
@@ -131,7 +131,7 @@ export function updateUser(body: TRegisterRequest) {
     dispatch({
       type: UPDATE_USER_REQUEST
     });
-    api.updateUserWithRefresh(getCookie('token'), body)
+    api.updateUser(body)
       .then((res) => {
         dispatch({
           type: UPDATE_USER_SUCCESS,
@@ -174,9 +174,6 @@ export function forgotPassword(body: TForgotPasswordRequest) {
     api.forgotPassword(body)
       .then(res => {
         console.log('forgot', res);
-        localStorage.setItem("refreshToken", res.refreshToken);
-        deleteCookie('token');
-        setCookie('token', res.accessToken);
         dispatch({
           type: FORGOT_PASSWORD_USER_SUCCESS,
           payload: res
@@ -256,15 +253,17 @@ export interface IREFRESH_TOKEN_FAILED {
 
 
 export function refreshToken(token: TRefreshToken) {
-  // console.log('refreshTokenAction', token);
+  console.log('refreshTokenAction', token);
   return function (dispatch: AppDispatch) {
+    deleteCookie('token')
     dispatch({
       type: REFRESH_TOKEN_REQUEST
     });
-    api.refreshToken(token)
+    api.refreshToken()
       .then(res => {
         console.log('refToken', res);
         localStorage.setItem("refreshToken", res.refreshToken);
+        setCookie('token', res.accessToken)
         // setCookie('token', res.accessToken);
         dispatch({
           type: REFRESH_TOKEN_SUCCESS,

@@ -138,9 +138,7 @@ export type TOrderInitialState = {
   name: string | null;
   requestOrder: boolean;
   errorOrder: string;
-}
-
-// export defArr =
+};
 
 export type TSortDataById = { [key: string]: IIngredientTypes };
 
@@ -150,14 +148,7 @@ export type TBurgerIngredientsInitialState = {
   isLoading: boolean;
   isError: boolean;
   currentProduct: {}
-}
-
-
-// export type TErrorOneOrder = {
-//   success: boolean;
-//   message: string;
-//   statusCode: number | null;
-// }
+};
 
 
 export type TOneOrderInitialState = {
@@ -165,11 +156,11 @@ export type TOneOrderInitialState = {
   requestOneOrder: boolean;
   errorOneOrder: any;
   order: TOrder[];
-}
+};
 
 export type TPopupInitialState = {
   isPopupOpen: boolean
-}
+};
 
 export type TDataWS = {
   success: boolean;
