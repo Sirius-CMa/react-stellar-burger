@@ -3,7 +3,7 @@ import styles from "./IngredientDetails.module.css";
 import { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { getDataBurgerIngredients } from '../../redux/Selectors';
+import { selectSortedIngredientsById } from '../../redux/Selectors';
 
 import { getAllIngredients } from "Action/burgerIngredients";
 import { TParams, IngredientDetailsProps, useAppDispatch, useAppSelector } from "../../typesData";
@@ -14,7 +14,7 @@ export const IngredientDetails: FC<IngredientDetailsProps> = ({ notPopup }) => {
   const dispatch = useAppDispatch();
 
   const { id } = useParams<TParams>();
-  const { sortDataById } = useAppSelector(getDataBurgerIngredients);
+  const sortDataById = useAppSelector(selectSortedIngredientsById);
 
 
 

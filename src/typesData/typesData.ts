@@ -147,7 +147,7 @@ export type TBurgerIngredientsInitialState = {
   sortDataById: TSortDataById,
   isLoading: boolean;
   isError: boolean;
-  currentProduct: {}
+  currentProduct: IIngredientTypes;
 };
 
 
@@ -176,7 +176,7 @@ export type TWSFeedInisialstate = {
   sortedOrdersByNumber: TSortedOrdersByNumber;
 }
 
-export type TSortedOrdersByNumber = Record<number, Array<Object>>;
+export type TSortedOrdersByNumber = Record<number, Array<TOrder>>;
 
 export type TIngredientPageProps = TOptionalProps;
 export type IngredientDetailsProps = TOptionalProps;

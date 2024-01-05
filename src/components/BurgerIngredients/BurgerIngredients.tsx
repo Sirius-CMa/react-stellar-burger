@@ -11,14 +11,11 @@ import { LoadingScreen } from "Components/LoadingScreen";
 import { Popup } from "Components/Popup";
 import { getDataBurgerIngredients } from "../../redux/Selectors";
 import { useLocation } from "react-router-dom";
-import { IIngredientTypes, useAppDispatch, useAppSelector } from "../../typesData";
+import { useAppDispatch, useAppSelector } from "../../typesData";
 
 
 export function BurgerIngredients() {
-  const { data } = useAppSelector<any>(getDataBurgerIngredients);
-  const { isLoading, isError } = useAppSelector(getDataBurgerIngredients);
-
-
+  const { isLoading, isError, data } = useAppSelector(getDataBurgerIngredients);
   // console.log("BurgerIngredients");
 
   const dispatch = useAppDispatch();
@@ -57,15 +54,13 @@ export function BurgerIngredients() {
   }, [dispatch]);
 
   const sortedIngredients = useMemo(() => ({
-    bun: data.filter((el: IIngredientTypes) => el.type === "bun"),
-    main: data.filter((el: IIngredientTypes) => el.type === "main"),
-    sauce: data.filter((el: IIngredientTypes) => el.type === "sauce")
+    bun: data.filter((el) => el.type === "bun"),
+    main: data.filter((el) => el.type === "main"),
+    sauce: data.filter((el) => el.type === "sauce")
   }), [data])
 
-  // const bun = useMemo(() => data.filter((el: IIngredientTypes) => el.type === "bun"), [data]);
-  // const main = useMemo(() => data.filter((el: IIngredientTypes) => el.type === "main"), [data]);
-  // const sauce = useMemo(() => data.filter((el: IIngredientTypes) => el.type === "sauce"), [data]);
   if (!data) return null
+
   return (
     <div>
       <div className={styles.container}>

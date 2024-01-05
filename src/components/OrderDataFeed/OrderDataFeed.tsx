@@ -5,18 +5,18 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { useParams } from "react-router-dom";
 import { FC, useEffect } from "react";
 
-import { getDataBurgerIngredients, getDataOneOrder } from "../../redux/Selectors";
+import { getDataOneOrder, selectSortedIngredientsById } from "../../redux/Selectors";
+
 import { reformatData } from "Utils/formatTime";
 import { getTotalPrice } from "Utils/service-functions";
-// import { orderStatus } from "Utils/constants";
-import { TOrderDataFeedProps, TSortDataById, orderStatus, useAppDispatch, useAppSelector } from "../../typesData";
-import { getOneOrder } from "Action/getOneOrder";
-import { getAllIngredients } from "Action/burgerIngredients";
 import { DEFAULT_BUN } from "Utils/constants";
 
-// type TParams2={
-//   number?: number;
-// }
+import { TOrderDataFeedProps, TSortDataById, orderStatus, useAppDispatch, useAppSelector } from "../../typesData";
+
+import { getOneOrder } from "Action/getOneOrder";
+import { getAllIngredients } from "Action/burgerIngredients";
+
+
 
 export const OrderDataFeed: FC<TOrderDataFeedProps> = ({ notPopup }) => {
   const dispatch = useAppDispatch();
@@ -28,10 +28,11 @@ export const OrderDataFeed: FC<TOrderDataFeedProps> = ({ notPopup }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const { sortDataById } = useAppSelector(getDataBurgerIngredients);
-  const { order } = useAppSelector<any>(getDataOneOrder);
+  const sortDataById = useAppSelector(selectSortedIngredientsById);
+  const { order } = useAppSelector(getDataOneOrder);
 
 
+  if (sortDataById === null || order === null) return null;
 
   const turgetOrder = order[0];
   const listIngredients: Array<string> = turgetOrder.ingredients.filter((a: any) => a);
@@ -39,7 +40,7 @@ export const OrderDataFeed: FC<TOrderDataFeedProps> = ({ notPopup }) => {
   const { time, currentDay } = reformatData(turgetOrder);
   const totalPrice = getTotalPrice(turgetOrder.ingredients, sortDataById);
   let sortListIngredientsById: TSortDataById = !sortDataById ? { '': DEFAULT_BUN } : sortDataById;
-  if (sortDataById === null || order === null) return null;
+
 
 
   return (

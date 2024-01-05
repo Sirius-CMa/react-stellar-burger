@@ -3,9 +3,9 @@ import styles from "./HistoryOrdersPage.module.css";
 import { useEffect } from "react";
 import { OrderElement } from "Components/OrderElement";
 import { connectWsProfileFeed, disconnectWsProfileFeed } from "Action/wsProfileFeed";
-import { getDataProfileFeed } from "../../redux/Selectors";
+import { selectProfileDataFeed } from "../../redux/Selectors";
 import { urlOrdersFeedProfile } from "Utils/constants";
-import { TOrder, useAppDispatch, useAppSelector } from "../../typesData";
+import { useAppDispatch, useAppSelector } from "../../typesData";
 
 export function HistoryOrdersPage() {
   const dispatch = useAppDispatch();
@@ -17,12 +17,13 @@ export function HistoryOrdersPage() {
     };
   }, [dispatch]);
 
-  const { data } = useAppSelector(getDataProfileFeed);
-  if (!data.success) return null;
+  // const orders = useAppSelector(selectProfileDataFeed2);
+  const data = useAppSelector(selectProfileDataFeed);
+  if (!data?.success) return null;
 
   return (
     <>
-      <ul className={styles.feed}>{data && data.orders.map((card: TOrder) => <OrderElement card={card} />)}</ul>
+      <ul className={styles.feed}>{data && data.orders.map((card) => <OrderElement card={card} />)}</ul>
     </>
   );
 }

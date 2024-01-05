@@ -3,40 +3,45 @@ import { IIngredientTypes, TOrder } from "./typesData";
 export type DictionaryStrStr = Record<string, string>;
 export type DictionaryStrBool = Record<string, boolean>;
 
-export type TLoginRequest = {
-  email: string;
-  password: string;
+
+type TBaseTypeRequest = {
+  name: string;
+  token: string;
+  password: string
+  email: string
 }
+
+export type TForgotPasswordRequest = Pick<TBaseTypeRequest, 'email'>;
+export type TResetPasswordRequest = Pick<TBaseTypeRequest, 'token' | 'password'>;
+export type TRegisterRequest = Omit<TBaseTypeRequest, 'token'>;
+export type TLoginRequest = Omit<TBaseTypeRequest, 'name' | 'token'>;
+
+export type TNewOrderRequest = {
+  ingredients: string[];
+};
+
+export type TLogoutRequest = {
+  token: string | null;
+};
+
+
+
 
 export type TLoginResponse = {
   email: string;
   name: string;
-}
-
-export type TRegisterRequest = {
-  name: string;
-  password: string;
-  email: string;
-}
+};
 
 export type TRefreshToken = {
   token: string | null;
 }
 
-export type TResetPasswordRequest = {
-  token: string;
-  password: string
-};
+
 
 export type TResetPasswordResponse = {
   message: string;
   success: boolean;
 };
-
-export type TForgotPasswordRequest = {
-  email: string
-};
-
 
 
 export type TFetch<T> = {
@@ -75,9 +80,7 @@ export type TOrderResponse = {
   orders: TOrder[];
 };
 
-export type TNewOrderRequest = {
-  ingredients: string[];
-};
+
 
 export type TNewOrderResponse = {
   name: string;
@@ -100,9 +103,7 @@ export type RRegisterUserResponse = {
 
 export type TLoginUserResponse = RRegisterUserResponse;
 
-export type TLogoutRequest = {
-  token: string | null;
-};
+
 
 export type TLogoutResponse = {
   success: boolean;
@@ -138,12 +139,12 @@ export type TGetOneOrderResponse = {
 
 
 
-export type TConstructor = {
-  dataServer: { baseUrl: string, headers: DictionaryStrStr };
-  getCookie: (a: string) => string | undefined;
-  setCookie: (name: string, value: string) => void;
-  deleteCookie: (name: string) => void;
-}
+// export type TConstructor = {
+//   dataServer: { baseUrl: string, headers: DictionaryStrStr };
+//   getCookie: (a: string) => string | undefined;
+//   setCookie: (name: string, value: string) => void;
+//   deleteCookie: (name: string) => void;
+// }
 
 // export type TConstructor = {
 //   dataServer: { baseUrl: string, headers: DictionaryStrStr };

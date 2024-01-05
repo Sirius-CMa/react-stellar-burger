@@ -6,7 +6,7 @@ import { loadState, saveState } from 'Utils/service-functions';
 import { configureStore } from '@reduxjs/toolkit';
 
 
-import { socketMiddleware } from '../middelware/socket-middleware';
+import { socketMiddleware } from '../middleware/socket-middleware';
 
 
 import {
