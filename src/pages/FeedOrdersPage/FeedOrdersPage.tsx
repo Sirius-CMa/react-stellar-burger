@@ -35,8 +35,8 @@ export function FeedOrdersPage() {
             <p className="text text_type_main-medium">Готовы:</p>
             <p className="text text_type_main-medium">В работе:</p>
             <ul className={styles.orderList}>
-              {doneOrders &&
-                doneOrders.map((card, index: number) => (
+              {
+                doneOrders?.map((card, index: number) => (
                   <li key={index} className="text text_type_digits-default mb-2">
                     0{card.number}
                   </li>

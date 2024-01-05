@@ -357,7 +357,7 @@ export function logoutUser() {
     dispatch({
       type: LOGOUT_USER_REQUEST
     });
-    api.logoutUser({ token: localStorage.getItem('refreshToken') })
+    api.logoutUser()
       .then(res => {
         console.log('logout', res.success, res.message);
         deleteCookie("token")

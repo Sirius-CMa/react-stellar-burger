@@ -9,7 +9,7 @@ import { PopupOverlay } from "../PopupOverlay/PopupOverlay";
 // import { SET_IS_POPUP_CLOSE } from "Action/popup";
 import { REMOVE_ORDER_DATA } from "Action/order";
 import { REMOVE_CURRENT_INGREDIENT } from "Action/burgerIngredients";
-import { getDataBurgerIngredients, getDataOrder } from "../../redux/Selectors";
+import { selectIsLoading, selectNumber } from "../../redux/Selectors";
 import { TPopupProps, useAppDispatch, useAppSelector } from "../../typesData";
 
 const $popupRoot = document.getElementById("popup") as HTMLElement;
@@ -18,8 +18,8 @@ const $popupRoot = document.getElementById("popup") as HTMLElement;
 
 export const Popup: FC<TPopupProps> = ({ handleClosePopup, children }) => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector(getDataBurgerIngredients);
-  const { number } = useAppSelector(getDataOrder);
+  const isLoading = useAppSelector(selectIsLoading);
+  const number = useAppSelector(selectNumber);
 
   useEffect(() => {
     const closePopupByEsc = (evt: KeyboardEvent) => {

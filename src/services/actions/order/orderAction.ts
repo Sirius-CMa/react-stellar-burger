@@ -3,6 +3,7 @@ import { Api } from "../../../utils/api"
 import { dataServer } from "Utils/constants";
 import { deleteCookie, getCookie, setCookie } from "Utils/cookie";
 import { AppDispatch } from "../../../typesData";
+import { TNewOrderRequest } from "../../../typesData/authTypes";
 
 export const GET_ORDER_DATA_REQUEST: 'GET_ORDER_DATA_REQUEST' = 'GET_ORDER_DATA_REQUEST';
 export const GET_ORDER_DATA_SUCCESS: 'GET_ORDER_DATA_SUCCESS' = 'GET_ORDER_DATA_SUCCESS';
@@ -42,7 +43,7 @@ export type TOrderActions =
 const api = new Api(dataServer, getCookie, setCookie, deleteCookie)
 
 
-export function getOrderDetailsAction(ingredients: any | undefined) {
+export function getOrderDetailsAction(ingredients: TNewOrderRequest) {
   return function (dispatch: AppDispatch) {
     dispatch({
       type: GET_ORDER_DATA_REQUEST,

@@ -2,9 +2,11 @@ import {
   DictionaryStrStr,
   TErrorResponse,
   TFetch,
+  TForgotPasswordRequest,
   TForgotPasswordResponse,
   TGetOneOrderResponse,
   TLoadIngredientsResponse,
+  TLoginRequest,
   TLoginUserResponse,
   TLogoutRequest,
   TLogoutResponse,
@@ -12,9 +14,11 @@ import {
   TNewOrderResponse,
   TOptions,
   TRefreshTokenResponse,
+  TRegisterRequest,
   TRegisterUserResponse,
+  TResetPasswordRequest,
   TUpdateProfileResponse,
-  TUserAuth
+  TUserAuthResponse
 } from "../../typesData/authTypes";
 
 
@@ -105,33 +109,33 @@ export class Api {
 
 
   getUserAuth = () => {
-    return this.requesFetchfetchWithRefresh<never, TUserAuth>({ endpoint: this._endpoints.userInfo, method: 'GET' });
+    return this.requesFetchfetchWithRefresh<never, TUserAuthResponse>({ endpoint: this._endpoints.userInfo, method: 'GET' });
   };
 
-  getOrderDetailsServer = (ingredients: { ingredients: string[] }) => {
+  getOrderDetailsServer = (ingredients: TNewOrderRequest) => {
     return this.requesFetchfetchWithRefresh<TNewOrderRequest, TNewOrderResponse>({ endpoint: this._endpoints.orders, data: ingredients, method: 'POST' });
   };
 
-  updateUser = (data: DictionaryStrStr) => {
+  updateUser = (data: TRegisterRequest) => {
     return this.requesFetchfetchWithRefresh<DictionaryStrStr, TUpdateProfileResponse>({ endpoint: this._endpoints.userInfo, data, method: 'PATCH' });
   };
 
   // : ----------------------------------------------------------------
 
-  resetPassword(data: DictionaryStrStr) {
+  resetPassword(data: TResetPasswordRequest) {
     return this.requestFetch({ endpoint: this._endpoints.resetPassword, data, method: 'POST' })
   }
 
-  forgotPassword(data: DictionaryStrStr) {
+  forgotPassword(data: TForgotPasswordRequest) {
     return this.requestFetch<DictionaryStrStr, TForgotPasswordResponse>({ endpoint: this._endpoints.forgotPassword, data, method: 'POST' })
   }
 
-  loginUser(data: DictionaryStrStr) {
+  loginUser(data: TLoginRequest) {
     // console.log('loginUser - DRY');
     return this.requestFetch<DictionaryStrStr, TLoginUserResponse>({ endpoint: this._endpoints.login, data, method: 'POST' })
   }
 
-  registerUser(data: DictionaryStrStr) {
+  registerUser(data: TRegisterRequest) {
     // console.log('registerUser - DRY');
     return this.requestFetch<DictionaryStrStr, TRegisterUserResponse>({ endpoint: this._endpoints.register, data, method: 'POST' })
   }
@@ -147,9 +151,13 @@ export class Api {
     return this.requestFetch<never, TLoadIngredientsResponse>({ endpoint: this._endpoints.ingredients, method: 'GET' })
   }
 
-  logoutUser = (data: TLogoutRequest) => {
+  logoutUser = () => {
     // console.log('loadIngredients - DRY');
-    return this.requestFetch<TLogoutRequest, TLogoutResponse>({ endpoint: this._endpoints.ingredients, data, method: 'POST' })
+    return this.requestFetch<TLogoutRequest, TLogoutResponse>({
+      endpoint: this._endpoints.ingredients,
+      data: { token: localStorage.getItem("refreshToken") },
+      method: 'POST'
+    })
   }
 
 

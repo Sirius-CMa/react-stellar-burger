@@ -9,7 +9,7 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 import { REMOVE_ORDER_DATA, getOrderDetailsAction } from "Action/order";
 import { Popup } from "Components/Popup";
 import { OrderDetails } from "Components/OrderDetails";
-import { getDataBurgerConstructor, getDataAuth, getDataOrder } from "../../redux/Selectors";
+import { getDataBurgerConstructor, getDataOrder, selectAuth } from "../../redux/Selectors";
 
 import { paths } from "Utils/paths";
 import { IIngredientTypes, useAppDispatch, useAppSelector } from "../../typesData";
@@ -17,9 +17,10 @@ import { IIngredientTypes, useAppDispatch, useAppSelector } from "../../typesDat
 export function Order() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const { number, requestOrder } = useAppSelector(getDataOrder);
   const { selectedBun, listIngredients } = useAppSelector(getDataBurgerConstructor);
-  const { auth } = useAppSelector(getDataAuth);
+  const auth = useAppSelector(selectAuth);
 
   const sum = useMemo(() => {
     return selectedBun.price * 2 + listIngredients.reduce((acc: number, el: IIngredientTypes) => acc + el.price, 0);
@@ -29,7 +30,7 @@ export function Order() {
     if (!auth) {
       navigate(paths.login);
     } else {
-      const ingredientsId: Array<string> = [...Array(2).fill(selectedBun._id), ...listIngredients.map((el: IIngredientTypes) => el._id)];
+      const ingredientsId = [...Array(2).fill(selectedBun._id), ...listIngredients.map((el) => el._id)];
       dispatch(getOrderDetailsAction({ ingredients: ingredientsId }));
     }
   };

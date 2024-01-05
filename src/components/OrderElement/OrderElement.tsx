@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { getDataBurgerIngredients } from "../../redux/Selectors";
+import { selectSortedIngredientsById } from "../../redux/Selectors";
 import { getTotalPrice } from "Utils/service-functions";
 import { reformatData } from "Utils/formatTime";
 
@@ -16,7 +16,7 @@ import { DEFAULT_BUN } from "Utils/constants";
 
 
 export const OrderElement: FC<TOrderElementProps> = ({ card, feed }) => {
-  const { sortDataById } = useAppSelector(getDataBurgerIngredients);
+  const sortDataById = useAppSelector(selectSortedIngredientsById);
   const location = useLocation();
 
   let sortListIngredientsById: TSortDataById = !sortDataById ? { '': DEFAULT_BUN } : sortDataById

@@ -9,13 +9,15 @@ import { TabContainer } from "Components/TabContainer";
 import { BlockIngredient } from "Components/BlockIngredient";
 import { LoadingScreen } from "Components/LoadingScreen";
 import { Popup } from "Components/Popup";
-import { getDataBurgerIngredients } from "../../redux/Selectors";
+import { getDataBurgerIngredients, selectIngredients } from "../../redux/Selectors";
 import { useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../typesData";
 
 
 export function BurgerIngredients() {
-  const { isLoading, isError, data } = useAppSelector(getDataBurgerIngredients);
+  const { isLoading, isError } = useAppSelector(getDataBurgerIngredients);
+  const data = useAppSelector(selectIngredients);
+
   // console.log("BurgerIngredients");
 
   const dispatch = useAppDispatch();

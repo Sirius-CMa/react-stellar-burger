@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { Button, Input, PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { useInputForm } from "../../hooks/handleInput";
-import { getDataAuth } from "../../redux/Selectors";
+import { selectAuth, selectUser } from "../../redux/Selectors";
 import { updateUser } from "Action/authorization";
 import { useAppDispatch, useAppSelector } from "../../typesData";
 
@@ -13,7 +13,8 @@ import { useAppDispatch, useAppSelector } from "../../typesData";
 export function ProfileForm() {
   const dispatch = useAppDispatch();
 
-  const { auth, user } = useAppSelector(getDataAuth);
+  const user = useAppSelector(selectUser);
+  const auth = useAppSelector(selectAuth);
   const { value, setValue, textError, isErrors, handleChange, resetForm } = useInputForm({
     name: '',
     email: '',
