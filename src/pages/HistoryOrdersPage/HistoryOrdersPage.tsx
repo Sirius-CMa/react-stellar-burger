@@ -17,7 +17,6 @@ export function HistoryOrdersPage() {
     };
   }, [dispatch]);
 
-  // const orders = useAppSelector(selectProfileDataFeed2);
   const data = useAppSelector(selectProfileDataFeed);
   if (!data?.success) return null;
 

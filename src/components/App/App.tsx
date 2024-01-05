@@ -19,7 +19,7 @@ import { RegisterPage } from "AuthPages/RegisterPage";
 import { ForgotPassword } from "AuthPages/ForgotPasswordPage";
 import { ResetPasswordPage } from "AuthPages/ResetPasswordPage";
 
-import { ProtectedRoute } from "Components/ProtectedRoute";
+import { Auth, NotAuth } from "Components/ProtectedRoute";
 import { IngredientDetails } from "Components/IngredientDetails";
 import { Popup } from "Components/Popup";
 import { OrderDataFeed } from "Components/OrderDataFeed";
@@ -45,17 +45,17 @@ export function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path={paths.home} element={<HomePage />} />
-        <Route path={paths.login} element={<ProtectedRoute element={<LoginPage />} onlyNotAuth />} />
-        <Route path={paths.register} element={<ProtectedRoute element={<RegisterPage />} onlyNotAuth />} />
-        <Route path={paths.forgotPassword} element={<ProtectedRoute element={<ForgotPassword />} onlyNotAuth />} />
-        <Route path={paths.resetPassword} element={<ProtectedRoute element={<ResetPasswordPage />} onlyNotAuth />} />
+        <Route path={paths.login} element={<NotAuth element={<LoginPage />} />} />
+        <Route path={paths.register} element={<NotAuth element={<RegisterPage />} />} />
+        <Route path={paths.forgotPassword} element={<NotAuth element={<ForgotPassword />} />} />
+        <Route path={paths.resetPassword} element={<NotAuth element={<ResetPasswordPage />} />} />
         <Route path={paths.ingredientsId} element={<IngredientPage notPopup />} />
         {""}
-        <Route path={paths.profile} element={<ProtectedRoute element={<ProfilePage />} />}>
+        <Route path={paths.profile} element={<Auth element={<ProfilePage />} />}>
           <Route index element={<ProfileForm />} />
           <Route path={paths.profileOrders} element={<HistoryOrdersPage />} />
         </Route>
-        <Route path={paths.profileOrdersNumber} element={<ProtectedRoute element={<OrderView />} />} />
+        <Route path={paths.profileOrdersNumber} element={<Auth element={<OrderView />} />} />
 
         <Route path={paths.page404} element={<Page404 />} />
         <Route path={paths.feed} element={<FeedOrdersPage />}></Route>
@@ -83,7 +83,7 @@ export function App() {
             path={paths.profileOrdersNumber}
             element={
               <Popup handleClosePopup={handleClosePopup}>
-                <ProtectedRoute element={<OrderDataFeed />} />
+                <Auth element={<OrderDataFeed />} />
               </Popup>
             }
           ></Route>

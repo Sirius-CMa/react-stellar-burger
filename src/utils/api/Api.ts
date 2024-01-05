@@ -70,7 +70,7 @@ export class Api {
   }
 
 
-  requesFetchfetchWithRefresh = async <T, R>({ endpoint, data, method = 'GET' }: TFetch<T>): Promise<R> => {
+  requesFetchfetchWithRefresh = async <Req, Res>({ endpoint, data, method = 'GET' }: TFetch<Req>): Promise<Res> => {
     try {
       return await this.requestFetch({ endpoint, data, method });
     } catch (err) {
@@ -89,8 +89,7 @@ export class Api {
     };
   }
 
-  requestFetch = async <T, R>({ endpoint, data, method = 'GET' }: TFetch<T>): Promise<R> => {
-    // console.log(1, endpoint);
+  requestFetch = async <Req, Res>({ endpoint, data, method = 'GET' }: TFetch<Req>): Promise<Res> => {
     const options: TOptions = {
       headers: method === 'GET' ? {} : this._headers,
       method

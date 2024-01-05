@@ -18,6 +18,7 @@ const $popupRoot = document.getElementById("popup") as HTMLElement;
 
 export const Popup: FC<TPopupProps> = ({ handleClosePopup, children }) => {
   const dispatch = useAppDispatch();
+
   const isLoading = useAppSelector(selectIsLoading);
   const number = useAppSelector(selectNumber);
 

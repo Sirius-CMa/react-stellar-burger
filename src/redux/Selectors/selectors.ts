@@ -1,5 +1,5 @@
 import { TLoginResponse } from "src/typesData/authTypes";
-import { IIngredientTypes, RootState, TDataWS, TOrder, TSortDataById } from "../../typesData";
+import { IIngredientTypes, RootState, TDataWS, TSortDataById } from "../../typesData";
 
 export const getDataBurgerConstructor = (state: RootState) => state.burgerConstructor;
 export const getDataBurgerIngredients = (store: RootState) => store.burgerIngredients;
@@ -16,7 +16,7 @@ export const selectIsLoading = (store: RootState): boolean => store.burgerIngred
 export const selectSortedIngredientsById = (store: RootState): TSortDataById | null => store.burgerIngredients.sortDataById;
 
 export const selectDataFeed = (store: RootState): TDataWS | null => store.wsFeed?.data
-export const selectProfileDataFeed2 = (store: RootState): TOrder[] | null => store.wsProfileFeed?.data?.orders
+
 export const selectProfileDataFeed = (store: RootState): TDataWS | null => store.wsProfileFeed?.data
 
 export const selectAuth = (store: RootState): boolean => store.auth.auth

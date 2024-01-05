@@ -7,7 +7,7 @@ import { TProtectedRouteTypes, useAppSelector } from "../../typesData";
 
 
 
-export const ProtectedRoute = ({ element, onlyNotAuth = false, ...rest }: TProtectedRouteTypes) => {
+const ProtectedRoute = ({ element, onlyNotAuth = false, ...rest }: TProtectedRouteTypes) => {
   const auth = useAppSelector(selectAuth);
 
   if (!auth && !onlyNotAuth) {
@@ -20,3 +20,7 @@ export const ProtectedRoute = ({ element, onlyNotAuth = false, ...rest }: TProte
   return element;
 };
 
+export const Auth = ProtectedRoute;
+export const NotAuth = ({ element }: { element: JSX.Element }) => (
+  <ProtectedRoute onlyNotAuth element={element} />
+);
